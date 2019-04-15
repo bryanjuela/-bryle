@@ -25,4 +25,5 @@ public class Role {
 	@JoinColumn(name = "user")
 	private User user;
 	
+	//slidjsijefjoi
 }
