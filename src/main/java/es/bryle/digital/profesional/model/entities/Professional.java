@@ -38,4 +38,6 @@ public class Professional {
 	@OneToOne
 	@JoinColumn(name = "user")
 	private User user;
+	
+	//comentario de prueba
 }
