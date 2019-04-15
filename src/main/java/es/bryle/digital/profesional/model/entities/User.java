@@ -27,4 +27,6 @@ public class User {
 	@OneToOne
 	@JoinColumn(name = "role")
 	private Role role;
+	
+	//gitkraken
 }
