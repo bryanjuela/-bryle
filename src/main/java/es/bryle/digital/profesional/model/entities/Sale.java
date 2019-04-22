@@ -26,7 +26,7 @@ public class Sale {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "sale_date")
 	private Date saleDate;
-	
+
 	@OneToOne
 	@JoinColumn(name = "car")
 	private Car car;
@@ -35,4 +35,35 @@ public class Sale {
 	@JoinColumn
 	private Professional professional;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Date getSaleDate() {
+		return saleDate;
+	}
+
+	public void setSaleDate(Date saleDate) {
+		this.saleDate = saleDate;
+	}
+
+	public Car getCar() {
+		return car;
+	}
+
+	public void setCar(Car car) {
+		this.car = car;
+	}
+
+	public Professional getProfessional() {
+		return professional;
+	}
+
+	public void setProfessional(Professional professional) {
+		this.professional = professional;
+	}
 }
