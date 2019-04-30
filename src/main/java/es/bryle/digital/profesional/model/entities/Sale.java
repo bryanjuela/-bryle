@@ -2,16 +2,19 @@ package es.bryle.digital.profesional.model.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -28,11 +31,13 @@ public class Sale {
 	private Date saleDate;
 
 	@OneToOne
-	@JoinColumn(name = "car")
+	@JoinColumn(name = "car_id")
 	private Car car;
 	
-	@ManyToOne
-	@JoinColumn
+	@OneToOne(cascade= CascadeType.ALL)
+	@Fetch(FetchMode.JOIN)
+	@JoinColumn(name="professional_id", referencedColumnName= "id",
+				foreignKey= @ForeignKey(name= "fk_professional_sale"))
 	private Professional professional;
 	
 	public Long getId() {
