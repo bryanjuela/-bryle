@@ -1,5 +1,6 @@
 package es.bryle.digital.profesional.model.entities;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import es.bryle.digital.profesional.model.entities.auth.User;
 
@@ -33,13 +37,14 @@ public class Professional {
 	
 	@Column(name = "last_name")
 	private String lastName;
-		
-	/*@OneToMany(mappedBy = "professional", cascade = CascadeType.ALL)
-	private Set<Sale> sales;*/
 	
 	@OneToOne(mappedBy = "professional", cascade= CascadeType.ALL,
 			fetch = FetchType.LAZY, optional = false)
 	private User user;
+	
+	@OneToMany(mappedBy = "professional", cascade = CascadeType.ALL)
+	@Fetch(FetchMode.JOIN)
+	private Set<Sale> sales;
 
 	public Long getId() {
 		return id;
