@@ -11,17 +11,21 @@ import org.springframework.stereotype.Service;
 
 import es.bryle.digital.profesional.model.entities.Car;
 import es.bryle.digital.profesional.model.entities.Professional;
+import es.bryle.digital.profesional.model.entities.Sale;
 import es.bryle.digital.profesional.model.entities.auth.Role;
 import es.bryle.digital.profesional.model.entities.auth.User;
 import es.bryle.digital.profesional.model.mapper.CarMapper;
 import es.bryle.digital.profesional.model.mapper.CarVOMapper;
 import es.bryle.digital.profesional.model.mapper.ProfessionalMapper;
 import es.bryle.digital.profesional.model.mapper.ProfessionalVOMapper;
+import es.bryle.digital.profesional.model.mapper.SaleVOMapper;
 import es.bryle.digital.profesional.model.vo.CarVO;
 import es.bryle.digital.profesional.model.vo.ProfessionalVO;
+import es.bryle.digital.profesional.model.vo.SaleVO;
 import es.bryle.digital.profesional.repository.CarRepository;
 import es.bryle.digital.profesional.repository.ProfessionaRepository;
 import es.bryle.digital.profesional.repository.RoleRepository;
+import es.bryle.digital.profesional.repository.SaleRepository;
 import es.bryle.digital.profesional.repository.UserRepository;
 import es.bryle.digital.profesional.service.interfaces.AdminService;
 
@@ -37,6 +41,8 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired 
 	private CarRepository carRepository;
 	@Autowired
+	private SaleRepository saleRepository;
+	@Autowired
 	private CarMapper carMapper;
 	@Autowired
 	private CarVOMapper carVOMapper;
@@ -44,6 +50,8 @@ public class AdminServiceImpl implements AdminService {
 	private ProfessionalMapper professionalMapper;
 	@Autowired
 	private ProfessionalVOMapper professionalVOMapper;
+	@Autowired
+	private SaleVOMapper saleVOMapper;
 	
 	private static final String ROLE_USER= "USER";
 	
@@ -227,6 +235,21 @@ public class AdminServiceImpl implements AdminService {
 			return -2;
 		}
 		return -1;
+	}
+
+	@Override
+	public List<SaleVO> getSales() {
+		List<Sale> saleList= saleRepository.findAll();
+		List<SaleVO> totalSales= new ArrayList<>();
+		
+		if(!saleList.isEmpty()) {
+			for(Sale sale: saleList) {
+				totalSales.add(saleVOMapper.mapper(sale));
+			}
+			return totalSales;
+		}
+		
+		return null;
 	}
 
 }//class

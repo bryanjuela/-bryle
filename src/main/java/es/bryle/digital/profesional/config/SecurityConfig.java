@@ -1,14 +1,31 @@
 package es.bryle.digital.profesional.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
+import es.bryle.digital.profesional.service.interfaces.AuthUserService;
+
 @Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	@Autowired
+	private AuthUserService authUserService;
+	 
 	private static final String[] AUTH_LIST = {
 	        // -- swagger ui
 	        "**/swagger-resources/**",
@@ -17,14 +34,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        "/webjars/**"
 	};
 
+	@Autowired
+    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(authUserService)
+            .passwordEncoder(encoder);
+    }
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 	    http
 	    .authorizeRequests().antMatchers(AUTH_LIST).permitAll()
+	    .antMatchers("/oauth/token").permitAll()
 	    .and()
 	    .httpBasic().authenticationEntryPoint(swaggerAuthenticationEntryPoint())
 	    .and()
-	    .csrf().disable();
+	    .csrf().disable()
+	    .cors();
 	}
 
 	@Bean
@@ -32,6 +57,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	    BasicAuthenticationEntryPoint entryPoint = new BasicAuthenticationEntryPoint();
 	    entryPoint.setRealmName("Swagger Realm");
 	    return entryPoint;
+	}
+
+	@Override
+	@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+	
+	@Bean
+	public TokenStore tokenStore() {
+		return new InMemoryTokenStore();
 	}
 	
 }

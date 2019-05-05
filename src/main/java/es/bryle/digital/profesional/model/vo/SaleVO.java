@@ -6,8 +6,8 @@ public class SaleVO {
 
 	private Long id;
 	private Date saleDate;
-	private CarVO car;
-	private ProfessionalVO professionalVO;
+	private Long car;
+	private Long professionalVO;
 	
 	public Long getId() {
 		return id;
@@ -25,19 +25,19 @@ public class SaleVO {
 		this.saleDate = saleDate;
 	}
 
-	public CarVO getCar() {
+	public Long getCar() {
 		return car;
 	}
 
-	public void setCar(CarVO car) {
+	public void setCar(Long car) {
 		this.car = car;
 	}
 
-	public ProfessionalVO getProfessional() {
+	public Long getProfessional() {
 		return professionalVO;
 	}
 
-	public void setProfessional(ProfessionalVO professional) {
+	public void setProfessional(Long professional) {
 		this.professionalVO = professional;
 	}
 }
