@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import es.bryle.digital.profesional.model.entities.Car;
 import es.bryle.digital.profesional.model.vo.CarVO;
 import es.bryle.digital.profesional.model.vo.ProfessionalVO;
+import es.bryle.digital.profesional.model.vo.SaleVO;
 
 @Service("adminService")
 public interface AdminService {
@@ -66,5 +67,8 @@ public interface AdminService {
 	 * -2 si hay algun error en los datos*/
 	Integer editCar(CarVO car);
 	
+	/* devuelve
+	 * listado con todas las ventas*/
+	List<SaleVO> getSales();
 	
 }

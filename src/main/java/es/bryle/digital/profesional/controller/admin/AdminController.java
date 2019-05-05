@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.bryle.digital.profesional.model.vo.CarVO;
 import es.bryle.digital.profesional.model.vo.ProfessionalVO;
+import es.bryle.digital.profesional.model.vo.SaleVO;
 import es.bryle.digital.profesional.service.interfaces.AdminService;
 import io.swagger.annotations.ApiOperation;
 
@@ -185,4 +186,15 @@ public class AdminController {
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 	}
+	
+	@ApiOperation(value = "Recuperación de todas las ventas",
+			notes = "Recupera un listado con todas las ventas de la BD")
+	@RequestMapping(value = "/sale", method= RequestMethod.GET)
+	public ResponseEntity<?> getSales(){
+		List<SaleVO> sales= adminService.getSales();
+		if(sales.isEmpty() || sales== null)
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(sales, HttpStatus.OK);
+	}
+	
 }//class
