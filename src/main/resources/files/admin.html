@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Acceso Administrador</title>
+	<link rel="stylesheet" type="text/css" href="style.css"> 
+
+</head>
+<body>
+  
+  <div class="banner">
+    <img src="images/banner2.jpg" alt="banner">
+  </div>
+
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'Comerciales')" id="defaultOpen">Comerciales</button>
+    <button class="tablinks" onclick="openTab(event, 'Coches')" >Coches</button>
+    <button class="tablinks" onclick="openTab(event, 'Ventas')">Ventas</button>
+  </div>
+
+
+  <div id="Comerciales" class="tabcontent">
+    <h1>Comerciales</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nam, repellendus vel temporibus nulla illo labore culpa quo enim reprehenderit doloremque sit quod vero possimus sapiente sunt, itaque officia quisquam!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
+  </div>
+
+  <div id="Coches" class="tabcontent">
+    <h1>Coches</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo enim, officia magnam harum sequi ad eveniet, modi, dolores aperiam beatae temporibus vitae veritatis animi culpa neque labore ex sint quod..</p> 
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
+  </div>
+
+  <div id="Ventas" class="tabcontent">
+    <h1>Ventas</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et cumque, quam soluta quisquam. Explicabo, quisquam id dicta autem. Incidunt ratione quam sapiente nulla qui, nesciunt repellendus iure dolorum cum dolor..</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
+  </div>
+
+
+
+  <div class="content-botton">
+    <div class="botones">
+      <input type="submit" value="Crear">
+    </div>
+    <div class="botones">
+      <input type="submit" value="Modificar">
+    </div>
+    <div class="botones">
+      <input type="submit" value="Eliminar">
+    </div>
+    <div class="botones">
+      <input type="reset" value="Limpiar">
+    </div>
+  </div>
+
+
+
+<footer class="footer">
+  <div> 
+    <img src="images/logo.png" alt="Logo BryLe">
+  </div>
+
+  <div> 
+    <p>Aplicación realizada por: <br><span> Bryan Juelas y Elena Méndez.</span> </p>
+  </div>
+</footer>
+
+
+
+  <script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+  </script>
+
+</body>
+</html>
