@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.com">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8"/>
 	<title>Acceso Administrador</title>
-	<link rel="stylesheet" type="text/css" href="../static/css/admin-style.css"> 
+	<!-- <link rel="stylesheet" type="text/css" href="../static/css/admin-style.css"> -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/admin-style.css}"> 
  <!-- <script type="text/javascript" src="js/admin-script.js"></script> -->
 
 </head>
 <body>
 
   <div class="banner">
-    <img src="../static/images/banner2.jpg" alt="banner">
+    <img th:src="@{/images/banner2.jpg}" alt="banner">
   </div>
 
   <div class="tab">
@@ -21,28 +22,111 @@
 
 
   <div id="Comerciales" class="tabcontent">
-    <h1>Comerciales</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nam, repellendus vel temporibus nulla illo labore culpa quo enim reprehenderit doloremque sit quod vero possimus sapiente sunt, itaque officia quisquam!</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
+  <h1>Comerciales</h1>
+     <div class="container">
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Email</th>
+					<th>DNI</th>
+					<th>Ventas</th>
+					<th> </th>
+					<th> </th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="professional: ${professionals}">
+					<td th:text="*{professional.id}"></td>
+					<td th:text="*{professional.firstName}"></td>
+					<td th:text="*{professional.lastName}"></td>
+					<td th:text="*{professional.user}"></td>
+					<td th:text="*{professional.dni}"></td>
+					<td><a>Editar</a></td>
+					<td><a th:href="@{/controller/admin-profile/delete-professional/} + ${professional.id}">Eliminar</a></td>
+				</tr>	
+			</tbody>
+		</table>
+		
+	</div>
   </div>
 
   <div id="Coches" class="tabcontent">
     <h1>Coches</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo enim, officia magnam harum sequi ad eveniet, modi, dolores aperiam beatae temporibus vitae veritatis animi culpa neque labore ex sint quod..</p> 
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
+     <div class="container">
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Marca</th>
+					<th>Modelo</th>
+					<th>Nº Bastidor</th>
+					<th>Año</th>
+					<th>Precio</th>
+					<th>Estado</th>
+					<th> </th>
+					<td> </td>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="car: ${cars}">
+					<td th:text="*{car.id}"></td>
+					<td th:text="*{car.marca}"></td>
+					<td th:text="*{car.modelo}"></td>
+					<td th:text="*{car.numBastidor}"></td>
+					<td th:text="*{car.anyo}"></td>
+					<td th:text="*{car.precio}"></td>
+					<td th:text="*{car.estado}"></td>
+					<td>Editar</td>
+					<td><a th:href="@{/controller/admin-profile/delete-car/} + ${car.id}">Eliminar</a></td>
+				</tr>	
+			</tbody>
+		</table>
+		
+	</div>
+     
   </div>
 
   <div id="Ventas" class="tabcontent">
     <h1>Ventas</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et cumque, quam soluta quisquam. Explicabo, quisquam id dicta autem. Incidunt ratione quam sapiente nulla qui, nesciunt repellendus iure dolorum cum dolor..</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
+    <div class="container">
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Fecha</th>
+					<th>Coche</th>
+					<th>Comercial</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="sale: ${sales}">
+					<td th:text="*{}"></td>
+					<td th:text="*{}"></td>
+					<td th:text="*{}"></td>
+					<td th:text="*{}"></td>
+				</tr>	
+			</tbody>
+		</table>
+		
+	</div>
+ 
   </div>
 
 
 
   <div class="content-botton">
     <div class="botones">
-      <input type="submit" value="Crear">
+      <a th:href="@{/controller/admin-profile/create-comercial}">Crear</a>
+      <input type="submit" value="Crear"> 
     </div>
     <div class="botones">
       <input type="submit" value="Modificar">
@@ -59,11 +143,11 @@
 
 <footer class="footer">
   <div> 
-    <img src="../static/images/logo.png" alt="Logo BryLe">
+    <img th:src="@{/images/logo.png}" alt="Logo BryLe">
   </div>
 
   <div> 
-    <p>Aplicación realizada por: <br><span> Bryan Juelas y Elena Méndez.</span> </p>
+    <p>Aplicación realizada por: <br><span> Bryan Juela y Elena Méndez.</span> </p>
   </div>
 </footer>
 
