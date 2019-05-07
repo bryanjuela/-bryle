@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="www.thymeleaf.com">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../static/css/comercial-style.css">
+	<meta charset="UTF-8"/>
+	<link rel="stylesheet" th:href="@{/css/comercial-style.css}">
 	<title>Nuevo Comercial</title>
 </head>
 <body>
 
 	<div class="box">
-		<img src="../static/images/logo.png" class="avatar" alt="Logo BryLe">
+		<img th:src="@{/images/logo.png}" class="avatar" alt="Logo BryLe">
 		<div >
 			<h1>Nuevo Comercial</h1>
 		</div>		
-		<form  action="">
-			<input type="text" placeholder="Nombre" required autofocus>
-			<input type="text" placeholder="Apellido" required autofocus>
-			<input type="text" placeholder="DNI" required autofocus>
+		<form  th:action="@{/controller/admin-profile/professional}" method="post" th:object="${professionalVO}">
+			<input type="text" placeholder="Nombre" required autofocus th:field="*{firstName}">
+			<input type="text" placeholder="Apellido" required autofocus th:field="*{lastName}">
+			<input type="text" placeholder="DNI" required autofocus th:field="*{dni}">
 
-            <input type="email" placeholder="Email" required>
+            <input type="email" placeholder="Email" required th:field="*{user}">
 			           
 			<input type="submit" value="Crear">
             <input type="reset" value="Limpiar">	
-            
 		</form>
 	</div>
 	
