@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import es.bryle.digital.profesional.model.entities.Car;
 import es.bryle.digital.profesional.model.entities.Professional;
 import es.bryle.digital.profesional.model.entities.Sale;
+import es.bryle.digital.profesional.model.entities.auth.Authority;
 import es.bryle.digital.profesional.model.entities.auth.Role;
 import es.bryle.digital.profesional.model.entities.auth.User;
 import es.bryle.digital.profesional.model.mapper.CarMapper;
@@ -22,6 +23,7 @@ import es.bryle.digital.profesional.model.mapper.SaleVOMapper;
 import es.bryle.digital.profesional.model.vo.CarVO;
 import es.bryle.digital.profesional.model.vo.ProfessionalVO;
 import es.bryle.digital.profesional.model.vo.SaleVO;
+import es.bryle.digital.profesional.repository.AuthorityRepository;
 import es.bryle.digital.profesional.repository.CarRepository;
 import es.bryle.digital.profesional.repository.ProfessionaRepository;
 import es.bryle.digital.profesional.repository.RoleRepository;
@@ -43,6 +45,8 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private SaleRepository saleRepository;
 	@Autowired
+	private AuthorityRepository authorityRepository;
+	@Autowired
 	private CarMapper carMapper;
 	@Autowired
 	private CarVOMapper carVOMapper;
@@ -53,7 +57,10 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private SaleVOMapper saleVOMapper;
 	
-	private static final String ROLE_USER= "USER";
+	private static final String ROLE_PROFESSIONAL= "professional";
+	private static final String ROLE_ADMIN= "admin";
+	private static final String ALL_AUTHORITY= "all";
+	private static final String RESTRICTED_AUTHORITY= "restricted";
 	
 	@Override
 	public Integer createProfessional(ProfessionalVO professionalVO) {
@@ -71,15 +78,19 @@ public class AdminServiceImpl implements AdminService {
 			if(existEmail== null && existDni== null) {
 				//mapear el objeto
 				Professional professional= professionalMapper.mapper(professionalVO);
-				Role rol=  roleRepository.findByType(ROLE_USER); 
+				Role rol=  roleRepository.findByType(ROLE_PROFESSIONAL); 
 				List<Role> roles= new ArrayList<>();
 				roles.add(rol);
 				
+				Set<Authority> authorities= authorityRepository.findByName(RESTRICTED_AUTHORITY);
+				
 				User user = new User();
 				user.setEmail(email);
-				user.setContraseña("12345");
+				user.setPassword("12345");
 				user.setProfessional(professional);
 				user.setRoles(roles);
+				user.setAuthorities(authorities);
+				professional.setUser(user);
 				
 				professionalRepository.save(professional);
 				userRepository.save(user);
@@ -166,7 +177,7 @@ public class AdminServiceImpl implements AdminService {
 		return null;
 	}
 
-	@Override
+	/*@Override
 	public List<CarVO> getCars() {
 		List<Car> carList= carRepository.findAll();
 		List<CarVO> totalCars= new ArrayList<>();
@@ -250,6 +261,6 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 		return null;
-	}
+	}*/
 
 }//class

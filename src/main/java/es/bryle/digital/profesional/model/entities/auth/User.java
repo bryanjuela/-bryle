@@ -25,19 +25,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 import es.bryle.digital.profesional.model.entities.Professional;
 
 @Entity
-@Table(name = "user")
+@Table(name= "user")
 public class User implements UserDetails {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column
 	private Long id;
 	
-	@Column(name = "email")
+	@Column(name= "email")
 	private String email;
 	
-	@Column(name = "password")
-	private String contraseña;
+	@Column(name= "password")
+	private String password;
+	
+	@Column(name= "active", columnDefinition= "BIT(1) default 0")
+	private Boolean active= false;
 	
 	@OneToOne
 	@JoinColumn(name = "professional_id")
@@ -52,6 +57,52 @@ public class User implements UserDetails {
         inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "role_role_fk"))})
 	private List<Role> roles;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    @JoinTable(
+        name = "user_authority",
+        joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "authority_user_fk"))},
+        inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "authorities_authorities_fk"))}
+    )
+    private Set<Authority> authorities;
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+
+	@Override
+	public String getPassword() {
+		return this.password;
+	}
+
+	@Override
+	public String getUsername() {
+		return this.email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return active;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return active;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return active;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 
 	public Long getId() {
 		return id;
@@ -69,12 +120,12 @@ public class User implements UserDetails {
 		this.email = email;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public Boolean getActive() {
+		return active;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	public Professional getProfessional() {
@@ -93,41 +144,12 @@ public class User implements UserDetails {
 		this.roles = roles;
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	@Override
-	public String getPassword() {
-		return this.contraseña;
+	public void setAuthorities(Set<Authority> authorities) {
+		this.authorities = authorities;
 	}
 
-	@Override
-	public String getUsername() {
-		return this.email;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return false;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return false;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return false;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return false;
-	}
-
-	
-	
 }

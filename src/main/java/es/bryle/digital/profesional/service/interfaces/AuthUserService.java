@@ -4,8 +4,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import es.bryle.digital.profesional.model.entities.auth.User;
+import es.bryle.digital.profesional.model.entities.auth.User;
 
-@Service
+@Service("authUserService")
 public interface AuthUserService extends UserDetailsService{
 
 	String resetPassword(String email);

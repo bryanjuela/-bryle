@@ -1,11 +1,13 @@
 package es.bryle.digital.profesional.controller.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,17 +18,17 @@ import es.bryle.digital.profesional.model.vo.CarVO;
 import es.bryle.digital.profesional.model.vo.ProfessionalVO;
 import es.bryle.digital.profesional.model.vo.SaleVO;
 import es.bryle.digital.profesional.service.interfaces.AdminService;
+import es.bryle.digital.profesional.service.interfaces.SalesService;
 import io.swagger.annotations.ApiOperation;
 
 @Controller
-@RequestMapping("/controller/admin-profile")
+@RequestMapping("/controller2/admin-profile")
 public class AdminController {
-
-	//private static final String ROLE_USER= "USER";
-	//private static final String ROLE_ADMIN= "ADMIN";
 	
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private SalesService salesService;
 	
 	@ApiOperation(value = "Cracion de un profesional",
 			notes = "Crear un usuario con el rol de 'USER'")
@@ -117,7 +119,7 @@ public class AdminController {
 	public ResponseEntity<?> crateCar(@RequestBody CarVO carVO){
 		
 		if(carVO!= null) {
-			Integer result= adminService.createCar(carVO);
+			Integer result= salesService.createCar(carVO);
 			if(result== 1)
 				return new ResponseEntity<>(HttpStatus.OK);
 			if(result== -1)
@@ -135,7 +137,7 @@ public class AdminController {
 	public ResponseEntity<?> deleteCar(@PathVariable("id")Long id){
 		
 		if(id!= null && id> 0) {
-			Integer result= adminService.deleteCar(id);
+			Integer result= salesService.deleteCar(id);
 			if(result== 1)
 				return new ResponseEntity<>(HttpStatus.OK);
 			if(result== -1)
@@ -149,7 +151,7 @@ public class AdminController {
 			notes = "Recupera un listado con todos los coches de la BD")
 	@RequestMapping(value = "/car", method= RequestMethod.GET)
 	public ResponseEntity<?> getCars(){
-		List<CarVO> cars= adminService.getCars();
+		List<CarVO> cars= salesService.getCars();
 		if(cars.isEmpty() || cars== null)
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<>(cars, HttpStatus.OK);
@@ -161,7 +163,7 @@ public class AdminController {
 	@RequestMapping(value = "/car/{id}", method= RequestMethod.GET)
 	public ResponseEntity<?> getCar(@PathVariable("id") Long id){
 		if(id!= null && id> 0) {
-			CarVO car= adminService.getCar(id);
+			CarVO car= salesService.getOneCar(id);
 			if(car!= null)
 				return new ResponseEntity<>(car, HttpStatus.OK);
 			else return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -176,7 +178,7 @@ public class AdminController {
 	public ResponseEntity<?> editCar(@RequestBody CarVO carVO){
 		
 		if(carVO!= null) {
-			Integer result= adminService.editCar(carVO);
+			Integer result= salesService.editCar(carVO);
 			if(result== 1)
 				return new ResponseEntity<>(HttpStatus.OK);
 			if(result== -1)
@@ -191,7 +193,7 @@ public class AdminController {
 			notes = "Recupera un listado con todas las ventas de la BD")
 	@RequestMapping(value = "/sale", method= RequestMethod.GET)
 	public ResponseEntity<?> getSales(){
-		List<SaleVO> sales= adminService.getSales();
+		List<SaleVO> sales= salesService.getSales();
 		if(sales.isEmpty() || sales== null)
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<>(sales, HttpStatus.OK);

@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import es.bryle.digital.profesional.model.entities.auth.User;
+import es.bryle.digital.profesional.model.entities.auth.User;
 import es.bryle.digital.profesional.repository.UserRepository;
 import es.bryle.digital.profesional.service.interfaces.AuthUserService;
 
