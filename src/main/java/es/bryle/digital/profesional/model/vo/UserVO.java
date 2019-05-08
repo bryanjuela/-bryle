@@ -10,7 +10,7 @@ public class UserVO {
 
 	private Long id;
 	private String email;
-	private String contraseña;
+	//private String password;
 	private List<Role> roles;
 	
 	public Long getId() {
@@ -25,12 +25,12 @@ public class UserVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getContraseña() {
-		return contraseña;
+	/*public String getPassword() {
+		return password;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
-	}
+	public void setPassword(String password) {
+		this.password = password;
+	}*/
 	public List<Role> getRoles() {
 		return roles;
 	}
