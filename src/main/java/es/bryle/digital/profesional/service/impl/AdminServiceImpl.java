@@ -30,6 +30,7 @@ import es.bryle.digital.profesional.repository.RoleRepository;
 import es.bryle.digital.profesional.repository.SaleRepository;
 import es.bryle.digital.profesional.repository.UserRepository;
 import es.bryle.digital.profesional.service.interfaces.AdminService;
+import es.bryle.digital.profesional.service.interfaces.AuthUserService;
 
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
@@ -46,6 +47,8 @@ public class AdminServiceImpl implements AdminService {
 	private SaleRepository saleRepository;
 	@Autowired
 	private AuthorityRepository authorityRepository;
+	@Autowired
+	private AuthUserService authUserService;
 	@Autowired
 	private CarMapper carMapper;
 	@Autowired
@@ -86,7 +89,7 @@ public class AdminServiceImpl implements AdminService {
 				
 				User user = new User();
 				user.setEmail(email);
-				user.setPassword("12345");
+				//user.setPassword("12345");
 				user.setProfessional(professional);
 				user.setRoles(roles);
 				user.setAuthorities(authorities);
@@ -94,6 +97,10 @@ public class AdminServiceImpl implements AdminService {
 				
 				professionalRepository.save(professional);
 				userRepository.save(user);
+				
+				String pass= authUserService.resetPassword(email);
+				System.out.println(pass);
+				
 				return 1;
 			}
 			

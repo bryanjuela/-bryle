@@ -15,5 +15,7 @@ public interface AuthUserService extends UserDetailsService{
 	
 	User getCurrentUser();
 	
+	Object getCurrentUser1();
+	
 	Boolean isEqualRolCurrentUser(String role);
 }
