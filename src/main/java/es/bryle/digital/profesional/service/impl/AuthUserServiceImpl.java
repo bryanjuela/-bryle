@@ -1,8 +1,12 @@
 package es.bryle.digital.profesional.service.impl;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import es.bryle.digital.profesional.model.entities.auth.User;
@@ -15,6 +19,10 @@ public class AuthUserServiceImpl implements AuthUserService{
 
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	private static final String PASSSWORD_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~!@#$%&*-_=+?";
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -27,7 +35,17 @@ public class AuthUserServiceImpl implements AuthUserService{
 
 	@Override
 	public String resetPassword(String email) {
-		return null;
+		User user= userRepository.findByEmail(email);
+		if(user== null)
+			throw new UsernameNotFoundException(email);
+		return generatePassword(user);
+	}
+
+	private String generatePassword(User user) {
+		String password = RandomStringUtils.random(8, PASSSWORD_CHARACTERS);
+		user.setPassword(bCryptPasswordEncoder.encode(password));
+		userRepository.save(user);
+		return password;
 	}
 
 	@Override
@@ -37,12 +55,19 @@ public class AuthUserServiceImpl implements AuthUserService{
 
 	@Override
 	public User getCurrentUser() {
-		return null;
+		Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+		return (User) auth.getPrincipal();
 	}
 
 	@Override
 	public Boolean isEqualRolCurrentUser(String role) {
 		return null;
+	}
+
+	@Override
+	public Object getCurrentUser1() {
+		Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+		return auth.getPrincipal();
 	}
 
 }

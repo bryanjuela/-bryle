@@ -41,8 +41,8 @@ public class User implements UserDetails {
 	@Column(name= "password")
 	private String password;
 	
-	@Column(name= "active", columnDefinition= "BIT(1) default 0")
-	private Boolean active= false;
+	@Column(name= "active", columnDefinition= "BIT(1) default 1")
+	private Boolean active= true;
 	
 	@OneToOne
 	@JoinColumn(name = "professional_id")
@@ -101,7 +101,7 @@ public class User implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return false;
+		return active;
 	}
 
 	public Long getId() {
