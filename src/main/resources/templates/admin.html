@@ -47,7 +47,7 @@
 					<td th:text="*{professional.user}"></td>
 					<td th:text="*{professional.dni}"></td>
 					<td><a>Editar</a></td>
-					<td><a th:href="@{/controller/admin-profile/delete-professional/} + ${professional.id}">Eliminar</a></td>
+					<td><a th:href="@{/controller/professional-operations/delete-professional/} + ${professional.id}">Eliminar</a></td>
 				</tr>	
 			</tbody>
 		</table>
@@ -125,7 +125,7 @@
 
   <div class="content-botton">
     <div class="botones">
-      <a th:href="@{/controller/admin-profile/create-comercial}">Crear</a>
+      <a th:href="@{/controller/professional-operations/create-comercial}">Crear</a>
       <input type="submit" value="Crear"> 
     </div>
     <div class="botones">

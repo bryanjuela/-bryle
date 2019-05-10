@@ -12,7 +12,7 @@
 		<div >
 			<h1>Nuevo Comercial</h1>
 		</div>		
-		<form  th:action="@{/controller/admin-profile/professional}" method="post" th:object="${professionalVO}">
+		<form  th:action="@{/controller/professional-operations/professional}" method="post" th:object="${professionalVO}">
 			<input type="text" placeholder="Nombre" required autofocus th:field="*{firstName}">
 			<input type="text" placeholder="Apellido" required autofocus th:field="*{lastName}">
 			<input type="text" placeholder="DNI" required autofocus th:field="*{dni}">
