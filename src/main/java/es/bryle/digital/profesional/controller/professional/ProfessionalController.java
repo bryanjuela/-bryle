@@ -53,18 +53,18 @@ public class ProfessionalController {
 		
 		if(!bindingResult.hasErrors()) {
 			if(professionalVO== null){
-				return "redirect:/controller/admin-profile/create-comercial";
+				return "redirect:/controller/professional-operations/create-comercial";
 			}
 			System.out.println("professional POST");
 			Integer result= adminService.createProfessional(professionalVO);
 			
 			if(result== 1)
-				return "redirect:/controller/admin-profile/professional-list";
+				return "redirect:/controller/professional-operations/professional-list";
 			if(result== -1 || result== -2)
-				return "redirect:/controller/admin-profile/create-comercial";
+				return "redirect:/controller/professional-operations/create-comercial";
 		}
 		
-		return "redirect:/controller/admin-profile/create-comercial";
+		return "redirect:/controller/professional-operations/create-comercial";
 	}
 	
 	@ApiOperation(value = "Eliminacion de un profesional",
@@ -75,13 +75,13 @@ public class ProfessionalController {
 		if(id!= null && id> 0) {
 			Integer result= adminService.deleteProfessional(id);
 			if(result== 1)
-				return "redirect:/controller/admin-profile/professional-list";
+				return "redirect:/controller/professional-operations/professional-list";
 			/* PAGINA DE ERROR
 			 * if(result== -1)
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			if(result== -2)
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);*/
 		}
-		return "redirect:/controller/admin-profile/professional-list";
+		return "redirect:/controller/professional-operations/professional-list";
 	}
 }
