@@ -17,8 +17,8 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationEn
 import es.bryle.digital.profesional.service.interfaces.AuthUserService;
 
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
@@ -31,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        "**/swagger-resources/**",
 	        "/swagger-ui.html",
 	        "/v2/api-docs",
-	        "/webjars/**"
+	        "/webjars/**",
+	        "/", "/css/**", "/js/**", "/images/**"/*, "/controller/professional-operations/professional-list"*/
 	};
 
 	@Autowired
@@ -44,15 +45,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 	    http
 	    .authorizeRequests().antMatchers(AUTH_LIST).permitAll()
-	    .antMatchers("/oauth/token").permitAll()
+	    //.antMatchers("/oauth/token").permitAll()
+	    .anyRequest().authenticated()
+	    .and().formLogin()/*.loginPage("/login")*/.permitAll()
 	    .and()
+	    .logout().permitAll()
+	    /*.and()
 	    .httpBasic().authenticationEntryPoint(swaggerAuthenticationEntryPoint())
 	    .and()
 	    .csrf().disable()
-	    .cors();
+	    .cors()*/;
 	}
 
-	@Bean
+	/*@Bean
 	public BasicAuthenticationEntryPoint swaggerAuthenticationEntryPoint() {
 	    BasicAuthenticationEntryPoint entryPoint = new BasicAuthenticationEntryPoint();
 	    entryPoint.setRealmName("Swagger Realm");
@@ -68,6 +73,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Bean
 	public TokenStore tokenStore() {
 		return new InMemoryTokenStore();
-	}
+	}*/
 	
 }

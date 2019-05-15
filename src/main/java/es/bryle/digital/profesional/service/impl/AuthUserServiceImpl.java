@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.bryle.digital.profesional.model.entities.auth.User;
 import es.bryle.digital.profesional.model.entities.auth.User;
@@ -42,7 +43,8 @@ public class AuthUserServiceImpl implements AuthUserService{
 	}
 
 	private String generatePassword(User user) {
-		String password = RandomStringUtils.random(8, PASSSWORD_CHARACTERS);
+		//String password = RandomStringUtils.random(8, PASSSWORD_CHARACTERS);
+		String password = "12345";
 		user.setPassword(bCryptPasswordEncoder.encode(password));
 		userRepository.save(user);
 		return password;
@@ -53,9 +55,10 @@ public class AuthUserServiceImpl implements AuthUserService{
 		return null;
 	}
 
-	@Override
+	/*@Override*/
 	public User getCurrentUser() {
 		Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(auth.getName()+"\n"+auth.getAuthorities()+"\n"+auth.getPrincipal());
 		return (User) auth.getPrincipal();
 	}
 
@@ -67,6 +70,8 @@ public class AuthUserServiceImpl implements AuthUserService{
 	@Override
 	public Object getCurrentUser1() {
 		Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
+		System.out.println(auth.getName()+"\n"+auth.getAuthorities());
 		return auth.getPrincipal();
 	}
 
