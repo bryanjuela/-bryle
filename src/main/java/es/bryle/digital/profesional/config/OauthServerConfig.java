@@ -18,9 +18,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-@Configuration
-@EnableAuthorizationServer
-@Import({SecurityConfig.class})
+//@Configuration
+//@EnableAuthorizationServer
+//@Import({SecurityConfig.class})
 public class OauthServerConfig extends AuthorizationServerConfigurerAdapter{
 
 	@Value("${bryle.oauth.client}")
