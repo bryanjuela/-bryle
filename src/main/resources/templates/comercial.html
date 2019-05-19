@@ -1,28 +1,90 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.com">
+
+
 <head>
 	<meta charset="UTF-8"/>
-	<link rel="stylesheet" th:href="@{/css/comercial-style.css}">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title>Nuevo Comercial</title>
+	<!--<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">-->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+	<!--<link rel="stylesheet" type="text/css" href="../static/css/comercial-style.css">-->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/comercial-style.css}">  
+
+
 </head>
 <body>
 
+
+
+<div class="container-fluid">
+	
+	
 	<div class="box">
-		<img th:src="@{/images/logo.png}" class="avatar" alt="Logo BryLe">
+		<div class="salir">
+  			<a th:href="@{/login.html}" >Salir</a> 
+ 		</div>
+			<img th:src="@{/images/logo.png}" class="avatar" alt="Logo BryLe">
 		<div >
 			<h1>Nuevo Comercial</h1>
-		</div>		
+		</div>	
+			
+		<!--Campos-->
 		<form  th:action="@{/controller/professional-operations/professional}" method="post" th:object="${professionalVO}">
-			<input type="text" placeholder="Nombre" required autofocus th:field="*{firstName}">
-			<input type="text" placeholder="Apellido" required autofocus th:field="*{lastName}">
-			<input type="text" placeholder="DNI" required autofocus th:field="*{dni}">
+		<!--<form  action="" class="formulario">-->
+			<div class="form-group row">
+				<label for="inputNombre" class="col-sm-2 col-form-label">Nombre:</label>
+				<div class="col-sm-9">
+					<input type="text" placeholder="Nombre" required autofocus th:field="*{firstName}">
+				</div>
+			</div>
 
-            <input type="email" placeholder="Email" required th:field="*{user}">
-			           
-			<input type="submit" value="Crear">
-            <input type="reset" value="Limpiar">	
+			<div class="form-group row">
+				<label for="inputApellido" class="col-sm-2 col-form-label">Apellido:</label>
+				<div class="col-sm-9">
+					<input type="text" placeholder="Apellido" required autofocus th:field="*{lastName}">
+				</div>
+			</div>
+						
+			<div class="form-group row">
+				<label for="inputDNI" class="col-sm-2 col-form-label">DNI:</label>
+				<div class="col-sm-9">
+					<input type="text" placeholder="DNI" required autofocus th:field="*{dni}">
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
+				<div class="col-sm-9">
+            		<input type="email" placeholder="Email" required th:field="*{user}">
+				</div>
+			</div>
+
+
+			
+			<!--botonera-->
+			<div class="botonera" >
+				<div class="crear">
+					 <a class="btn btn-primary" th:href="@{/controller/professional-operations/create-comercial}">Crear</a>
+  					<!-- <a class="btn btn-primary" href="@{/controller/professional-operations/create-comercial}" role="button">Crear</a>--> 
+					<!--<input type="submit" value="Crear">-->
+				</div>
+				<div class="limpiar">
+	        		<input type="reset" value="Limpiar">	
+				</div>
+			</div>
+			
+            
 		</form>
 	</div>
 	
+
+</div>
+
+	<!--script-->
+	<script src="../static/js/jquery.js"></script>
+	<script src="../static/js/popper.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	
 </body>
-</html>
+</html>>

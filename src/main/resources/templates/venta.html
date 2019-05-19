@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<!--<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">-->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">  
+	<!--<link rel="stylesheet" type="text/css" href="../static/css/venta-style.css">-->
+	<link rel="stylesheet" type="text/css" th:href="@{/venta-style.css}">  
+
+
+	<title>Nueva Venta</title>
+</head>
+<body>
+
+<div class="container-fluid">
+	
+	
+	<div class="box">
+		<div class="salir">
+  			<a th:href="@{/login.html}" >Salir</a> 
+ 		</div>
+		<img th:src="@{/images/logo.jpg}" alt="Logo BryLe" class="avatar">
+		
+		<div >
+			<h1>Nueva Venta</h1>
+		</div>	
+
+		<!--Campos-->
+		<form  action="">
+				
+			<div class="form-group row">
+				<label for="inputBastidor" class="col-sm-2 col-form-label">Nº de Bastidor:</label>
+				<div class="col-sm-9">
+					<select id="inputState" class="form-control">
+       					<option selected>Seleccionar</option>
+        				<option value="">1</option>
+        				<option value="">2</option>
+        				<option value="">3</option>
+     				</select>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="inputBastidor" class="col-sm-2 col-form-label">Empleado:</label>
+				<div class="col-sm-9">
+					<select id="inputState" class="form-control">
+       					<option selected>Seleccionar</option>
+        				<option value="">1</option>
+        				<option value="">2</option>
+        				<option value="">3</option>
+     				</select>
+     			</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="inputAnyo" class="col-sm-2 col-form-label">Fecha de venta:</label>
+				<div class="col-sm-3">
+           			<input type="date"  required>
+				</div>
+				<label for="inputAnyo" class="col-sm-2 col-form-label offset-md-1">Precio de venta:</label>
+				<div class="col-sm-3">
+           			<input type="number" placeholder="Precio">
+				</div>
+			</div>
+					
+			<!--botonera-->
+			<div class="botonera" >
+				<div class="crear">
+					<input type="submit" value="Crear">
+				</div>
+				<div class="limpiar">
+	        		<input type="reset" value="Limpiar">	
+				</div>
+			</div>
+			
+            
+		</form>
+	</div>
+	
+
+</div>
+
+	<!--script-->
+	<script src="../static/js/jquery.js"></script>
+	<script src="../static/js/popper.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	
+</body>
+</html>

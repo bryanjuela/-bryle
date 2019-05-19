@@ -1,25 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.com">
+
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8"/>
+  	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title>Recuperar Contraseña</title>
-	<link rel="stylesheet" type="text/css" href="../static/css/recuperar-style.css"> 
+  	<!--<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">-->
+  	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">  
+  	<!--<link rel="stylesheet" type="text/css" href="../static/css/recuperar-style.css">-->
+  	<link rel="stylesheet" type="text/css" th:href="@{/css/recuperar-style.css}">  
+
 
 </head>
 <body>
 	
 	 <div class="box">
-      <img src="../static/images/logo.png" class="avatar" alt="Logo BryLe">
+	 
+       <img th:src="@{/images/logo.jpg}" alt="Logo BryLe" class="avatar">
+       
       <div >
         <h1>Recuperar Contraseña</h1>
       </div>
+      
       <form>
         <input type="text" placeholder="Introduce nombre de usuario" required autofocus>
         <input type="password" placeholder="Nueva contraseña" required>
         <input type="password" placeholder="Repetir contraseña" required>
-        <input type="submit" value="Acceder">
-        <input type="reset" value="Limpiar">
-        
+        <div class="botones">
+          <input type="submit" value="Acceder">
+          <input type="reset" value="Limpiar">
+        </div>
+        <div class="salir">
+          <a th:href="@{/login.html}">Salir</a> 
+        </div>
       </form>
     </div>
 

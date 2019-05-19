@@ -1,29 +1,105 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../static/css/coche-style.css">
+	<meta charset="UTF-8"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/coche-style.css}"> 
+		
+	
 	<title>Nuevo Coche</title>
 </head>
 <body>
 
+<div class="container-fluid">
+	
+	
 	<div class="box">
-		<img src="../static/images/logo.png" class="avatar" alt="Logo BryLe">
+		<div class="salir">
+  			<a th:href="@{/login.html}">Salir</a>
+ 		</div>
+
+    <img th:src="@{/images/logo.jpg}" alt="Logo BryLe" class="avatar">  
+<!--		<img src="../static/images/logo.png" class="avatar" alt="Logo BryLe">-->
+		
 		<div >
 			<h1>Nuevo Coche</h1>
-		</div>		
+		</div>	
+			
+		<!--Campos-->
+		
 		<form  action="">
-			<input type="text" placeholder="Marca" required autofocus>
-			<input type="text" placeholder="Modelo" required autofocus>
-			<input type="text" placeholder="Bastidor" required autofocus>
-           	<input type="date"  required>
-	        <input type="number" placeholder="Precio" required>
+			<div class="form-group row">
+				<label for="inputMarca" class="col-sm-2 col-form-label">Marca:</label>
+				<div class="col-sm-9">
+					<input type="text" placeholder="Marca" required autofocus>
+				</div>
+			</div>
 
-			<input type="submit" value="Crear">
-            <input type="reset" value="Limpiar">	
+			<div class="form-group row">
+				<label for="inputModelo" class="col-sm-2 col-form-label">Modelo:</label>
+				<div class="col-sm-9">
+					<input type="text" placeholder="Modelo" required autofocus>
+				</div>
+			</div>
+						
+			<div class="form-group row">
+				<label for="inputBastidor" class="col-sm-2 col-form-label">Nº de Bastidor:</label>
+				<div class="col-sm-9">
+					<input type="text" placeholder="Bastidor" required autofocus>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="inputAnyo" class="col-sm-2 col-form-label">Fecha de fabricación:</label>
+				<div class="col-sm-3">
+           			<input type="date"  required>
+				</div>
+				<label for="inputKm" class="col-sm-2 col-form-label offset-md-1">Km:</label>
+				<div class="col-sm-3">
+	        		<input type="number" placeholder="Km">
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="inputPrecio" class="col-sm-2 col-form-label">Precio:</label>
+				<div class="col-sm-3">
+	        		<input type="number" placeholder="Precio">
+				</div>
+				<label for="inputEstado" class="col-sm-2 col-form-label offset-md-1">Estado:</label>
+				<div class="col-sm-3">
+					<select id="inputState" class="form-control">
+       					<option selected>Seleccionar</option>
+        				<option value="nuevo">Nuevo</option>
+        				<option value="usado">2ª Mano</option>
+     				 </select>	
+  				</div>
+
+			</div>
+			
+			<!--botonera-->
+			<div class="botonera" >
+				<div class="crear">
+					 <a class="btn btn-primary" th:href="@{/controller/professional-operations/create-car}">Crear</a>
+  					<!--<a class="btn btn-primary" href="@{/controller/professional-operations/create-car}" role="button">Crear</a>--> 
+					<!--<input type="submit" value="Crear">-->
+				</div>
+				<div class="limpiar">
+	        		<input type="reset" value="Limpiar">	
+				</div>
+			</div>
+			
             
 		</form>
 	</div>
+	
+
+</div>
+
+	<!--script-->
+	<script src="../static/js/jquery.js"></script>
+	<script src="../static/js/popper.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
 	
 </body>
 </html>

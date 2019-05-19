@@ -47,29 +47,24 @@ table {
   border-spacing: 0;
 }
 
-/********************************************************/
-
-
-body {
-  margin: 0;
-  padding: 0;
-  background: url(../images/banner.jpg) no-repeat center top;
-  background-size: cover;
-  font-family: sans-serif;
-  height: 100vh;
-}
+/***********************************************************************************/
 
 .box {
-  width: 320px;
-  height: 500px;
+  display: block;
+  float: left;
+  width: 95%; 
+  height: 550px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   background: #000;
   color: #fff;
   top: 50%;
   left: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
-  box-sizing: border-box;
   padding: 70px 30px;
+  font-family: sans-serif;
+
 }
 
 .box .avatar {
@@ -89,31 +84,25 @@ body {
   font-weight: bold;
 }
 
-.box input {
-  width: 100%;
-  margin-bottom: 20px;
+.form-group {
+  margin-top: 40px;
+  margin-bottom: 50px;
 }
 
-.box input[type="text"], .box input[type="password"] {
-  border: none;
-  border-bottom: 1px solid #fff;
-  background: transparent;
-  outline: none;
-  height: 40px;
-  color: #fff;
-  font-size: 16px;
+.box input {
+  width: 100%;
+  margin-bottom: 50px;
 }
 
 .box input[type="submit"] , input[type="reset"]{
   border: none;
   outline: none;
+  width: 20%;
   height: 40px;
   background: #b80f22;
   color: #fff;
   font-size: 18px;
   border-radius: 12px;
-  font-weight: bold;
-
 }
 
 .box input[type="submit"]:hover , input[type="reset"]:hover {
@@ -122,45 +111,89 @@ body {
   color: #000;
 }
 
-.box a {
-  text-decoration: none;
-  font-size: 12px;
-  line-height: 20px;
-  color: darkgrey;
+/*botones*/
+.box .crear input{
+  position: relative;
+  float: left;
+  width: 100px;
+  margin-right: 20px;
+
+}
+.box .limpiar input{
+  position: relative;
+  float: left;
+  width: 100px;
+}
+ .box .botonera {
+  position: relative;
+  float: right;
+  width: 220px;
+  margin-top: 20px;
+  margin-right: 10px;
 }
 
-.box a:hover {
-  color: #fff;
-}
-
-.box .salir{
-  text-align: center;
-}
-
-.box .salir a{
-  width: 100%;
+.salir{
+  float: right;
+  width: 10%;
+  text-align: right;
+  margin-top: -50px;
+  padding-right: 10px;
   font-size: 20px;
   font-weight: bold;
-  color: blue;
 }
 
-/******************   MOVIL  ******************/
+/******************************  MOVIL  ******************************/
 
-
-@media (max-width: 700px){
+@media(max-width: 700px){
+  
   body{
     background: #000000;
   }
 
-  .box{
+  .box {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+    display: block;
+    float: left;
+    width: 100%; 
+    color: #fff;
+    margin-top: 30px;
+
+  }
+
+.box input {
+  width: 100%;
+  margin-bottom: 20px;
+
+}
+
+  .box .form-group {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .box .botonera{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 0px;
+
+  }
+
+  .box .crear input, .box .limpiar input {
     width: 100%;
   }
-  
-  .box .botones{
-  margin-top: 30px;
-}
-  .box .salir{
-    margin-top: 10px;
+
+
+  .salir{
+    float: right;
+    width: 10%;
+    text-align: right;
+    margin-top: -115px;
+    padding-right: 30px;
+    font-size: 20px;
+    font-weight: bold;
   }
+
 
 }

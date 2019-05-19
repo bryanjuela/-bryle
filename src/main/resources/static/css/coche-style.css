@@ -47,30 +47,27 @@ table {
   border-spacing: 0;
 }
 
+/***********************************************************************************/
 
 
-
-
-body {
-  margin: 0;
-  padding: 0;
-  background: #ddd;
-  background-size: cover;
-  font-family: sans-serif;
-  height: 100vh;
-}
 
 .box {
-  width: 320px;
-  height: 520px;
+  position: relative;
+  display: block;
+  float: left;
+  width: 95%; 
+  height: 550px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   background: #000;
   color: #fff;
   top: 50%;
   left: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
-  box-sizing: border-box;
   padding: 70px 30px;
+  font-family: sans-serif;
+
 }
 
 .box .avatar {
@@ -86,22 +83,18 @@ body {
   margin: 0;
   padding: 0 0 20px;
   text-align: center;
-  font-size: 22px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.box label {
-  margin: 0;
-  padding: 0;
-  font-weight: bold;
-  display: block;
-}
 
 .box input {
   width: 100%;
   margin-bottom: 20px;
+
 }
 
-.box input[type="text"], .box input[type="password"] {
+.box input[type="text"]{
   border: none;
   border-bottom: 1px solid #fff;
   background: transparent;
@@ -111,29 +104,101 @@ body {
   font-size: 16px;
 }
 
-.box input[type="submit"] , input[type="reset"]{
+.box a , input[type="reset"]{
   border: none;
   outline: none;
+  width: 20%;
   height: 40px;
   background: #b80f22;
   color: #fff;
   font-size: 18px;
-  border-radius: 20px;
+  border-radius: 12px;
 }
 
-.box input[type="submit"]:hover , input[type="reset"]:hover {
+.box a:hover , input[type="reset"]:hover {
   cursor: pointer;
   background: #0c06c9;
   color: #000;
 }
 
-.box a {
-  text-decoration: none;
-  font-size: 12px;
-  line-height: 20px;
-  color: darkgrey;
+/*botones*/
+.box .crear a{
+  position: relative;
+  float: left;
+  width: 100px;
+  margin-right: 20px;
+
+}
+.box .limpiar input{
+  position: relative;
+  float: left;
+  width: 100px;
 }
 
-.box a:hover {
-  color: #fff;
+.box .botonera {
+  position: relative;
+  float: right;
+  width: 220px;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
+.salir{
+  float: right;
+  width: 10%;
+  text-align: right;
+  margin-top: -50px;
+  padding-right: 10px;
+  font-size: 20px;
+  background: #000;
+}
+.box .salir a{
+  color: blue;
+  font-weight: bold;
+  background: #000;
+
+}
+
+/******************************  MOVIL  ******************************/
+
+@media(max-width: 700px){
+  
+  body{
+    background: #000000;
+  }
+
+  .box {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+    display: block;
+    float: left;
+    width: 100%; 
+    color: #fff;
+    margin-top: 30px;
+
+  }
+
+  .box .botonera{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .box .crear a, .box .limpiar input {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .salir{
+    float: right;
+    width: 10%;
+    text-align: right;
+    margin-top: -115px;
+    padding-right: 30px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+
 }

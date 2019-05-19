@@ -51,42 +51,44 @@ table {
 
 
 
-
-
 * {
       box-sizing: border-box
     }
 
     body {
       font-family: sans-serif;
+      background: url("../images/fondo.jpg");
     }
+
+
     .banner img{
       width: 100%;
-      height: 200px;
+      height: 150px;
     }
 
     
     .tab {
-        float: left;
-        border: 1px solid #000;
-        background-color: #000;
-        width: 20%;
-        height: 300px;
+      display: block;
+      float: left;
+      border: 1px solid #000;
+      background-color: #000;
+      width: 15%;
+      height: 350px;
     }
 
     .tab button {
-        display: block;
-        background-color: inherit;
-        color: black;
-        padding: 22px 16px;
-        width: 100%;
-        border: none;
-        outline: none;
-        text-align: left;
-        cursor: pointer;
-        transition: 0.3s;
-        font: 400 17px Helvetica, sans-serif;
-        color: white;
+      background: #000;
+      color: #fff;
+      padding: 22px 16px;
+      width: 100%;
+      border: none;
+      outline: none;
+      text-align: left;
+      cursor: pointer;
+      transition: 0.3s;
+      font: 400 17px Helvetica, sans-serif;
+      font-weight: bold;
+
     }
 
     .tab button:hover {
@@ -100,44 +102,103 @@ table {
         background-color: #ddd;
         color: black;
         font: 500 25px Helvetica, sans-serif;
+        font-weight: bold;
+
     }
 
     .tabcontent {
         float: left;
-        padding: 0px 12px;
+        padding: 10px 10px;
         border: 1px solid #000;
-        width: 60%;
+        width: 85%;
         border-left: none;
-        height: 300px;
+        height: 350px;
         background: #ddd;
     }
 
     .tabcontent h1{
+      font-weight: bold;
+      font-family: new-time-roman;
       font-size: 36px;
       text-align: center;
+      padding-bottom: 20px;
+    }
+
+    .container .bt-editar{
+      text-align: right;
+
+    }
+     .container .bt-eliminar{
+      text-align: left;
     }
 
 
-   
 
-   .content-botton{
-      float: left;
-      padding: 0px 12px;
-      width: 20%;
-      border-left: none;
-      height: 300px;
-      background: #fff;
+
+/*****************************************  MOVIL  ********************/
+
+
+    @media (max-width: 700px) {
       
+      body{
+      	background: #fff;
+      }
+      
+      .banner img{
+        width: 100%;
+        height: 80px;
+       }
+
+      .tab{
+        position: relative;
+        display: block;
+        float: left;
+        width: 100%;
+        height: 70px;
+        background: #000;
+      }
+
+      .tab button{
+        width: 32.5%;
+        text-align: center;
+      }
+
+    
+      .tab button.active {
+        background-color: #ddd;
+        color: black;
+        font: 500 18px Helvetica, sans-serif;
+        font-weight: bold;
+        padding-bottom: 40px;
+        padding-left: 2px;
     }
 
-    .botones{
-      width: 20;
-      float: left;
-      margin: 20px;
-      text-align: center;
+      .tabcontent{
+        width: 100%;
+      }
+
+      .tabcontent h1{
+        display: block;
+        display: none;
+      }
+
+
+
     }
 
-    .botones input[type="submit"] , input[type="reset"]{
+
+    .crear{
+      position: relative;
+      float: right;
+      width: 100%;
+      height: 40px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-right: 20px;
+      text-align: right;
+    }
+
+    .crear a {
       border: none;
       outline: none;
       height: 40px;
@@ -145,17 +206,48 @@ table {
       background: #b80f22;
       color: #fff;
       font-size: 18px;
-      border-radius: 20px;
+      border-radius: 12px;
 
     }
 
-    .botones input[type="submit"]:hover , input[type="reset"]:hover {
+    .crear a :hover  {
       cursor: pointer;
       background: #0c06c9;
       color: #000;
 
     }
 
+    .salir {
+      width: 100%;
+      background: #000;
+      text-align: right;
+      margin-top: -3px;
+      padding-right: 30px;
+      padding-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+   
+
+    .editar{
+      width: 90px;
+      border-radius: 12px;
+      font-weight: bold;
+      border: solid;
+      margin-right: 20px;
+      cursor: pointer;
+
+    }
+  
+    .eliminar{
+      width: 90px;
+      border-radius: 12px;
+      font-weight: bold;
+      border: solid;
+      cursor: pointer;
+
+    }
+ 
     .footer{
       float: left;
       text-align: center;
@@ -164,10 +256,16 @@ table {
     }
 
     .footer img{
-      width: 8%;
+      width: 5%;
     }
 
+    .footer p{
+      font-size: 12px;
+      line-height : 15px;
+      
+    }
     .footer span{
       font-weight: bold;
+      font-size: 12px;
     }
    
