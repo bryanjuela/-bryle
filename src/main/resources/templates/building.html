@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+
+<head>
+	<meta charset="utf-8"/>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>BUILDING</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:700,900" rel="stylesheet">
+
+	<!-- Custom stlylesheet -->
+	<!-- <link rel="stylesheet" type="text/css" href="../static/css/building-style.css">  -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/building-style.css}"> 
+
+	
+</head>
+
+<body>
+
+	<div id="sorry">
+		<div class="sorry">
+			<div class="building">
+				<h1>SORRY</h1>
+				<h2>UNDER CONSTRUCTION</h2>
+			</div>
+			<div class="img">
+				<!--<img src="../static/images/progreso.gif" alt="">-->
+				<img src="@{/static/images/progreso.gif}" alt="">
+			</div>
+
+			<!--<a href="login.html">Homepage</a>-->
+			<a th:href="@{/login.html}">Homepage</a>
+		</div>
+	</div>
+
+</body>
+
+</html>
