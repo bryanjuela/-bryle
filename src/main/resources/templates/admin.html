@@ -4,6 +4,7 @@
 	<meta charset="UTF-8"/>
 	<title>Acceso Administrador</title>
 	<!-- <link rel="stylesheet" type="text/css" href="../static/css/admin-style.css"> -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/admin-style.css}"> 
  <!-- <script type="text/javascript" src="js/admin-script.js"></script> -->
 
@@ -13,6 +14,10 @@
   <div class="banner">
     <img th:src="@{/images/banner2.jpg}" alt="banner">
   </div>
+  
+  <div class="salir">
+  		<a th:href="@{/login.html}">Salir</a> 
+  </div>
 
   <div class="tab">
     <button class="tablinks" onclick="openTab(event, 'Comerciales')" id="defaultOpen">Comerciales</button>
@@ -21,7 +26,7 @@
   </div>
 
 
-  <div id="Comerciales" class="tabcontent">
+  <div id="Comerciales" class="tabcontent table-responsive">
   <h1>Comerciales</h1>
      <div class="container">
 		
@@ -46,8 +51,8 @@
 					<td th:text="*{professional.lastName}"></td>
 					<td th:text="*{professional.user}"></td>
 					<td th:text="*{professional.dni}"></td>
-					<td><a>Editar</a></td>
-					<td><a th:href="@{/controller/professional-operations/delete-professional/} + ${professional.id}">Eliminar</a></td>
+					<td class="bt-editar"><a class="btn btn-outline-primary btn-sm editar" th:href="@{/controller/professional-operations/create-professional/}">Editar</a></td>
+					<td class="bt-eliminar"><a class="btn btn-outline-danger btn-sm eliminar" th:href="@{/controller/professional-operations/delete-professional/} + ${professional.id} ">Eliminar</a></td>
 				</tr>	
 			</tbody>
 		</table>
@@ -55,7 +60,7 @@
 	</div>
   </div>
 
-  <div id="Coches" class="tabcontent">
+  <div id="Coches" class="tabcontent table-responsive">
     <h1>Coches</h1>
      <div class="container">
 		
@@ -68,9 +73,10 @@
 					<th>Nº Bastidor</th>
 					<th>Año</th>
 					<th>Precio</th>
+					<!-- <th>Km</th> -->
 					<th>Estado</th>
 					<th> </th>
-					<td> </td>
+					<th> </th>
 				</tr>
 			</thead>
 
@@ -82,9 +88,10 @@
 					<td th:text="*{car.numBastidor}"></td>
 					<td th:text="*{car.anyo}"></td>
 					<td th:text="*{car.precio}"></td>
+					<!-- <td th:text="*{car.km}"></td> -->
 					<td th:text="*{car.estado}"></td>
-					<td>Editar</td>
-					<td><a th:href="@{/controller/admin-profile/delete-car/} + ${car.id}">Eliminar</a></td>
+					<td class="bt-editar"><a class="btn btn-outline-primary btn-sm editar" th:href="@{/controller/admin-profile/create-car/}">Editar</a></td>
+					<td class="	bt-eliminar"><a class="btn btn-outline-danger btn-sm eliminar" th:href="@{/controller/admin-profile/delete-car/} + ${car.id}">Eliminar</a></td>
 				</tr>	
 			</tbody>
 		</table>
@@ -93,7 +100,7 @@
      
   </div>
 
-  <div id="Ventas" class="tabcontent">
+  <div id="Ventas" class="tabcontent table-responsive">
     <h1>Ventas</h1>
     <div class="container">
 		
@@ -109,10 +116,12 @@
 
 			<tbody>
 				<tr th:each="sale: ${sales}">
-					<td th:text="*{}"></td>
-					<td th:text="*{}"></td>
-					<td th:text="*{}"></td>
-					<td th:text="*{}"></td>
+					<td th:text="*{sale.id}"></td>
+					<td th:text="*{sale.sale_date}"></td>
+					<td th:text="*{sale.car_id}"></td>
+					<td th:text="*{sale.professional_id}"></td>
+					<td class="bt-editar"><a class="btn btn-outline-primary btn-sm editar" th:href="@{/controller/admin-profile/create-sale/}">Editar</a></td>
+					<td class="	bt-eliminar"><a class="btn btn-outline-danger btn-sm eliminar" th:href="@{/controller/admin-profile/delete-sale/} + ${sale.id}">Eliminar</a></td>
 				</tr>	
 			</tbody>
 		</table>
@@ -123,21 +132,12 @@
 
 
 
-  <div class="content-botton">
-    <div class="botones">
-      <a th:href="@{/controller/professional-operations/create-comercial}">Crear</a>
-      <input type="submit" value="Crear"> 
-    </div>
-    <div class="botones">
-      <input type="submit" value="Modificar">
-    </div>
-    <div class="botones">
-      <input type="submit" value="Eliminar">
-    </div>
-    <div class="botones">
-      <input type="reset" value="Limpiar">
-    </div>
-  </div>
+	<div class="crear">
+		<a class="btn btn-primary" th:href="@{/controller/professional-operations/create-comercial}">Crear</a>
+  		<!-- <a class="btn btn-primary" href="@{/controller/professional-operations/create-comercial}" role="button">Crear</a> -->
+
+   </div>
+
 
 
 

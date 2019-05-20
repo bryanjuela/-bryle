@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>ERROR 404</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:700,900" rel="stylesheet">
+
+	<!-- Custom stlylesheet -->
+	<!--<link rel="stylesheet" type="text/css" href="../static/css/error-style.css"> -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/error-style.css}"> 
+
+
+</head>
+
+<body>
+
+	<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h1>404</h1>
+				<h2>Page not found</h2>
+			</div>
+			
+			<!--<a href="login.html">Homepage</a>-->
+			<a th:href="@{/login.html}">Homepage</a>
+		</div>
+	</div>
+
+</body>
+
+</html>
