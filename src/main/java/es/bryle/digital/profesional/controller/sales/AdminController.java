@@ -1,4 +1,4 @@
-package es.bryle.digital.profesional.controller.admin;
+package es.bryle.digital.profesional.controller.sales;
 
 import java.util.List;
 import java.util.Map;
