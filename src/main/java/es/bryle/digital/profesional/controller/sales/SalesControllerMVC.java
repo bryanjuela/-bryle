@@ -1,4 +1,4 @@
-package es.bryle.digital.profesional.controller.admin;
+package es.bryle.digital.profesional.controller.sales;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +28,9 @@ public class SalesControllerMVC {
 
 	@Autowired
 	private SalesService salesService;
+	
+	private static final String ROOT_PATH= "/controller/sales-operations";
+	private static final String REDIRECT= "redirect:";
 	
 	
 	@ApiOperation(value = "Recuperación de todos los coches",
@@ -70,11 +73,11 @@ public class SalesControllerMVC {
 		if(carVO!= null) {
 			Integer result= salesService.createCar(carVO);
 			if(result== 1)
-				return "redirect:/controller/admin-profile/car-list";
+				return REDIRECT+ROOT_PATH+"/car-list";
 			if(result== -1 || result== -2)
-				return "redirect:/controller/admin-profile/create-car";
+				return REDIRECT+ROOT_PATH+"/create-car";
 		}
-		return "redirect:/controller/admin-profile/create-car";
+		return REDIRECT+ROOT_PATH+"/create-car";
 	}
 	
 	
@@ -87,13 +90,13 @@ public class SalesControllerMVC {
 		if(id!= null && id> 0) {
 			Integer result= salesService.deleteCar(id);
 			if(result== 1)
-				return "redirect:/controller/admin-profile/car-list";
+				return REDIRECT+ROOT_PATH+"/car-list";
 			
 			/*PAGINA DE ERROR
 			 * if(result== -1)
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);*/
 		}
-		return "redirect:/controller/admin-profile/car-list";
+		return REDIRECT+ROOT_PATH+"/car-list";
 	}
 	
 	
