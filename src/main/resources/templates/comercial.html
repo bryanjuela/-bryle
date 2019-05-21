@@ -26,7 +26,7 @@
  		</div>
 			<img th:src="@{/images/logo.png}" class="avatar" alt="Logo BryLe">
 		<div >
-			<h1>Nuevo Comercial</h1>
+			<h1 th:text="${titulo}"></h1>
 		</div>	
 			
 		<!--Campos-->
@@ -65,7 +65,7 @@
 			<!--botonera-->
 			<div class="botonera" >
 				<div class="crear">
-					 <a class="btn btn-primary" th:href="@{/controller/professional-operations/create-comercial}">Crear</a>
+					 <a class="btn btn-primary" th:href="@{/controller/professional-operations/professional}">Crear</a>
   					<!-- <a class="btn btn-primary" href="@{/controller/professional-operations/create-comercial}" role="button">Crear</a>--> 
 					<!--<input type="submit" value="Crear">-->
 				</div>
