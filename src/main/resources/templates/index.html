@@ -3,10 +3,8 @@
 <head>
 	<meta charset="UTF-8"/>
 	<title>Acceso Administrador</title>
-	<!-- <link rel="stylesheet" type="text/css" href="../static/css/admin-style.css"> -->
 	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/admin-style.css}"> 
- <!-- <script type="text/javascript" src="js/admin-script.js"></script> -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/index-style.css}"> 
 
 </head>
 <body>
@@ -36,9 +34,11 @@
 					<th>Id</th>
 					<th>Nombre</th>
 					<th>Apellido</th>
+					<!-- <th>Dirección</th> -->
+					<!-- <th>Telefono</th> -->
 					<th>Email</th>
 					<th>DNI</th>
-					<th>Ventas</th>
+					<th>Nº Ventas</th>
 					<th> </th>
 					<th> </th>
 				</tr>
@@ -49,10 +49,12 @@
 					<td th:text="*{professional.id}"></td>
 					<td th:text="*{professional.firstName}"></td>
 					<td th:text="*{professional.lastName}"></td>
+					<!-- <td th:text="*{professional.address}"></td> -->
+					<!--<td th:text="*{professional.tlf}"></td>-->
 					<td th:text="*{professional.user}"></td>
 					<td th:text="*{professional.dni}"></td>
 					<!-- si las ventas es igual a null, mostrar 0
-					 <td th:if="*{professional.sales == null}" th:text="0"></td> -->
+					<td th:if="*{professional.sales == null}" th:text="0"></td> -->
 					<td class="bt-editar"><a class="btn btn-outline-primary btn-sm editar" th:href="@{/controller/professional-operations/edit-professional/} + ${professional.id}">Editar</a></td>
 					<td class="bt-eliminar"><a class="btn btn-outline-danger btn-sm eliminar" th:href="@{/controller/professional-operations/delete-professional/} + ${professional.id} ">Eliminar</a></td>
 				</tr>	
@@ -112,7 +114,7 @@
 					<th>Id</th>
 					<th>Fecha</th>
 					<th>Coche</th>
-					<th>Comercial</th>
+					<!-- <th>Comercial</th> -->
 				</tr>
 			</thead>
 
@@ -121,7 +123,7 @@
 					<td th:text="*{sale.id}"></td>
 					<td th:text="*{sale.sale_date}"></td>
 					<td th:text="*{sale.car_id}"></td>
-					<td th:text="*{sale.professional_id}"></td>
+					<!-- <td th:text="*{sale.professional_id}"></td> -->
 					<td class="bt-editar"><a class="btn btn-outline-primary btn-sm editar" th:href="@{/controller/admin-profile/create-sale/}">Editar</a></td>
 					<td class="	bt-eliminar"><a class="btn btn-outline-danger btn-sm eliminar" th:href="@{/controller/admin-profile/delete-sale/} + ${sale.id}">Eliminar</a></td>
 				</tr>	
@@ -136,8 +138,6 @@
 
 	<div class="crear">
 		<a class="btn btn-primary" th:href="@{/controller/professional-operations/create-comercial}">Crear</a>
-  		<!-- <a class="btn btn-primary" href="@{/controller/professional-operations/create-comercial}" role="button">Crear</a> -->
-
    </div>
 
 
