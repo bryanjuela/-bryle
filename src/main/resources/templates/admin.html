@@ -51,6 +51,8 @@
 					<td th:text="*{professional.lastName}"></td>
 					<td th:text="*{professional.user}"></td>
 					<td th:text="*{professional.dni}"></td>
+					<!-- si las ventas es igual a null, mostrar 0
+					 <td th:if="*{professional.sales == null}" th:text="0"></td> -->
 					<td class="bt-editar"><a class="btn btn-outline-primary btn-sm editar" th:href="@{/controller/professional-operations/edit-professional/} + ${professional.id}">Editar</a></td>
 					<td class="bt-eliminar"><a class="btn btn-outline-danger btn-sm eliminar" th:href="@{/controller/professional-operations/delete-professional/} + ${professional.id} ">Eliminar</a></td>
 				</tr>	

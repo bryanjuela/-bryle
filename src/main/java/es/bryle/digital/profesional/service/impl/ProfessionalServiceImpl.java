@@ -148,8 +148,8 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
 	@Override
 	public Integer editProfessional(ProfessionalVO professionalVO) {
-		//Optional<Professional> professional= professionalRepository.findById(professionalVO.getId());
-		Professional professional= professionalRepository.findByUser(professionalVO.getUser());
+		Optional<Professional> professional= professionalRepository.findById(professionalVO.getId());
+		//Professional professional= professionalRepository.findByUser(professionalVO.getUser());
 		//comprobar si existe en la BD
 		if(professional!= null) {
 			String email= professionalVO.getUser();
@@ -159,7 +159,7 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 			User existEmail= userRepository.findByEmail(email);
 			
 			if(existDni!= null && existEmail!= null) {
-				Professional newProfessional= professionalMapper.mapper(professionalVO, professional);
+				Professional newProfessional= professionalMapper.mapper(professionalVO, professional.get());
 				if(newProfessional!= null) {
 					professionalRepository.save(newProfessional);
 					return 1;
