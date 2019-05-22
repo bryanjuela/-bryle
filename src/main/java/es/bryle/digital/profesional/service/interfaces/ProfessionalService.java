@@ -10,7 +10,7 @@ import es.bryle.digital.profesional.model.vo.ProfessionalVO;
 import es.bryle.digital.profesional.model.vo.SaleVO;
 
 @Service("adminService")
-public interface AdminService {
+public interface ProfessionalService {
 
 	//CRUD Professionals
 	/* devuleve

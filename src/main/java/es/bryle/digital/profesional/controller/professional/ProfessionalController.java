@@ -7,13 +7,15 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.bryle.digital.profesional.model.vo.ProfessionalVO;
-import es.bryle.digital.profesional.service.interfaces.AdminService;
+import es.bryle.digital.profesional.repository.ProfessionaRepository;
+import es.bryle.digital.profesional.service.interfaces.ProfessionalService;
 import es.bryle.digital.profesional.service.interfaces.SalesService;
 import io.swagger.annotations.ApiOperation;
 
@@ -22,13 +24,19 @@ import io.swagger.annotations.ApiOperation;
 public class ProfessionalController {
 
 	@Autowired
-	private AdminService adminService;
+	private ProfessionalService professionalService;
+	@Autowired
+	private ProfessionaRepository professionalRepository;
+	
+	
+	private static final String REDIRECT= "redirect:";
+	private static final String ROOT_PATH= "/controller/professional-operations";
 	
 	@ApiOperation(value = "Recuperación de todos los profesionales",
 			notes = "Recupera un listado con todos los profesionales de la BD")
 	@RequestMapping(value = "/professional-list", method= RequestMethod.GET)
 	public String getProfessionals(Map<String, Object> model){
-		List<ProfessionalVO> professionals= adminService.getProfessionals();
+		List<ProfessionalVO> professionals= professionalService.getProfessionals();
 		if(!professionals.isEmpty() || professionals!= null) {
 			model.put("professionals", professionals);
 			System.out.println("professional-list GET");
@@ -39,15 +47,16 @@ public class ProfessionalController {
 	@ApiOperation(value = "Formulario de profesional",
 			notes = "Redirecciona a la vista para crear un nuevo profesional")
 	@RequestMapping(value = "/create-comercial", method= RequestMethod.GET)
-	public String createProfessional(Map<String, Object> model) {
+	public String newProfessional(Map<String, Object> model) {
 		ProfessionalVO professionalVO= new ProfessionalVO();
 		model.put("professionalVO", professionalVO);
+		model.put("titulo", "Nuevo Comercial");
 		return "/comercial";
 	}
 	
 	@ApiOperation(value = "Creación de un profesional",
 			notes = "Crear un usuario con el rol de 'USER'")
-	@RequestMapping(value = "/professional", method= RequestMethod.POST)
+	@RequestMapping(value = "/professional")
 	public String createProfessional(@Valid ProfessionalVO professionalVO, 
 			final BindingResult bindingResult){
 		
@@ -56,8 +65,12 @@ public class ProfessionalController {
 				return "redirect:/controller/professional-operations/create-comercial";
 			}
 			System.out.println("professional POST");
-			Integer result= adminService.createProfessional(professionalVO);
-			
+			Integer result;
+			if(professionalRepository.findByUser(professionalVO.getUser())== null) 
+				result= professionalService.createProfessional(professionalVO);
+			else 
+				result= professionalService.editProfessional(professionalVO);
+				
 			if(result== 1)
 				return "redirect:/controller/professional-operations/professional-list";
 			if(result== -1 || result== -2)
@@ -73,7 +86,7 @@ public class ProfessionalController {
 	public String deleteProfessional(@PathVariable("id")Long id){
 		
 		if(id!= null && id> 0) {
-			Integer result= adminService.deleteProfessional(id);
+			Integer result= professionalService.deleteProfessional(id);
 			if(result== 1)
 				return "redirect:/controller/professional-operations/professional-list";
 			/* PAGINA DE ERROR
@@ -83,5 +96,21 @@ public class ProfessionalController {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);*/
 		}
 		return "redirect:/controller/professional-operations/professional-list";
+	}
+	
+	@ApiOperation(value = "Edición de un profesional",
+			notes = "Redirecciona a la vista del comercial con los datos del comercial seleccionado")
+	@RequestMapping(value = "/edit-professional/{id}")
+	public String editProfessional(@PathVariable("id")Long id, Model model){
+		
+		if(id!= null && id> 0) {
+			ProfessionalVO professionalVO= professionalService.getProfessional(id);
+			if(professionalVO!= null) {
+				model.addAttribute("professionalVO", professionalVO);
+				model.addAttribute("titulo", "Editar Comercial");
+				return "/comercial";
+			}
+		}
+		return REDIRECT+ ROOT_PATH+"/professional-list";
 	}
 }

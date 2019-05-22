@@ -29,11 +29,11 @@ import es.bryle.digital.profesional.repository.ProfessionaRepository;
 import es.bryle.digital.profesional.repository.RoleRepository;
 import es.bryle.digital.profesional.repository.SaleRepository;
 import es.bryle.digital.profesional.repository.UserRepository;
-import es.bryle.digital.profesional.service.interfaces.AdminService;
+import es.bryle.digital.profesional.service.interfaces.ProfessionalService;
 import es.bryle.digital.profesional.service.interfaces.AuthUserService;
 
 @Service("adminService")
-public class AdminServiceImpl implements AdminService {
+public class ProfessionalServiceImpl implements ProfessionalService {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -148,10 +148,10 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Integer editProfessional(ProfessionalVO professionalVO) {
-		Optional<Professional> professional= professionalRepository.findById(professionalVO.getId());
-		
+		//Optional<Professional> professional= professionalRepository.findById(professionalVO.getId());
+		Professional professional= professionalRepository.findByUser(professionalVO.getUser());
 		//comprobar si existe en la BD
-		if(professional.isPresent()) {
+		if(professional!= null) {
 			String email= professionalVO.getUser();
 			String dni= professionalVO.getDni();
 			
@@ -159,7 +159,7 @@ public class AdminServiceImpl implements AdminService {
 			User existEmail= userRepository.findByEmail(email);
 			
 			if(existDni!= null && existEmail!= null) {
-				Professional newProfessional= professionalMapper.mapper(professionalVO, professional.get());
+				Professional newProfessional= professionalMapper.mapper(professionalVO, professional);
 				if(newProfessional!= null) {
 					professionalRepository.save(newProfessional);
 					return 1;

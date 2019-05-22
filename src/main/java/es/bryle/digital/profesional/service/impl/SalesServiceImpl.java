@@ -21,6 +21,7 @@ import es.bryle.digital.profesional.repository.ProfessionaRepository;
 import es.bryle.digital.profesional.repository.RoleRepository;
 import es.bryle.digital.profesional.repository.SaleRepository;
 import es.bryle.digital.profesional.repository.UserRepository;
+import es.bryle.digital.profesional.service.interfaces.AuthUserService;
 import es.bryle.digital.profesional.service.interfaces.SalesService;
 
 @Service("salesService")
@@ -42,6 +43,8 @@ public class SalesServiceImpl implements SalesService {
 	private CarMapper carMapper;
 	@Autowired
 	private CarVOMapper carVOMapper;
+	@Autowired
+	private AuthUserService authUserService;
 	@Autowired
 	private ProfessionalMapper professionalMapper;
 	@Autowired

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.bryle.digital.profesional.model.vo.CarVO;
 import es.bryle.digital.profesional.model.vo.ProfessionalVO;
 import es.bryle.digital.profesional.model.vo.SaleVO;
-import es.bryle.digital.profesional.service.interfaces.AdminService;
+import es.bryle.digital.profesional.service.interfaces.ProfessionalService;
 import es.bryle.digital.profesional.service.interfaces.SalesService;
 import io.swagger.annotations.ApiOperation;
 
@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiOperation;
 public class AdminController {
 	
 	@Autowired
-	private AdminService adminService;
+	private ProfessionalService adminService;
 	@Autowired
 	private SalesService salesService;
 	

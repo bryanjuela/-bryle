@@ -58,8 +58,7 @@ public class AuthUserServiceImpl implements AuthUserService{
 	/*@Override*/
 	public User getCurrentUser() {
 		Authentication auth= SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(auth.getName()+"\n"+auth.getAuthorities()+"\n"+auth.getPrincipal());
-		return (User) auth.getPrincipal();
+		return userRepository.findByEmail(auth.getName());
 	}
 
 	@Override
