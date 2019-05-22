@@ -66,10 +66,13 @@ public class ProfessionalController {
 			}
 			System.out.println("professional POST");
 			Integer result;
-			if(professionalRepository.findByUser(professionalVO.getUser())== null) 
+			if(professionalVO.getId()== null) { 
 				result= professionalService.createProfessional(professionalVO);
-			else 
+				System.out.println("Nuevo"+result);
+			}else { 
 				result= professionalService.editProfessional(professionalVO);
+				System.out.println("Editar"+result);
+			}	
 				
 			if(result== 1)
 				return "redirect:/controller/professional-operations/professional-list";
