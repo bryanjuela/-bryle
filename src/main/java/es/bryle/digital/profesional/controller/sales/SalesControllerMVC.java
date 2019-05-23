@@ -40,7 +40,7 @@ public class SalesControllerMVC {
 		List<CarVO> cars= salesService.getCars();
 		if(!cars.isEmpty() || cars!= null)
 			model.put("cars", cars);
-		return "/admin";
+		return "/index";
 	}
 	
 	@ApiOperation(value = "Recuperación de todas las ventas",
@@ -50,7 +50,7 @@ public class SalesControllerMVC {
 		List<SaleVO> sales= salesService.getSales();
 		if(!sales.isEmpty() || sales!= null)
 			model.put("sales", sales);
-		return "/admin";
+		return "/index";
 	}
 	
 	
@@ -60,7 +60,7 @@ public class SalesControllerMVC {
 	public String createCar(Map<String, Object> model) {
 		CarVO carVO= new CarVO();
 		model.put("carVO", carVO);
-		
+		model.put("titulo", "Nuevo Coche");
 		return "/comercial";
 	}
 	

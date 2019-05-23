@@ -41,7 +41,7 @@ public class ProfessionalController {
 			model.put("professionals", professionals);
 			System.out.println("professional-list GET");
 		}	
-		return "/admin";
+		return "/index";
 	}
 	
 	@ApiOperation(value = "Formulario de profesional",

@@ -3,10 +3,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/coche-style.css}"> 
-		
-	
 	<title>Nuevo Coche</title>
 </head>
 <body>
@@ -15,20 +14,18 @@
 	
 	
 	<div class="box">
-		<div class="salir">
-  			<a th:href="@{/login.html}">Salir</a>
- 		</div>
-
-    <img th:src="@{/images/logo.jpg}" alt="Logo BryLe" class="avatar">  
-<!--		<img src="../static/images/logo.png" class="avatar" alt="Logo BryLe">-->
+		
+    	<img th:src="@{/images/logo.jpg}" alt="Logo BryLe" class="avatar">  
 		
 		<div >
-			<h1>Nuevo Coche</h1>
+			<h1 th:text="${titulo}"></h1>
 		</div>	
 			
 		<!--Campos-->
 		
 		<form  action="">
+		<!-- <form  th:action="@{/controller/sales-operations/car}" method="post" th:object="${carVO}">-->
+		
 			<div class="form-group row">
 				<label for="inputMarca" class="col-sm-2 col-form-label">Marca:</label>
 				<div class="col-sm-9">
@@ -79,13 +76,16 @@
 			
 			<!--botonera-->
 			<div class="botonera" >
-				<div class="crear">
-					 <a class="btn btn-primary" th:href="@{/controller/admin-profile/create-car}">Crear</a>
-  					<!--<a class="btn btn-primary" href="@{/controller/admin-profile/create-car}" role="button">Crear</a>--> 
-					<!--<input type="submit" value="Crear">-->
+				<div class="aceptar">
+					 <!--  <a class="btn btn-primary" th:href="@{/controller/sales-operations/create-car}">Crear</a>-->
+					<input class="btn btn-primary" type="submit" value="Aceptar">
+					
 				</div>
 				<div class="limpiar">
 	        		<input type="reset" value="Limpiar">	
+				</div>
+				<div class="cancelar">
+  					<a class="btn btn-primary" href="@{/controller/sales-operations/car-list}" role="button">Cancelar</a> 
 				</div>
 			</div>
 			

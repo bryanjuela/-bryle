@@ -107,7 +107,7 @@ table {
   font-size: 16px;
 }
 
-.box a , input[type="reset"]{
+.box a, input[type="reset"], input[type="submit"]{
   border: none;
   outline: none;
   width: 20%;
@@ -118,14 +118,14 @@ table {
   border-radius: 12px;
 }
 
-.box a:hover , input[type="reset"]:hover {
+.box a:hover , input[type="reset"]:hover , input[type="submit"] {
   cursor: pointer;
   background: #0c06c9;
   color: #000;
 }
 
 /*botones*/
-.box .crear a{
+.box .aceptar input{
   position: relative;
   float: left;
   width: 100px;
@@ -138,6 +138,12 @@ table {
   width: 100px;
 }
 
+.box .cancelar a{
+  position: relative;
+  float: right;
+  width: 100px;
+}
+
 .box .botonera {
   position: relative;
   float: right;
@@ -146,21 +152,8 @@ table {
   margin-right: 10px;
 }
 
-.salir{
-  float: right;
-  width: 10%;
-  text-align: right;
-  margin-top: -50px;
-  padding-right: 10px;
-  font-size: 20px;
-  background: #000;
-}
-.box .salir a{
-  color: blue;
-  font-weight: bold;
-  background: #000;
 
-}
+
 /******************************  MOVIL  ******************************/
 
 @media(max-width: 700px){
@@ -187,20 +180,12 @@ table {
     margin-top: 20px;
   }
 
-  .box .crear a, .box .limpiar input {
+  .box .aceptar input, .box .limpiar input, .box .cancelar imput {
     width: 100%;
     margin-top: 20px;
   }
 
-  .salir{
-    float: right;
-    width: 10%;
-    text-align: right;
-    margin-top: -115px;
-    padding-right: 30px;
-    font-size: 20px;
-    font-weight: bold;
-  }
+
 
 
 }

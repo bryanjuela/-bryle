@@ -6,33 +6,23 @@
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title>Nuevo Comercial</title>
-	<!--<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">-->
 	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-	<!--<link rel="stylesheet" type="text/css" href="../static/css/comercial-style.css">-->
 	<link rel="stylesheet" type="text/css" th:href="@{/css/comercial-style.css}">  
-
-
 </head>
 <body>
 
-
-
 <div class="container-fluid">
-	
-	
+		
 	<div class="box">
-		<div class="salir">
-  			<a th:href="@{/login.html}" >Salir</a> 
- 		</div>
-			<img th:src="@{/images/logo.png}" class="avatar" alt="Logo BryLe">
+		<img th:src="@{/images/logo.png}" class="avatar" alt="Logo BryLe">
 		<div >
 			<h1 th:text="${titulo}"></h1>
-			<p th:if="${titulo == 'Editar Comercial'}">Parrafo if</p>
 		</div>	
 			
 		<!--Campos-->
 		<form  th:action="@{/controller/professional-operations/professional}" method="post" th:object="${professionalVO}">
 		<!--<form  action="" class="formulario">-->
+		<input type="hidden" th:field="*{id}">
 			<div class="form-group row">
 				<label for="inputNombre" class="col-sm-2 col-form-label">Nombre:</label>
 				<div class="col-sm-9">
@@ -46,7 +36,20 @@
 					<input type="text" placeholder="Apellido" required autofocus th:field="*{lastName}">
 				</div>
 			</div>
-						
+			<!-- 
+			<div class="form-group row">
+				<label for="inputDireccion" class="col-sm-2 col-form-label">Dirección:</label>
+				<div class="col-sm-9">
+					<input type="text" placeholder="Dirección" autofocus th:field="*{address}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="inputTelefono" class="col-sm-2 col-form-label">Teléfono:</label>
+				<div class="col-sm-9">
+					<input type="number" placeholder="Teléfono" required autofocus th:field="*{tlf}">
+				</div>
+			</div>
+			-->		
 			<div class="form-group row">
 				<label for="inputDNI" class="col-sm-2 col-form-label">DNI:</label>
 				<div class="col-sm-9">
@@ -60,22 +63,22 @@
             		<input type="email" placeholder="Email" required th:field="*{user}">
 				</div>
 			</div>
-
-			<input type="hidden" placeholder="Email" th:field="*{id}">
 			
 			<!--botonera-->
 			<div class="botonera" >
-				<div class="crear">
-					 <!-- <a class="btn btn-primary" th:href="@{/controller/professional-operations/professional}">Crear</a> -->
-  					<!-- <a class="btn btn-primary" href="@{/controller/professional-operations/create-comercial}" role="button">Crear</a>--> 
-					<input type="submit" value="Crear">
+				<div class="aceptar">
+					<!-- <a class="btn btn-primary" th:href="@{/controller/professional-operations/professional}">Crear</a> -->
+					<input class="btn btn-primary" type="submit" value="Aceptar">
 				</div>
 				<div class="limpiar">
 	        		<input type="reset" value="Limpiar">	
 				</div>
+				<div class="cancelar">
+  					<a class="btn btn-primary" href="@{/controller/professional-operations/professional-list}" role="button">Cancelar</a> 
+				</div>
+				
 			</div>
-			
-            
+		            
 		</form>
 	</div>
 	
@@ -88,4 +91,4 @@
 	<script src="../static/js/bootstrap.min.js"></script>
 	
 </body>
-</html>>
+</html>
