@@ -18,7 +18,8 @@ public class ProfessionalMapper {
 	private UserRepository userRepository;
 	@Autowired
 	private ProfessionaRepository professionalRepository;
-	
+	@Autowired
+	private SaleMapper saleMapper;
 	
 	public Professional mapper(ProfessionalVO source) {
 		return mapper(source, new Professional());
@@ -44,6 +45,12 @@ public class ProfessionalMapper {
 					
 				if(target.getUser()!= null)
 					target.getUser().setEmail(source.getUser());
+			}
+			
+			if(source.getSales()!= null && !source.getSales().isEmpty()) {
+				source.getSales().forEach(element-> {
+					target.getSales().add(saleMapper.mapper(element));
+				});
 			}
 		
 		return target;

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,21 +39,17 @@ public class SalesControllerMVC {
 	@RequestMapping(value = "/car-list", method= RequestMethod.GET)
 	public String getCars(Map<String, Object> model){
 		List<CarVO> cars= salesService.getCars();
-		if(!cars.isEmpty() || cars!= null)
+		if(!cars.isEmpty() || cars!= null) {
 			model.put("cars", cars);
+		}
+		
+		//Ruta para el boton crear de index.html para los coches
+		//createButton -> nombre de la variable
+		//ROOT_PATH+"/create-car" -> valor de la variable 
+		
+		model.put("createButton", ROOT_PATH+"/create-car");
 		return "/index";
 	}
-	
-	@ApiOperation(value = "Recuperación de todas las ventas",
-			notes = "Recupera un listado con todas las ventas de la BD")
-	@RequestMapping(value = "/sale-list", method= RequestMethod.GET)
-	public String getSales(Map<String, Object> model){
-		List<SaleVO> sales= salesService.getSales();
-		if(!sales.isEmpty() || sales!= null)
-			model.put("sales", sales);
-		return "/index";
-	}
-	
 	
 	@ApiOperation(value = "Formulario de coche",
 			notes = "Redirecciona a la vista para crear un nuevo coche")
@@ -61,21 +58,31 @@ public class SalesControllerMVC {
 		CarVO carVO= new CarVO();
 		model.put("carVO", carVO);
 		model.put("titulo", "Nuevo Coche");
-		return "/comercial";
+		return "/coche";
 	}
 	
 	
-	@ApiOperation(value = "Creación de un nuevo coche",
-			notes = "Crea un nuevo coche si no existe ya en la BD")
+	@ApiOperation(value = "Creación o edición de un nuevo coche",
+			notes = "Crea o edita un coche en la BD")
 	@RequestMapping(value = "/car", method= RequestMethod.POST)
-	public String crateCar(@Valid CarVO carVO){
+	public String saveCar(@Valid CarVO carVO){
 		
 		if(carVO!= null) {
-			Integer result= salesService.createCar(carVO);
+			Integer result; 
+			String redirectPage;
+			
+			if(carVO.getId()== null) {//crear
+				result= salesService.createCar(carVO);
+				redirectPage= "/create-car";
+			}else {//editar
+				result= salesService.editCar(carVO);
+				redirectPage= "/edit-car/"+carVO.getId();
+			}
+			
 			if(result== 1)
 				return REDIRECT+ROOT_PATH+"/car-list";
 			if(result== -1 || result== -2)
-				return REDIRECT+ROOT_PATH+"/create-car";
+				return REDIRECT+ROOT_PATH+ redirectPage;
 		}
 		return REDIRECT+ROOT_PATH+"/create-car";
 	}
@@ -92,12 +99,118 @@ public class SalesControllerMVC {
 			if(result== 1)
 				return REDIRECT+ROOT_PATH+"/car-list";
 			
-			/*PAGINA DE ERROR
-			 * if(result== -1)
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);*/
+			//PAGINA DE ERROR
+			if(result== -1)
+				return "/error_404";
 		}
 		return REDIRECT+ROOT_PATH+"/car-list";
 	}
 	
+	
+	@ApiOperation(value = "Edición de un coche",
+			notes = "Redirecciona a la vista de coches con los datos del coche seleccionado")
+	@RequestMapping(value = "/edit-car/{id}")
+	public String editCar(@PathVariable("id")Long id, Model model){
+		
+		if(id!= null && id> 0) {
+			CarVO carVO= salesService.getOneCar(id);
+			if(carVO!= null) {
+				model.addAttribute("carVO", carVO);
+				model.addAttribute("titulo", "Editar coche");
+				return "/coche";
+			}
+		}
+		
+		return "/error_404";
+	}
+
+	@ApiOperation(value = "Recuperación de todas las ventas",
+			notes = "Recupera un listado con todas las ventas de la BD")
+	@RequestMapping(value = "/sale-list", method= RequestMethod.GET)
+	public String getSales(Map<String, Object> model){
+		List<SaleVO> sales= salesService.getSales();
+		if(!sales.isEmpty() || sales!= null) {
+			model.put("sales", sales);
+		}	
+		
+		//Ruta para el boton crear de index.html para los coches
+		//createButton -> nombre de la variable
+		//ROOT_PATH+"/create-sale" -> valor de la variable 
+		model.put("createButton", ROOT_PATH+"/create-sale");
+		return "/index";
+	}
+	
+	@ApiOperation(value = "Formulario de venta",
+			notes = "Redirecciona a la vista para crear una nueva venta")
+	@RequestMapping(value = "/create-sale", method= RequestMethod.GET)
+	public String createSale(Model model) {
+		SaleVO saleVO= new SaleVO();
+		model.addAttribute("saleVO", saleVO);
+		model.addAttribute("titulo", "Nueva venta");
+		return "/venta";
+	}
+	
+	@ApiOperation(value = "Creación o edición de una venta",
+			notes = "Crea o edita una venta en la BD")
+	@RequestMapping(value = "/sale", method= RequestMethod.POST)
+	public String saveSale(@Valid SaleVO saleVO, Model model){
+		
+		if(saleVO!= null) {
+			Integer result;
+			String redirectPage;
+			if(saleVO.getId()== null) { //nueva venta;
+				result= salesService.createSale(saleVO);
+				redirectPage= "/create-sale";
+			}else {                      //editar venta
+				result= salesService.editSale(saleVO);
+				redirectPage= "/edit-sale/"+saleVO.getId();
+			}
+			
+			if(result== 1) //todo correcto
+				return REDIRECT+ROOT_PATH+"/sale-list";
+			if(result== -1 || result== -2) //volver a cargar la página
+				return REDIRECT+ROOT_PATH+ redirectPage;
+			
+		}
+		
+		//error
+		return "/error_404";
+	}
+	
+	
+	@ApiOperation(value = "Edición de una venta",
+			notes = "Redirecciona a la vista de ventas con los datos de la Venta seleccionado")
+	@RequestMapping(value = "/edit-sale/{id}")
+	public String editSale(@PathVariable("id")Long id, Model model){
+		
+		if(id!= null && id> 0) {
+			SaleVO saleVO= salesService.getOneSale(id);
+			if(saleVO!= null) {
+				model.addAttribute("saleVO", saleVO);
+				model.addAttribute("titulo", "Editar Venta");
+				return "/venta";
+			}
+		}
+		
+		return "/error_404";
+	}
+	
+	
+	@ApiOperation(value = "Eliminacion de una venta",
+			notes = "Elimina ls venta de la BD y vuelve a cargar la página de ventas")
+	@RequestMapping(value = "/delete-sale/{id}")
+	public String deleteSale(@PathVariable("id")Long id){
+		
+		if(id!= null && id> 0) {
+			Integer result= salesService.deleteCar(id);
+			if(result== 1)
+				return REDIRECT+ROOT_PATH+"/sale-list";
+			
+			//PAGINA DE ERROR
+			 if(result== -1) 
+				 return "/error_404"; 
+		}
+		return REDIRECT+ROOT_PATH+"/sale-list";
+	}
 	
 }

@@ -1,5 +1,6 @@
 package es.bryle.digital.profesional.model.mapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.bryle.digital.profesional.model.entities.Professional;
@@ -8,6 +9,9 @@ import es.bryle.digital.profesional.model.vo.ProfessionalVO;
 @Service
 public class ProfessionalVOMapper {
 
+	@Autowired
+	private SaleVOMapper saleVOMapper;
+	
 	public ProfessionalVO mapper(Professional source) {
 		return mapper(source, new ProfessionalVO());
 	}
@@ -28,6 +32,12 @@ public class ProfessionalVOMapper {
 		
 		if(source.getUser()!= null)
 			target.setUser(source.getUser().getEmail());
+		
+		if(source.getSales()!= null) {
+			source.getSales().forEach(element-> {
+				target.getSales().add(saleVOMapper.mapper(element));
+			});
+		}
 			
 		return target;
 	}

@@ -39,8 +39,12 @@ public class ProfessionalController {
 		List<ProfessionalVO> professionals= professionalService.getProfessionals();
 		if(!professionals.isEmpty() || professionals!= null) {
 			model.put("professionals", professionals);
-			System.out.println("professional-list GET");
-		}	
+		}
+		
+		//Ruta para el boton crear de index.html para los coches
+		//createButton -> nombre de la variable
+		//ROOT_PATH+"/create-comercial" -> valor de la variable 
+		model.put("createButton", ROOT_PATH+"/create-comercial");
 		return "/index";
 	}
 	
@@ -54,8 +58,8 @@ public class ProfessionalController {
 		return "/comercial";
 	}
 	
-	@ApiOperation(value = "Creación de un profesional",
-			notes = "Crear un usuario con el rol de 'USER'")
+	@ApiOperation(value = "Creación o edición de un profesional",
+			notes = "Crear o edita un usuario con el rol de 'USER'")
 	@RequestMapping(value = "/professional")
 	public String createProfessional(@Valid ProfessionalVO professionalVO, 
 			final BindingResult bindingResult){
@@ -66,21 +70,25 @@ public class ProfessionalController {
 			}
 			System.out.println("professional POST");
 			Integer result;
+			String redirectPage;
+			
 			if(professionalVO.getId()== null) { 
 				result= professionalService.createProfessional(professionalVO);
+				redirectPage="/create-comercial";
 				System.out.println("Nuevo"+result);
 			}else { 
 				result= professionalService.editProfessional(professionalVO);
+				redirectPage="/edit-professional/"+professionalVO.getId();
 				System.out.println("Editar"+result);
 			}	
 				
-			if(result== 1)
-				return "redirect:/controller/professional-operations/professional-list";
-			if(result== -1 || result== -2)
-				return "redirect:/controller/professional-operations/create-comercial";
+			if(result== 1) //todo correcto
+				return REDIRECT+ROOT_PATH+ "professional-list";
+			if(result== -1 || result== -2)//volver a cargar la página
+				return REDIRECT+ROOT_PATH+ redirectPage;
 		}
 		
-		return "redirect:/controller/professional-operations/create-comercial";
+		return  REDIRECT+ROOT_PATH+"/create-comercial";
 	}
 	
 	@ApiOperation(value = "Eliminacion de un profesional",
@@ -91,14 +99,12 @@ public class ProfessionalController {
 		if(id!= null && id> 0) {
 			Integer result= professionalService.deleteProfessional(id);
 			if(result== 1)
-				return "redirect:/controller/professional-operations/professional-list";
-			/* PAGINA DE ERROR
-			 * if(result== -1)
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			if(result== -2)
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);*/
+				return  REDIRECT+ROOT_PATH+"/professional-list";
+			//PAGINA DE ERROR
+			if(result== -1 || result== -2)//volver a cargar la página
+				return "/error_404";
 		}
-		return "redirect:/controller/professional-operations/professional-list";
+		return  REDIRECT+ROOT_PATH+"/professional-list";
 	}
 	
 	@ApiOperation(value = "Edición de un profesional",
