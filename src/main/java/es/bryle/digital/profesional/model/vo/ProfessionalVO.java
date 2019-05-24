@@ -10,7 +10,7 @@ public class ProfessionalVO {
 	private String firstName;
 	private String lastName;
 	private String user;
-	/*private Set<SaleVO> sales;*/
+	private Set<SaleVO> sales;
 
 	public Long getId() {
 		return id;
@@ -44,13 +44,13 @@ public class ProfessionalVO {
 		this.lastName = lasttName;
 	}
 
-	/*public Set<SaleVO> getSales() {
+	public Set<SaleVO> getSales() {
 		return sales;
 	}
 
 	public void setSales(Set<SaleVO> sales) {
 		this.sales = sales;
-	}*/
+	}
 
 	public String getUser() {
 		return user;

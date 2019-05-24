@@ -78,13 +78,13 @@ public class Professional {
 		this.lastName = lasttName;
 	}
 
-	/*public Set<Sale> getSales() {
+	public Set<Sale> getSales() {
 		return sales;
 	}
 
 	public void setSales(Set<Sale> sales) {
 		this.sales = sales;
-	}*/
+	}
 
 	public User getUser() {
 		return user;
