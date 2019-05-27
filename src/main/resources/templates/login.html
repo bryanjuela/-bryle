@@ -1,30 +1,105 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.com">
+
 <head>
-	<meta charset="UTF-8"/>
-	<title>Login</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/login-style.css}"> 
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>Login</title>
+<!-- Compiled and minified Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/login-style.css}">
+<!-- Minified JS library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Compiled and minified Bootstrap JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
 </head>
 <body>
-	
-	 <div class="box">
-      <img th:src="@{/images/logo.png}" class="avatar" alt="Logo BryLe">
-      <div >
-        <h1>Bienvenido</h1>
-      </div>
-      <form th:action="@{/login}" method="post">
-        <label for="username">Nombre de usuario</label>
-        <input type="text" placeholder="Introduce nombre de usuario" name="username" id="username" required autofocus>
-        <label for="password">Contraseña</label>
-        <input type="password" placeholder="Introduce contraseña" name="password" id="password" required>
-        <input name="_csrf" type="hidden" value="65867534-36b7-4203-9a28-05e88ecdfb3e" />
-        <input type="submit" value="Acceder">
-        <input type="reset" value="Limpiar">
-        <a th:href="@{/recuperar.html}">¿Olvidaste tu contraseña?</a><br>
-        <a th:href="@{registro.html}">¿No tienes cuenta?</a>
-		
-      </form>
-    </div>
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<div class="carousel-inner">
+			<div class="item active">
+				<img th:src="@{/images/coche8.jpg}" alt="coche">
+			</div>
+			<div class="item">
+				<img th:src="@{/images/coche1.jpg}" alt="coche">
+			</div>
+			<div class="item">
+				<img th:src="@{/images/coche2.jpg}" alt="coche">
+			</div>
+			<div class="item">
+				<img th:src="@{/images/coche3.jpg}" alt="coche">
+			</div>
+			<div class="item">
+				<img th:src="@{/images/coche4.jpg}" alt="coche">
+			</div>
+			<div class="item">
+				<img th:src="@{/images/coche5.jpg}" alt="coche">
+			</div>
+			<div class="item">
+				<img th:src="@{/images/coche6.jpg}" alt="coche">
+			</div>
+			<div class="item">
+				<img th:src="@{/images/coche7.jpg}" alt="coche">
+			</div>
+			<div class="item">
+				<img th:src="@{/images/coche9.jpg}" alt="coche">
+			</div>
+
+		</div>
+
+		<!-- Controls -->
+		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left"></span>
+		</a> <a class="right carousel-control" href="#myCarousel"
+			data-slide="next"> <span
+			class="glyphicon glyphicon-chevron-right"></span>
+		</a>
+	</div>
+
+
+
+	<div class="box">
+		<img th:src="@{/images/logo.png}" class="avatar" alt="Logo BryLe">
+		<div>
+			<h1>Bienvenido</h1>
+		</div>
+		<form th:action="@{/login}" method="post">
+			<!-- <label for="username">Nombre de usuario</label> -->
+			<input type="text" placeholder="Introduce nombre de usuario"
+				name="username" id="username" required autofocus>
+			<!-- <label for="password">Contraseña</label> -->
+			<input type="password" placeholder="Introduce contraseña"
+				name="password" id="password" required> <input name="_csrf"
+				type="hidden" value="65867534-36b7-4203-9a28-05e88ecdfb3e" /> <input
+				type="submit" value="Acceder"> <input type="reset"
+				value="Limpiar"> <a th:href="@{/recuperar.html}">¿Olvidaste
+				tu contraseña?</a><br> <a th:href="@{registro.html}">¿No tienes
+				cuenta?</a>
+
+		</form>
+	</div>
+
+
+
+	<script type="text/javascript">
+		// Call carousel manually
+		$('#myCarouselCustom').carousel();
+
+		// Go to the previous item
+		$("#prevBtn").click(function() {
+			$("#myCarouselCustom").carousel("prev");
+		});
+		// Go to the previous item
+		$("#nextBtn").click(function() {
+			$("#myCarouselCustom").carousel("next");
+		});
+	</script>
+
 </body>
 </html>
