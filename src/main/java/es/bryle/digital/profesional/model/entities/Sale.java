@@ -30,9 +30,13 @@ public class Sale {
 	@Column(name = "sale_date")
 	private Date saleDate;
 
-	@OneToOne
+	@OneToOne(cascade= CascadeType.ALL)
+	@Fetch(FetchMode.JOIN)
 	@JoinColumn(name = "car_id")
 	private Car car;
+	
+	@Column(name = "price")
+	private String price;
 	
 	@OneToOne(cascade= CascadeType.ALL)
 	@Fetch(FetchMode.JOIN)
@@ -71,4 +75,13 @@ public class Sale {
 	public void setProfessional(Professional professional) {
 		this.professional = professional;
 	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	
 }

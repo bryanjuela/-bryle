@@ -156,6 +156,7 @@ public class SalesControllerMVC {
 	public String saveSale(@Valid SaleVO saleVO, Model model){
 		
 		if(saleVO!= null) {
+			System.out.println(saleVO.getSaleDate());
 			Integer result;
 			String redirectPage;
 			if(saleVO.getId()== null) { //nueva venta;
@@ -202,7 +203,7 @@ public class SalesControllerMVC {
 	public String deleteSale(@PathVariable("id")Long id){
 		
 		if(id!= null && id> 0) {
-			Integer result= salesService.deleteCar(id);
+			Integer result= salesService.deleteSale(id);
 			if(result== 1)
 				return REDIRECT+ROOT_PATH+"/sale-list";
 			

@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        "/swagger-ui.html",
 	        "/v2/api-docs",
 	        "/webjars/**",
-	        "/", "/css/**", "/js/**", "/images/**"/*, "/controller/professional-operations/professional-list"*/
+	        "/css/**", "/js/**", "/images/**", "/reset-password"
 	};
 
 	@Autowired
@@ -47,11 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	    .authorizeRequests().antMatchers(AUTH_LIST).permitAll()
 	    //.antMatchers("/oauth/token").permitAll()
 	    .anyRequest().authenticated()
-	    .and().formLogin().loginPage("/login").permitAll()
+	    .and().formLogin().loginPage("/login")
+	    .defaultSuccessUrl("/controller/professional-operations/professional-list").permitAll()
 	    .and()
 	    .logout().permitAll()
 	    .and()
-	    .exceptionHandling().accessDeniedPage("/error_404");
+	    .exceptionHandling().accessDeniedPage("/error_404")
+	    .and();
 	    /*.and()
 	    .httpBasic().authenticationEntryPoint(swaggerAuthenticationEntryPoint())
 	    .and()

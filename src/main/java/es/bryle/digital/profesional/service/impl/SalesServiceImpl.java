@@ -66,7 +66,7 @@ public class SalesServiceImpl implements SalesService {
 			professionalRepository.save(professional);
 			return 1;
 		}
-		
+	
 		return -1;
 	}
 
@@ -75,7 +75,10 @@ public class SalesServiceImpl implements SalesService {
 		Optional<Sale> sale= saleRepository.findById(id);
 
 		if(sale.isPresent()) {
+			Professional professional= sale.get().getProfessional();
+			//professional.getSales().remove(sale.get());
 			saleRepository.deleteById(sale.get().getId());
+			//professionalRepository.save(professional);
 			return 1;
 		}
 		return -1;
