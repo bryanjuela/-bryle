@@ -38,6 +38,12 @@ public class Professional {
 	@Column(name = "last_name")
 	private String lastName;
 	
+	@Column(name = "phone")
+	private String phone;
+	
+	@Column(name = "address")
+	private String address;
+	
 	@OneToOne(mappedBy = "professional", cascade= CascadeType.ALL,
 			fetch = FetchType.LAZY, optional = false)
 	private User user;
@@ -92,6 +98,22 @@ public class Professional {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package es.bryle.digital.profesional.model.mapper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,18 +31,19 @@ public class SaleMapper {
 	}
 
 	public  Sale mapper(SaleVO source, Sale target) {
-		if(source.getSaleDate()!= null)
-			target.setSaleDate(source.getSaleDate());
+		if(source.getSaleDate()!= null) {
+			
+		}	
 		
 		if(source.getCar()!= null) {
 			Optional<Car> car= carRepository.findById(source.getCar()); 
 			if(car.isPresent()) {
 				target.setCar(car.get());
-			}
-			return null;	
+			}else 
+				return null;	
 		}
 		
-		if(source.getProfessional()!= null) {
+		if(source.getProfessional()== null) {
 			User user= authUserService.getCurrentUser();
 			if(user!= null) {
 				Optional<Professional> professional= professionalRepository.findById(user.getId());
@@ -48,8 +51,13 @@ public class SaleMapper {
 					target.setProfessional(professional.get());
 				}
 			}
-			return null;
+			
+		}else {
+			target.setProfessional(professionalRepository.findById(source.getProfessional()).get());
 		}
+		
+		if(source.getPrice()!= null)
+			target.setPrice(source.getPrice());
 		
 		return target;
 	}

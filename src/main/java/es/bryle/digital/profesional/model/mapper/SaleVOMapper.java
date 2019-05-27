@@ -26,8 +26,11 @@ public class SaleVOMapper {
 		}
 		
 		if(source.getSaleDate()!= null) {
-			target.setSaleDate(source.getSaleDate());
+			//target.setSaleDate(source.getSaleDate().toString());
 		}
+		
+		if(source.getPrice()!= null)
+			target.setPrice(source.getPrice());
 			
 		return target;
 	}

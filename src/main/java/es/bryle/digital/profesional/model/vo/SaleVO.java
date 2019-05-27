@@ -5,9 +5,11 @@ import java.util.Date;
 public class SaleVO {
 
 	private Long id;
-	private Date saleDate;
+	//private Date saleDate;
+	private String saleDate;
 	private Long car;
-	private Long professionalVO;
+	private Long professional;
+	private String price;
 	
 	public Long getId() {
 		return id;
@@ -17,14 +19,21 @@ public class SaleVO {
 		this.id = id;
 	}
 
-	public Date getSaleDate() {
+	/*public Date getSaleDate() {
 		return saleDate;
 	}
 
 	public void setSaleDate(Date saleDate) {
 		this.saleDate = saleDate;
+	}*/
+
+	public String getSaleDate() {
+		return saleDate;
 	}
 
+	public void setSaleDate(String saleDate) {
+		this.saleDate = saleDate;
+	}
 	public Long getCar() {
 		return car;
 	}
@@ -34,10 +43,18 @@ public class SaleVO {
 	}
 
 	public Long getProfessional() {
-		return professionalVO;
+		return professional;
 	}
 
 	public void setProfessional(Long professional) {
-		this.professionalVO = professional;
+		this.professional = professional;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
 	}
 }

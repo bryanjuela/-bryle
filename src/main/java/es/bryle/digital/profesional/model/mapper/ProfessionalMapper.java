@@ -52,6 +52,12 @@ public class ProfessionalMapper {
 					target.getSales().add(saleMapper.mapper(element));
 				});
 			}
+			
+			if(source.getAddress()!= null)
+				target.setAddress(source.getAddress());
+			
+			if(source.getPhone()!= null)
+				target.setPhone(source.getPhone());
 		
 		return target;
 	}

@@ -1,5 +1,6 @@
 package es.bryle.digital.profesional.model.vo;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -9,6 +10,8 @@ public class ProfessionalVO {
 	private String dni;
 	private String firstName;
 	private String lastName;
+	private String phone;
+	private String address;
 	private String user;
 	private Set<SaleVO> sales;
 
@@ -58,6 +61,22 @@ public class ProfessionalVO {
 
 	public void setUser(String user) {
 		this.user = user;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }
