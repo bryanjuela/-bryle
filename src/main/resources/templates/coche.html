@@ -23,9 +23,8 @@
 			
 		<!--Campos-->
 		
-		<form  action="">
-		<!-- <form  th:action="@{/controller/sales-operations/car}" method="post" th:object="${carVO}">-->
-		
+		<form  th:action="@{/controller/sales-operations/car}" method="post" th:object="${carVO}">
+		<input type="hidden" th:field="*{id}"/>
 			<div class="form-group row">
 				<label for="inputMarca" class="col-sm-2 col-form-label">Marca:</label>
 				<div class="col-sm-9">

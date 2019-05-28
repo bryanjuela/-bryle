@@ -14,13 +14,14 @@
   </div>
   
   <div class="salir">
-  		<a th:href="@{/login.html}">Salir</a> 
+  		<a th:href="@{/logout}">Salir</a> 
   </div>
 
   <div class="tab">
     <button class="tablinks" onclick="openTab(event, 'Comerciales')" id="defaultOpen">Comerciales</button>
     <button class="tablinks" onclick="openTab(event, 'Coches')" >Coches</button>
-    <button class="tablinks" onclick="openTab(event, 'Ventas')">Ventas</button>
+    <button class="tablinks" onclick="openTab(event, 'Ventas')">Ventas</button> 
+    <!-- <a class="tablinks" onclick="openTab(event, 'Ventas')" th:href="@{/controller/sales-operations/sale-list}">Ventas</a> -->
   </div>
 
 
@@ -94,8 +95,8 @@
 					<td th:text="*{car.precio}"></td>
 					<!-- <td th:text="*{car.km}"></td> -->
 					<td th:text="*{car.estado}"></td>
-					<td class="bt-editar"><a class="btn btn-outline-primary btn-sm editar" th:href="@{/controller/admin-profile/create-car/}">Editar</a></td>
-					<td class="	bt-eliminar"><a class="btn btn-outline-danger btn-sm eliminar" th:href="@{/controller/admin-profile/delete-car/} + ${car.id}">Eliminar</a></td>
+					<td class="bt-editar"><a class="btn btn-outline-primary btn-sm editar" th:href="@{/controller/sales-operations/edit-car/} + ${car.id}">Editar</a></td>
+					<td class="	bt-eliminar"><a class="btn btn-outline-danger btn-sm eliminar" th:href="@{/controller/sales-operations/delete-car/} + ${car.id}">Eliminar</a></td>
 				</tr>	
 			</tbody>
 		</table>
@@ -114,18 +115,18 @@
 					<th>Id</th>
 					<th>Fecha</th>
 					<th>Coche</th>
-					<!-- <th>Comercial</th> -->
+					<th>Precio</th>
 				</tr>
 			</thead>
 
 			<tbody>
 				<tr th:each="sale: ${sales}">
 					<td th:text="*{sale.id}"></td>
-					<td th:text="*{sale.sale_date}"></td>
-					<td th:text="*{sale.car_id}"></td>
-					<!-- <td th:text="*{sale.professional_id}"></td> -->
-					<td class="bt-editar"><a class="btn btn-outline-primary btn-sm editar" th:href="@{/controller/admin-profile/create-sale/}">Editar</a></td>
-					<td class="	bt-eliminar"><a class="btn btn-outline-danger btn-sm eliminar" th:href="@{/controller/admin-profile/delete-sale/} + ${sale.id}">Eliminar</a></td>
+					<td th:text="*{sale.saleDate}"></td>
+					<td th:text="*{sale.car}"></td>
+					<td th:text="*{sale.price}"></td>
+					<td class="bt-editar"><a class="btn btn-outline-primary btn-sm editar" th:href="@{/controller/sales-operations/edit-sale/} + ${sale.id}">Editar</a></td>
+					<td class="	bt-eliminar"><a class="btn btn-outline-danger btn-sm eliminar" th:href="@{/controller/sales-operations/delete-sale/} + ${sale.id}">Eliminar</a></td>
 				</tr>	
 			</tbody>
 		</table>
@@ -137,7 +138,7 @@
 
 
 	<div class="crear">
-		<a class="btn btn-primary" th:href="@{/controller/professional-operations/create-comercial}">Crear</a>
+		<a class="btn btn-primary" th:href="${createButton}">Crear</a>
    </div>
 
 
