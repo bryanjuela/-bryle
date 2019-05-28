@@ -83,7 +83,7 @@ public class ProfessionalController {
 			}	
 				
 			if(result== 1) //todo correcto
-				return REDIRECT+ROOT_PATH+ "professional-list";
+				return REDIRECT+ROOT_PATH+ "/professional-list";
 			if(result== -1 || result== -2)//volver a cargar la página
 				return REDIRECT+ROOT_PATH+ redirectPage;
 		}
