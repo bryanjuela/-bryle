@@ -2,270 +2,265 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
+	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+	details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
+	output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-  display: block;
+article, aside, details, figcaption, figure, footer, header, hgroup,
+	menu, nav, section {
+	display: block;
 }
+
 body {
-  line-height: 1;
+	line-height: 1;
 }
+
 ol, ul {
-  list-style: none;
+	list-style: none;
 }
+
 blockquote, q {
-  quotes: none;
+	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
+
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
 }
+
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 /*****************************************************************************/
-
-
-
 * {
-      box-sizing: border-box
-    }
+	box-sizing: border-box
+}
 
-    body {
-      font-family: sans-serif;
-      background: url("../images/fondo.jpg");
-    }
+body {
+	font-family: sans-serif;
+}
 
+.banner img {
+	width: 100%;
+	height: 150px;
+}
 
-    .banner img{
-      width: 100%;
-      height: 150px;
-    }
+.tab {
+	display: block;
+	float: left;
+	border: 1px solid #000;
+	background-color: #000;
+	width: 15%;
+	height: 350px;
+}
 
-    
-    .tab {
-      display: block;
-      float: left;
-      border: 1px solid #000;
-      background-color: #000;
-      width: 15%;
-      height: 350px;
-    }
+.tab button {
+	background: #000;
+	color: #3366BB;
+	padding: 22px 16px;
+	width: 100%;
+	border: none;
+	outline: none;
+	text-align: left;
+	cursor: pointer;
+	transition: 0.3s;
+	font: 400 17px Helvetica, sans-serif;
+	font-weight: bold;
+}
 
-    .tab button {
-      background: #000;
-      color: #fff;
-      padding: 22px 16px;
-      width: 100%;
-      border: none;
-      outline: none;
-      text-align: left;
-      cursor: pointer;
-      transition: 0.3s;
-      font: 400 17px Helvetica, sans-serif;
-      font-weight: bold;
+.tab button:hover {
+	background-color: #eee;
+	color:  #3366BB;
+	font-weight: bold;
+}
 
-    }
-
-    .tab button:hover {
-        background-color: #eee;
-        color: black;
-        font-weight: bold;
-
-    }
-
-    .tab button.active {
-        background-color: #ddd;
-        color: black;
-        font: 500 25px Helvetica, sans-serif;
-        font-weight: bold;
-
-    }
-
-    .tabcontent {
-        float: left;
-        padding: 10px 10px;
-        border: 1px solid #000;
-        width: 85%;
-        border-left: none;
-        height: 350px;
-        background: #ddd;
-    }
-
-    .tabcontent h1{
-      font-weight: bold;
-      font-family: new-time-roman;
-      font-size: 36px;
-      text-align: center;
-      padding-bottom: 20px;
-    }
-
-    .container .bt-editar{
-      text-align: right;
-
-    }
-     .container .bt-eliminar{
-      text-align: left;
-    }
+.tab button.active {
+	background-color: #ddd;
+	color: #3366BB;
+	font: 500 25px Helvetica, sans-serif;
+	font-weight: bold;
+}
+.tab a{
+	text-decoration: none;
+}
 
 
 
+.tabcontent {
+	float: left;
+	padding: 10px 10px;
+	border: 1px solid #000;
+	width: 85%;
+	border-left: none;
+	height: 350px;
+	background: #ddd;
+	text-align: center;
+}
+
+.tabcontent h1 {
+	font-weight: bold;
+	font-family: Helvetica, sans-serif;
+	font-size: 36px;
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+}
+
+
+.tabcontent p {
+	text-align: center;
+	font-size: 20px;
+	line-height: 36px;
+}
+
+.tabcontent span {
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.tabcontent img {
+	width: 20%;
+	text-align: center;
+}
+
+
+table tr th {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+table tr th:hover{
+  cursor: pointer;
+  font-weight: bold;
+
+} 
+.container .bt-editar {
+	text-align: right;
+}
+
+.container .bt-eliminar {
+	text-align: left;
+}
+
+.crear {
+	position: relative;
+	float: right;
+	width: 100%;
+	height: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 20px;
+	text-align: right;
+}
+
+.crear a {
+	border: none;
+	outline: none;
+	height: 40px;
+	width: 100px;
+	background: #b80f22;
+	color: #fff;
+	font-size: 18px;
+	border-radius: 12px;
+}
+
+.crear a :hover {
+	cursor: pointer;
+	background: #0c06c9;
+	color: #000;
+}
+
+.salir {
+	width: 100%;
+	background: #000;
+	text-align: right;
+	margin-top: -3px;
+	padding-right: 30px;
+	padding-bottom: 10px;
+	font-size: 20px;
+	font-weight: bold;
+	outline: none;
+}
+.salir a{
+	text-decoration: none;
+}
+.salir a:hover{
+	color:#b80f22;
+}
+
+.salir a :active{
+	color:#b80f22;
+}
+
+.editar {
+	width: 90px;
+	border-radius: 12px;
+	font-weight: bold;
+	border: solid;
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+.eliminar {
+	width: 90px;
+	border-radius: 12px;
+	font-weight: bold;
+	border: solid;
+	cursor: pointer;
+}
 
 /*****************************************  MOVIL  ********************/
-
-
-    @media (max-width: 700px) {
-      
-      body{
-      	background: #fff;
-      }
-      
-      .banner img{
-        width: 100%;
-        height: 80px;
-       }
-
-      .tab{
-        position: relative;
-        display: block;
-        float: left;
-        width: 100%;
-        height: 70px;
-        background: #000;
-      }
-
-      .tab button{
-        width: 32.5%;
-        text-align: center;
-      }
-
-    
-      .tab button.active {
-        background-color: #ddd;
-        color: black;
-        font: 500 18px Helvetica, sans-serif;
-        font-weight: bold;
-        padding-bottom: 40px;
-        padding-left: 2px;
-    }
-
-      .tabcontent{
-        width: 100%;
-      }
-
-      .tabcontent h1{
-        display: block;
-        display: none;
-      }
-
-
-
-    }
-
-
-    .crear{
-      position: relative;
-      float: right;
-      width: 100%;
-      height: 40px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      padding-right: 20px;
-      text-align: right;
-    }
-
-    .crear a {
-      border: none;
-      outline: none;
-      height: 40px;
-      width: 100px;
-      background: #b80f22;
-      color: #fff;
-      font-size: 18px;
-      border-radius: 12px;
-
-    }
-
-    .crear a :hover  {
-      cursor: pointer;
-      background: #0c06c9;
-      color: #000;
-
-    }
-
-    .salir {
-      width: 100%;
-      background: #000;
-      text-align: right;
-      margin-top: -3px;
-      padding-right: 30px;
-      padding-bottom: 10px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-   
-
-    .editar{
-      width: 90px;
-      border-radius: 12px;
-      font-weight: bold;
-      border: solid;
-      margin-right: 20px;
-      cursor: pointer;
-
-    }
-  
-    .eliminar{
-      width: 90px;
-      border-radius: 12px;
-      font-weight: bold;
-      border: solid;
-      cursor: pointer;
-
-    }
- 
-    .footer{
-      float: left;
-      text-align: center;
-      width: 100%;
-      padding-bottom: 20px;
-    }
-
-    .footer img{
-      width: 5%;
-    }
-
-    .footer p{
-      font-size: 12px;
-      line-height : 15px;
-      
-    }
-    .footer span{
-      font-weight: bold;
-      font-size: 12px;
-    }
-   
+@media ( max-width : 700px) {
+	body {
+		background: #fff;
+	}
+	.banner img {
+		width: 100%;
+		height: 80px;
+	}
+	.tab {
+		position: relative;
+		display: block;
+		float: left;
+		width: 100%;
+		height: 70px;
+		background: #000;
+	}
+	.tab button {
+		width: 32.5%;
+		text-align: center;
+	}
+	.tab button.active {
+		background-color: #ddd;
+		color: black;
+		font: 500 18px Helvetica, sans-serif;
+		font-weight: bold;
+		padding-bottom: 40px;
+		padding-left: 2px;
+	}
+	.tabcontent {
+		width: 100%;
+	}
+	.tabcontent h1 {
+		display: block;
+		display: none;
+	}
+}

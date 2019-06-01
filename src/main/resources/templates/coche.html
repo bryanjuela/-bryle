@@ -2,101 +2,107 @@
 <html xmlns:th="http://www.thymeleaf.com">
 
 <head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/coche-style.css}"> 
-	<title>Nuevo Coche</title>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/coche-style.css}">
+<title>Coche</title>
 </head>
 <body>
 
-<div class="container-fluid">
-	
-	
-	<div class="box">
-		
-    	<img th:src="@{/images/logo.jpg}" alt="Logo BryLe" class="avatar">  
-		
-		<div >
-			<h1 th:text="${titulo}"></h1>
-		</div>	
-			
-		<!--Campos-->
-		
-		<form  th:action="@{/controller/sales-operations/car}" method="post" th:object="${carVO}">
-		<input type="hidden" th:field="*{id}"/>
-			<div class="form-group row">
-				<label for="inputMarca" class="col-sm-2 col-form-label">Marca:</label>
-				<div class="col-sm-9">
-					<input type="text" placeholder="Marca" required autofocus>
-				</div>
+	<div class="container-fluid">
+
+
+		<div class="box">
+
+			<img th:src="@{/images/logo.png}" alt="Logo BryLe" class="avatar">
+
+			<div>
+				<h1 th:text="${titulo}"></h1>
 			</div>
 
-			<div class="form-group row">
-				<label for="inputModelo" class="col-sm-2 col-form-label">Modelo:</label>
-				<div class="col-sm-9">
-					<input type="text" placeholder="Modelo" required autofocus>
-				</div>
-			</div>
-						
-			<div class="form-group row">
-				<label for="inputBastidor" class="col-sm-2 col-form-label">Nº de Bastidor:</label>
-				<div class="col-sm-9">
-					<input type="text" placeholder="Bastidor" required autofocus>
-				</div>
-			</div>
+			<!--Campos-->
 
-			<div class="form-group row">
-				<label for="inputAnyo" class="col-sm-2 col-form-label">Fecha de fabricación:</label>
-				<div class="col-sm-3">
-           			<input type="date"  required>
-				</div>
-				<label for="inputKm" class="col-sm-2 col-form-label offset-md-1">Km:</label>
-				<div class="col-sm-3">
-	        		<input type="number" placeholder="Km">
-				</div>
-			</div>
+			<form th:action="@{/controller/sales-operations/car}" method="post"
+				th:object="${carVO}">
 
-			<div class="form-group row">
-				<label for="inputPrecio" class="col-sm-2 col-form-label">Precio:</label>
-				<div class="col-sm-3">
-	        		<input type="number" placeholder="Precio">
-				</div>
-				<label for="inputEstado" class="col-sm-2 col-form-label offset-md-1">Estado:</label>
-				<div class="col-sm-3">
-					<select id="inputState" class="form-control">
-       					<option selected>Seleccionar</option>
-        				<option value="nuevo">Nuevo</option>
-        				<option value="usado">2ª Mano</option>
-     				 </select>	
-  				</div>
+				<input type="hidden" th:field="*{id}" />
 
-			</div>
-			
-			<!--botonera-->
-			<div class="botonera" >
-				<div class="aceptar">
-					<input class="btn btn-primary" type="submit" value="Aceptar">
+				<div class="form-group row">
+					<label for="inputMarca" class="col-sm-2 col-form-label">Marca:</label>
+					<div class="col-sm-9">
+						<input type="text" placeholder="Marca" required autofocus th:field="*{marca}">
+					</div>
 				</div>
-				<div class="limpiar">
-	        		<input type="reset" value="Limpiar">	
+
+				<div class="form-group row">
+					<label for="inputModelo" class="col-sm-2 col-form-label">Modelo:</label>
+					<div class="col-sm-9">
+						<input type="text" placeholder="Modelo" required th:field="*{modelo}">
+					</div>
 				</div>
-				<div class="cancelar">
-  					<a class="btn btn-primary" href="@{/controller/sales-operations/car-list}" role="button">Cancelar</a> 
+
+				<div class="form-group row">
+					<label for="inputBastidor" class="col-sm-2 col-form-label">Nº
+						de Bastidor:</label>
+					<div class="col-sm-9">
+						<input type="text" placeholder="Bastidor" pattern="[A-HJ-NPR-Z0_9]{17}" required th:field="*{numBastidor}">
+					</div>
 				</div>
-			</div>
-			
-            
-		</form>
+
+				<div class="form-group row">
+					<label for="inputAnyo" class="col-sm-2 col-form-label">Año
+						de fabricación:</label>
+					<div class="col-sm-3">
+						<input type="number" required min="2010-01-01" max="2020-01-01" th:field="*{anyo}">
+					</div>
+					<label for="inputKm" class="col-sm-2 col-form-label offset-md-1">Km:</label>
+					<!-- <div class="col-sm-3">
+						<input type="number" placeholder="Km" min="0" max="999999" th:field="*{km}">
+					</div> -->
+				</div>
+
+				<div class="form-group row">
+					<label for="inputPrecio" class="col-sm-2 col-form-label">Precio:</label>
+					<div class="col-sm-3">
+						<input type="number" placeholder="Precio" min="0" max="999999" th:field="*{precio}">
+					</div>
+					<label for="inputEstado"
+						class="col-sm-2 col-form-label offset-md-1">Estado:</label>
+					<div class="col-sm-3">
+						<select id="inputState" class="form-control" th:field="*{estado}">
+							<option selected>Seleccionar</option>
+							<option value="nuevo">Nuevo</option>
+							<option value="usado">2ª Mano</option>
+						</select>
+					</div>
+
+				</div>
+
+				<!--botonera-->
+				<div class="botonera">
+					<div class="aceptar">
+						<input class="btn btn-primary" type="submit" value="Aceptar">
+					</div>
+					<div class="limpiar">
+						<input type="reset" value="Limpiar">
+					</div>
+					<div class="cancelar">
+						<a class="btn btn-primary"
+							th:href="@{/controller/sales-operations/car-list}" role="button">Cancelar</a>
+					</div>
+				</div>
+
+
+			</form>
+		</div>
+
+
 	</div>
+
 	
 
-</div>
-
-	<!--script-->
-	<script src="../static/js/jquery.js"></script>
-	<script src="../static/js/popper.min.js"></script>
-	<script src="../static/js/bootstrap.min.js"></script>
-	
 </body>
 </html>

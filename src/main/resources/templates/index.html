@@ -1,178 +1,225 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.com">
 <head>
-	<meta charset="UTF-8"/>
-	<title>Acceso Administrador</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/index-style.css}"> 
+<meta charset="UTF-8" />
+<title>Página de inicio</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/index-style.css}">
+
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/admin-script.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.tablesorter.min.js}"></script>
 
 </head>
 <body>
 
-  <div class="banner">
-    <img th:src="@{/images/banner2.jpg}" alt="banner">
-  </div>
-  
-  <div class="salir">
-  		<a th:href="@{/logout}">Salir</a> 
-  </div>
-
-  <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'Comerciales')" id="defaultOpen">Comerciales</button>
-    <button class="tablinks" onclick="openTab(event, 'Coches')" >Coches</button>
-    <button class="tablinks" onclick="openTab(event, 'Ventas')">Ventas</button> 
-    <!-- <a class="tablinks" onclick="openTab(event, 'Ventas')" th:href="@{/controller/sales-operations/sale-list}">Ventas</a> -->
-  </div>
-
-
-  <div id="Comerciales" class="tabcontent table-responsive">
-  <h1>Comerciales</h1>
-     <div class="container">
-		
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Nombre</th>
-					<th>Apellido</th>
-					<!-- <th>Dirección</th> -->
-					<!-- <th>Telefono</th> -->
-					<th>Email</th>
-					<th>DNI</th>
-					<th>Nº Ventas</th>
-					<th> </th>
-					<th> </th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<tr th:each="professional: ${professionals}">
-					<td th:text="*{professional.id}"></td>
-					<td th:text="*{professional.firstName}"></td>
-					<td th:text="*{professional.lastName}"></td>
-					<!-- <td th:text="*{professional.address}"></td> -->
-					<!--<td th:text="*{professional.tlf}"></td>-->
-					<td th:text="*{professional.user}"></td>
-					<td th:text="*{professional.dni}"></td>
-					<!-- si las ventas es igual a null, mostrar 0
-					<td th:if="*{professional.sales == null}" th:text="0"></td> -->
-					<td class="bt-editar"><a class="btn btn-outline-primary btn-sm editar" th:href="@{/controller/professional-operations/edit-professional/} + ${professional.id}">Editar</a></td>
-					<td class="bt-eliminar"><a class="btn btn-outline-danger btn-sm eliminar" th:href="@{/controller/professional-operations/delete-professional/} + ${professional.id} ">Eliminar</a></td>
-				</tr>	
-			</tbody>
-		</table>
-		
+	<div class="banner">
+		<img th:src="@{/images/banner2.jpg}" alt="banner">
 	</div>
-  </div>
 
-  <div id="Coches" class="tabcontent table-responsive">
-    <h1>Coches</h1>
-     <div class="container">
-		
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Marca</th>
-					<th>Modelo</th>
-					<th>Nº Bastidor</th>
-					<th>Año</th>
-					<th>Precio</th>
-					<!-- <th>Km</th> -->
-					<th>Estado</th>
-					<th> </th>
-					<th> </th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<tr th:each="car: ${cars}">
-					<td th:text="*{car.id}"></td>
-					<td th:text="*{car.marca}"></td>
-					<td th:text="*{car.modelo}"></td>
-					<td th:text="*{car.numBastidor}"></td>
-					<td th:text="*{car.anyo}"></td>
-					<td th:text="*{car.precio}"></td>
-					<!-- <td th:text="*{car.km}"></td> -->
-					<td th:text="*{car.estado}"></td>
-					<td class="bt-editar"><a class="btn btn-outline-primary btn-sm editar" th:href="@{/controller/sales-operations/edit-car/} + ${car.id}">Editar</a></td>
-					<td class="	bt-eliminar"><a class="btn btn-outline-danger btn-sm eliminar" th:href="@{/controller/sales-operations/delete-car/} + ${car.id}">Eliminar</a></td>
-				</tr>	
-			</tbody>
-		</table>
-		
+	<div class="salir">
+		<a th:href="@{/logout}">Cambiar usuario</a>
 	</div>
-     
-  </div>
-
-  <div id="Ventas" class="tabcontent table-responsive">
-    <h1>Ventas</h1>
-    <div class="container">
-		
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Fecha</th>
-					<th>Coche</th>
-					<th>Precio</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<tr th:each="sale: ${sales}">
-					<td th:text="*{sale.id}"></td>
-					<td th:text="*{sale.saleDate}"></td>
-					<td th:text="*{sale.car}"></td>
-					<td th:text="*{sale.price}"></td>
-					<td class="bt-editar"><a class="btn btn-outline-primary btn-sm editar" th:href="@{/controller/sales-operations/edit-sale/} + ${sale.id}">Editar</a></td>
-					<td class="	bt-eliminar"><a class="btn btn-outline-danger btn-sm eliminar" th:href="@{/controller/sales-operations/delete-sale/} + ${sale.id}">Eliminar</a></td>
-				</tr>	
-			</tbody>
-		</table>
-		
+<!--
+	<div class="tab">
+		<button class="tablinks" onclick="openTab(event, 'Bienvenido')"	id="defaultOpen">Quienes somos</button>	
+		<button class="tablinks" onclick="openTab(event, 'Coches')"	>Coches</button>
+		<button class="tablinks" onclick="openTab(event, 'Profesionales')">Profesionales</button>
+		<button class="tablinks" onclick="openTab(event, 'Ventas')">Ventas</button>
 	</div>
- 
-  </div>
+		
+	 <div class="tab">
+		<button class="tablinks" onclick="openTab(event, 'Bienvenido')" id="defaultOpen">Nosotros</button>
+		<a th:href="@{/controller/sales-operations/car-list}"><button class="tablinks" onclick="openTab(event, 'Coches')">Coches</button></a>
+		<a th:href="@{/controller/professional-operations/professional-list}"><button class="tablinks" onclick="openTab(event, 'Profesionales')">Profesionales</button></a>
+		<a th:href="@{/controller/sales-operations/sale-list}"><button class="tablinks" onclick="openTab(event, 'Ventas')">Ventas</button></a>
+	</div> 
+		
+	
+	
+-->
+	<div class="tab">
+	 	<button class="tablinks" onclick="openTab(event, 'Bienvenido')" id="defaultOpen">Nosotros</button>
+	 	<button id="tab2" class="tablinks" onclick="openTab(event, 'Coches')"><a th:href="@{/controller/sales-operations/car-list}">Coches</a></button>
+		<button id="tab3" class="tablinks" onclick="openTab(event, 'Profesionales')"><a th:href="@{/controller/professional-operations/professional-list}">Profesionales</a></button>
+		<button id="tab4" class="tablinks" onclick="openTab(event, 'Ventas')"><a th:href="@{/controller/sales-operations/sale-list}">Ventas</a></button>
+	</div>
+	
+	
 
+	<div id="Bienvenido" class="tabcontent">
+	
+		<h1>Bienvenido</h1>
+		<div class="container">
+		<div>
+			<img th:src="@{/images/logo.png}" alt="Logo BryLe">
+		</div>
 
+		<div>
+			<p>
+				Aplicación realizada por: <br>
+				<span> Bryan Juela y Elena Méndez.</span>
+			</p>
+		</div>
+		</div>
+	
+	</div>
+
+	<div id="Coches" class="tabcontent table-responsive ">
+		<h1>Coches</h1>
+		<div class="container">
+
+			<table  id="mi-tabla1" class="table table-striped tablesorter">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Marca</th>
+						<th>Modelo</th>
+						<th>Nº Bastidor</th>
+						<th>Año</th>
+						<th>Precio</th>
+						<!-- <th>Km</th> -->
+						<th>Estado</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="car: ${cars}">
+						<td th:text="*{car.id}"></td>
+						<td th:text="*{car.marca}"></td>
+						<td th:text="*{car.modelo}"></td>
+						<td th:text="*{car.numBastidor}"></td>
+						<td th:text="*{car.anyo}"></td>
+						<td th:text="*{car.precio}"></td>
+						<!-- <td th:text="*{car.km}"></td> -->
+						<td th:text="*{car.estado}"></td>
+						<td class="bt-editar"><a
+							class="btn btn-outline-primary btn-sm editar"
+							th:href="@{/controller/sales-operations/edit-car/} + ${car.id}">Editar</a></td>
+						<td class="	bt-eliminar"><a
+							class="btn btn-outline-danger btn-sm eliminar"
+							th:href="@{/controller/sales-operations/delete-car/} + ${car.id}">Eliminar</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+
+	</div>
+	
+
+	<div id="Profesionales" class="tabcontent table-responsive">
+		<h1>Profesionales</h1>
+		<div class="container">
+
+			<table  id="mi-tabla2" class="table table-striped ">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th>Dirección</th>
+						<th>Telefono</th>
+						<th>Email</th>
+						<th>DNI</th>
+						<th>Nº Ventas</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="professional: ${professionals}">
+						<td th:text="*{professional.id}"></td>
+						<td th:text="*{professional.firstName}"></td>
+						<td th:text="*{professional.lastName}"></td>
+						<td th:text="*{professional.address}"></td>
+						<td th:text="*{professional.phone}"></td>
+						<td th:text="*{professional.user}"></td>
+						<td th:text="*{professional.dni}"></td>
+						<!-- si las ventas es igual a null, mostrar 0 -->
+						<td th:if="*{professional.sales == null}" th:text="0"></td>
+						<td class="bt-editar"><a
+							class="btn btn-outline-primary btn-sm editar"
+							th:href="@{/controller/professional-operations/edit-professional/} + ${professional.id}">Editar</a></td>
+						<td class="bt-eliminar"><a
+							class="btn btn-outline-danger btn-sm eliminar"
+							th:href="@{/controller/professional-operations/delete-professional/} + ${professional.id} ">Eliminar</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+
+	<div id="Ventas" class="tabcontent table-responsive">
+		<h1>Ventas</h1>
+		<div class="container">
+
+			<table id="mi-tabla3" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Fecha</th>
+						<th>Coche</th>
+						<th>Precio</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="sale: ${sales}">
+						<td th:text="*{sale.id}"></td>
+						<td th:text="*{sale.saleDate}"></td>
+						<td th:text="*{sale.car}"></td>
+						<td th:text="*{sale.price}"></td>
+						<td class="bt-editar"><a
+							class="btn btn-outline-primary btn-sm editar"
+							th:href="@{/controller/sales-operations/edit-sale/} + ${sale.id}">Editar</a></td>
+						<td class="	bt-eliminar"><a
+							class="btn btn-outline-danger btn-sm eliminar"
+							th:href="@{/controller/sales-operations/delete-sale/} + ${sale.id}">Eliminar</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+
+	</div>
+
+	
 
 	<div class="crear">
 		<a class="btn btn-primary" th:href="${createButton}">Crear</a>
-   </div>
+	</div>
+
+<div>
+
+</div>
 
 
 
+	<script>
+		function openTab(evt, tabName) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(
+						" active", "");
+			}
+			document.getElementById(tabName).style.display = "block";
+			evt.currentTarget.className += " active";
+		}
 
-<footer class="footer">
-  <div> 
-    <img th:src="@{/images/logo.png}" alt="Logo BryLe">
-  </div>
-
-  <div> 
-    <p>Aplicación realizada por: <br><span> Bryan Juela y Elena Méndez.</span> </p>
-  </div>
-</footer>
-
-
-  <script>
-    function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-  </script>
+		// Get the element with id="defaultOpen" and click on it
+		document.getElementById("defaultOpen").click();
+	</script> 
 
 
 </body>
