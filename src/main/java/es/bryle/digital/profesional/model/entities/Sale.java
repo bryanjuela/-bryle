@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,10 +40,16 @@ public class Sale {
 	@Column(name = "price")
 	private String price;
 	
-	@OneToOne(cascade= CascadeType.ALL)
+	@ManyToOne(cascade= CascadeType.ALL)
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(name="professional_id", referencedColumnName= "id",
 				foreignKey= @ForeignKey(name= "fk_professional_sale"))
+	 /*@JoinTable(
+		        name = "sale_professional",
+		        joinColumns = {@JoinColumn(name = "sale_id", referencedColumnName = "id",
+		            foreignKey = @ForeignKey(name = "professional_sale_fk"))},
+		        inverseJoinColumns = {@JoinColumn(name = "professional_id", referencedColumnName = "id",
+		            foreignKey = @ForeignKey(name = "professional_professional_fk"))})*/
 	private Professional professional;
 	
 	public Long getId() {

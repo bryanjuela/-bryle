@@ -61,6 +61,9 @@ public class SalesServiceImpl implements SalesService {
 		if(sale!= null) {
 			Professional professional= sale.getProfessional();
 			professional.getSales().add(sale);
+			Car car= sale.getCar();
+			car.setEstado("Vendido");
+			car.setSale(sale);
 			
 			saleRepository.save(sale);
 			professionalRepository.save(professional);
@@ -76,9 +79,8 @@ public class SalesServiceImpl implements SalesService {
 
 		if(sale.isPresent()) {
 			Professional professional= sale.get().getProfessional();
-			//professional.getSales().remove(sale.get());
-			saleRepository.deleteById(sale.get().getId());
-			//professionalRepository.save(professional);
+			professional.getSales().remove(sale.get());			
+			professionalRepository.save(professional);
 			return 1;
 		}
 		return -1;
@@ -149,7 +151,19 @@ public class SalesServiceImpl implements SalesService {
 	public Integer deleteCar(Long id) {
 		Optional<Car> existCar= carRepository.findById(id);
 		if(existCar.isPresent()) {
-			carRepository.deleteById(id);
+			if(existCar.get().getSale()== null)
+				carRepository.deleteById(id);
+			else {
+				Sale sale= existCar.get().getSale();
+				Professional professional= sale.getProfessional();
+				System.out.println("Borrar coche: "+professional.getSales().size());
+				sale.setProfessional(null);
+								
+				professional.getSales().remove(sale);
+				
+				saleRepository.save(sale);
+				professionalRepository.save(professional);
+			}	
 			return 1;
 		}
 			
@@ -183,10 +197,9 @@ public class SalesServiceImpl implements SalesService {
 		if(!carList.isEmpty()) {
 			for(Car car: carList) 
 				totalCars.add(carVOMapper.mapper(car));
-			return totalCars;
 		}
 		
-		return null;
+		return totalCars;
 	}
 
 	@Override

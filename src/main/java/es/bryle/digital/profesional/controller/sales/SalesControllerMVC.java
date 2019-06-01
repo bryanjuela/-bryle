@@ -1,5 +1,6 @@
 package es.bryle.digital.profesional.controller.sales;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,14 +40,13 @@ public class SalesControllerMVC {
 	@RequestMapping(value = "/car-list", method= RequestMethod.GET)
 	public String getCars(Map<String, Object> model){
 		List<CarVO> cars= salesService.getCars();
-		if(!cars.isEmpty() || cars!= null) {
-			model.put("cars", cars);
-		}
+		if(cars== null ) 
+			cars= new ArrayList<>();
 		
 		//Ruta para el boton crear de index.html para los coches
 		//createButton -> nombre de la variable
 		//ROOT_PATH+"/create-car" -> valor de la variable 
-		
+		model.put("cars", cars);
 		model.put("createButton", ROOT_PATH+"/create-car");
 		return "/index";
 	}
@@ -129,13 +129,13 @@ public class SalesControllerMVC {
 	@RequestMapping(value = "/sale-list", method= RequestMethod.GET)
 	public String getSales(Map<String, Object> model){
 		List<SaleVO> sales= salesService.getSales();
-		if(!sales.isEmpty() || sales!= null) {
-			model.put("sales", sales);
-		}	
+		if(sales== null) 
+			sales= new ArrayList<SaleVO>();
 		
 		//Ruta para el boton crear de index.html para los coches
 		//createButton -> nombre de la variable
 		//ROOT_PATH+"/create-sale" -> valor de la variable 
+		model.put("sales", sales);
 		model.put("createButton", ROOT_PATH+"/create-sale");
 		return "/index";
 	}

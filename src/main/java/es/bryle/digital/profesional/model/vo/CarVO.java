@@ -11,6 +11,7 @@ public class CarVO {
 	private String anyo;
 	private String precio;
 	private String estado;
+	private String km;
 	
 	public Long getId() {
 		return id;
@@ -66,6 +67,14 @@ public class CarVO {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public String getKm() {
+		return km;
+	}
+
+	public void setKm(String km) {
+		this.km = km;
 	}
 
 	

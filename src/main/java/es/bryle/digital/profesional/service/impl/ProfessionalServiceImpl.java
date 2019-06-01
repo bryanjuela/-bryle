@@ -121,11 +121,11 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 				ProfessionalVO professional= professionalVOMapper.mapper(element);
 				totalProfessionals.add(professional);
 			}
-			return totalProfessionals;
+			
 		}
 		
 		
-		return null;
+		return totalProfessionals;
 	}
 
 	@Override

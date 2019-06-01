@@ -46,7 +46,7 @@ public class SaleMapper {
 		if(source.getProfessional()== null) {
 			User user= authUserService.getCurrentUser();
 			if(user!= null) {
-				Optional<Professional> professional= professionalRepository.findById(user.getId());
+				Optional<Professional> professional= professionalRepository.findById(user.getProfessional().getId());
 				if(professional.isPresent()) {
 					target.setProfessional(professional.get());
 				}

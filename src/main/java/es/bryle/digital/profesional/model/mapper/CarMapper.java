@@ -39,6 +39,9 @@ public class CarMapper {
 		if(source.getPrecio()!= null)
 			target.setPrecio(source.getPrecio());
 		
+		if(source.getKm()!= null)
+			target.setKm(source.getKm());
+		
 		return target;
 	}
 	

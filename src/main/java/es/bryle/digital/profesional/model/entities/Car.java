@@ -1,11 +1,19 @@
 package es.bryle.digital.profesional.model.entities;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "car")
@@ -30,6 +38,16 @@ public class Car {
 	
 	@Column(name = "precio")
 	private String precio;
+	
+	@Column(name = "estado")
+	private String estado;
+	
+	@Column
+	private String km;
+	
+	@OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
+	@Fetch(FetchMode.JOIN)
+	private Sale sale;
 	
 	public Long getId() {
 		return id;
@@ -87,6 +105,21 @@ public class Car {
 		this.estado = estado;
 	}
 
-	@Column(name = "estado")
-	private String estado;
+	public Sale getSale() {
+		return sale;
+	}
+
+	public void setSale(Sale sale) {
+		this.sale = sale;
+	}
+
+	public String getKm() {
+		return km;
+	}
+
+	public void setKm(String km) {
+		this.km = km;
+	}
+
+	
 }
