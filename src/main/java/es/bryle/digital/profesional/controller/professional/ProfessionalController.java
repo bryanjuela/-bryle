@@ -1,5 +1,6 @@
 package es.bryle.digital.profesional.controller.professional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,13 +38,13 @@ public class ProfessionalController {
 	@RequestMapping(value = "/professional-list", method= RequestMethod.GET)
 	public String getProfessionals(Map<String, Object> model){
 		List<ProfessionalVO> professionals= professionalService.getProfessionals();
-		if(!professionals.isEmpty() || professionals!= null) {
-			model.put("professionals", professionals);
-		}
+		if(professionals== null) 
+			professionals= new ArrayList<ProfessionalVO>();
 		
 		//Ruta para el boton crear de index.html para los coches
 		//createButton -> nombre de la variable
-		//ROOT_PATH+"/create-comercial" -> valor de la variable 
+		//ROOT_PATH+"/create-comercial" -> valor de la variable
+		model.put("professionals", professionals);
 		model.put("createButton", ROOT_PATH+"/create-comercial");
 		return "/index";
 	}

@@ -48,8 +48,8 @@ public class Professional {
 			fetch = FetchType.LAZY, optional = false)
 	private User user;
 	
-	@OneToMany(mappedBy = "professional", cascade = CascadeType.ALL)
-	@Fetch(FetchMode.JOIN)
+	@OneToMany(mappedBy = "professional", cascade = CascadeType.ALL, 
+			fetch = FetchType.LAZY, orphanRemoval = true)
 	private Set<Sale> sales;
 
 	public Long getId() {

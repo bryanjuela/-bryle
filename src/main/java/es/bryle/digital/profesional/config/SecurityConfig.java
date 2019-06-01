@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	    //.antMatchers("/oauth/token").permitAll()
 	    .anyRequest().authenticated()
 	    .and().formLogin().loginPage("/login")
-	    .defaultSuccessUrl("/controller/professional-operations/professional-list").permitAll()
+	    .defaultSuccessUrl("/controller/sales-operations/car-list").permitAll()
 	    .and()
 	    .logout().permitAll()
 	    .and()
