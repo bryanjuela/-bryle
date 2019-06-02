@@ -46,6 +46,7 @@ public class ProfessionalController {
 		//ROOT_PATH+"/create-comercial" -> valor de la variable
 		model.put("professionals", professionals);
 		model.put("createButton", ROOT_PATH+"/create-comercial");
+		model.put("profesionales", "defaultOpen");
 		return "/index";
 	}
 	
@@ -63,7 +64,7 @@ public class ProfessionalController {
 			notes = "Crear o edita un usuario con el rol de 'USER'")
 	@RequestMapping(value = "/professional")
 	public String createProfessional(@Valid ProfessionalVO professionalVO, 
-			final BindingResult bindingResult){
+			final BindingResult bindingResult, Model model){
 		
 		if(!bindingResult.hasErrors()) {
 			if(professionalVO== null){
@@ -89,21 +90,26 @@ public class ProfessionalController {
 				return REDIRECT+ROOT_PATH+ redirectPage;
 		}
 		
-		return  REDIRECT+ROOT_PATH+"/create-comercial";
+		model.addAttribute("mensaje", "PROFESSIONAL ERROR");
+		model.addAttribute("redirectPage", ROOT_PATH+"/professional-list");
+		return "/error_404";
 	}
 	
 	@ApiOperation(value = "Eliminacion de un profesional",
 			notes = "Elimina al profesional y todas sus ventas de la BD ")
 	@RequestMapping(value = "/delete-professional/{id}")
-	public String deleteProfessional(@PathVariable("id")Long id){
+	public String deleteProfessional(@PathVariable("id")Long id, Model model){
 		
 		if(id!= null && id> 0) {
 			Integer result= professionalService.deleteProfessional(id);
 			if(result== 1)
 				return  REDIRECT+ROOT_PATH+"/professional-list";
 			//PAGINA DE ERROR
-			if(result== -1 || result== -2)//volver a cargar la página
+			if(result== -1 || result== -2) {//volver a cargar la página
+				 model.addAttribute("mensaje", "PROFESSIONAL ID NOT FOUND");
+				 model.addAttribute("redirectPage", ROOT_PATH+"/professional-list");
 				return "/error_404";
+			}	
 		}
 		return  REDIRECT+ROOT_PATH+"/professional-list";
 	}
@@ -121,6 +127,8 @@ public class ProfessionalController {
 				return "/comercial";
 			}
 		}
-		return REDIRECT+ ROOT_PATH+"/professional-list";
+		 model.addAttribute("mensaje", "PROFESSIONAL ID NOT FOUND");
+		 model.addAttribute("redirectPage", ROOT_PATH+"/professional-list");
+		return "/error_404";
 	}
 }

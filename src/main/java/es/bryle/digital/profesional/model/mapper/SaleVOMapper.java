@@ -18,11 +18,11 @@ public class SaleVOMapper {
 		}
 		
 		if(source.getProfessional()!= null) {
-			target.setProfessional(source.getProfessional().getId());
+			target.setProfessional(source.getProfessional().getId().toString());
 		}
 	
 		if(source.getCar()!= null) {
-			target.setCar(source.getCar().getId());
+			target.setCar(source.getCar().getId().toString());
 		}
 		
 		if(source.getSaleDate()!= null) {

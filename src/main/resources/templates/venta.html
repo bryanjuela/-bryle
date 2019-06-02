@@ -5,7 +5,7 @@
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">  
-	<link rel="stylesheet" type="text/css" th:href="@{/venta-style.css}">  
+	<link rel="stylesheet" type="text/css" th:href="@{/css/venta-style.css}">  
 	<title>Venta</title>
 </head>
 <body>
@@ -28,13 +28,11 @@
 				<input type="hidden" th:field="*{id}"/>
 				<label for="inputBastidor" class="col-sm-2 col-form-label">Nº de Bastidor:</label>
 				<div class="col-sm-9">
-				<input type="text" th:field="*{car}"/>
-				<!-- <select id="inputState" class="form-control">
-       					<option selected>Seleccionar</option>
-        				<option value="">1</option>
-        				<option value="">2</option>
-        				<option value="">3</option>
-     				</select>-->
+				<!-- <input type="text" th:field="*{car}"/> -->
+				<select id="inputState" class="form-control" th:field="*{car}">
+       					<option value="" disabled selected>Seleccionar</option>
+        				<option th:each="bastidor: ${cars}" th:value="${bastidor.id}" th:text="${bastidor.numBastidor + ' - ' + bastidor.marca + ' ' + bastidor.modelo}"></option>
+     				</select>
 				</div>
 			</div>
 

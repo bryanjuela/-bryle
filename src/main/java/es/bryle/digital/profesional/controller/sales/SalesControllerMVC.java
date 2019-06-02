@@ -48,6 +48,7 @@ public class SalesControllerMVC {
 		//ROOT_PATH+"/create-car" -> valor de la variable 
 		model.put("cars", cars);
 		model.put("createButton", ROOT_PATH+"/create-car");
+		model.put("coches", "defaultOpen");
 		return "/index";
 	}
 	
@@ -65,7 +66,7 @@ public class SalesControllerMVC {
 	@ApiOperation(value = "Creación o edición de un nuevo coche",
 			notes = "Crea o edita un coche en la BD")
 	@RequestMapping(value = "/car", method= RequestMethod.POST)
-	public String saveCar(@Valid CarVO carVO){
+	public String saveCar(@Valid CarVO carVO, Model model){
 		
 		if(carVO!= null) {
 			Integer result; 
@@ -84,7 +85,9 @@ public class SalesControllerMVC {
 			if(result== -1 || result== -2)
 				return REDIRECT+ROOT_PATH+ redirectPage;
 		}
-		return REDIRECT+ROOT_PATH+"/create-car";
+		model.addAttribute("mensaje", "CAR ERROR");
+		model.addAttribute("redirectPage", ROOT_PATH+"/car-list");
+		return "/error_404";
 	}
 	
 	
@@ -92,7 +95,7 @@ public class SalesControllerMVC {
 	@ApiOperation(value = "Eliminacion de un coche",
 			notes = "Elimina el coche de la BD ")
 	@RequestMapping(value = "/delete-car/{id}")
-	public String deleteCar(@PathVariable("id")Long id){
+	public String deleteCar(@PathVariable("id")Long id, Model model){
 		
 		if(id!= null && id> 0) {
 			Integer result= salesService.deleteCar(id);
@@ -100,8 +103,11 @@ public class SalesControllerMVC {
 				return REDIRECT+ROOT_PATH+"/car-list";
 			
 			//PAGINA DE ERROR
-			if(result== -1)
+			if(result== -1) {
+				model.addAttribute("mensaje", "CAR ID NOT FOUND");
+				 model.addAttribute("redirectPage", ROOT_PATH+"/car-list");
 				return "/error_404";
+			}	
 		}
 		return REDIRECT+ROOT_PATH+"/car-list";
 	}
@@ -120,7 +126,8 @@ public class SalesControllerMVC {
 				return "/coche";
 			}
 		}
-		
+		 model.addAttribute("mensaje", "CAR ID NOT FOUND");
+		 model.addAttribute("redirectPage", ROOT_PATH+"/car-list");
 		return "/error_404";
 	}
 
@@ -128,7 +135,7 @@ public class SalesControllerMVC {
 			notes = "Recupera un listado con todas las ventas de la BD")
 	@RequestMapping(value = "/sale-list", method= RequestMethod.GET)
 	public String getSales(Map<String, Object> model){
-		List<SaleVO> sales= salesService.getSales();
+		List<SaleVO> sales= salesService.getAllSales();
 		if(sales== null) 
 			sales= new ArrayList<SaleVO>();
 		
@@ -137,6 +144,7 @@ public class SalesControllerMVC {
 		//ROOT_PATH+"/create-sale" -> valor de la variable 
 		model.put("sales", sales);
 		model.put("createButton", ROOT_PATH+"/create-sale");
+		model.put("ventas", "defaultOpen");
 		return "/index";
 	}
 	
@@ -147,6 +155,14 @@ public class SalesControllerMVC {
 		SaleVO saleVO= new SaleVO();
 		model.addAttribute("saleVO", saleVO);
 		model.addAttribute("titulo", "Nueva venta");
+		
+		//pasar el listado de coches no vendidos
+		List<CarVO> cars= salesService.getCars();
+		for(CarVO element: cars) {
+			if(element.getEstado().equalsIgnoreCase("vendido"))
+				cars.remove(element);
+		}
+		model.addAttribute("cars", cars);
 		return "/venta";
 	}
 	
@@ -175,6 +191,8 @@ public class SalesControllerMVC {
 		}
 		
 		//error
+		model.addAttribute("mensaje", "SALE ERROR");
+		model.addAttribute("redirectPage", ROOT_PATH+"/sale-list");
 		return "/error_404";
 	}
 	
@@ -189,10 +207,18 @@ public class SalesControllerMVC {
 			if(saleVO!= null) {
 				model.addAttribute("saleVO", saleVO);
 				model.addAttribute("titulo", "Editar Venta");
+				//pasar el listado de coches no vendidos
+				List<CarVO> cars= salesService.getCars();
+				for(CarVO element: cars) {
+					if(element.getEstado().equalsIgnoreCase("vendido"))
+						cars.remove(element);
+				}
+				model.addAttribute("cars", cars);
 				return "/venta";
 			}
 		}
-		
+		 model.addAttribute("mensaje", "SALE ID NOT FOUND");
+		 model.addAttribute("redirectPage", ROOT_PATH+"/sale-list");
 		return "/error_404";
 	}
 	
@@ -200,7 +226,7 @@ public class SalesControllerMVC {
 	@ApiOperation(value = "Eliminacion de una venta",
 			notes = "Elimina ls venta de la BD y vuelve a cargar la página de ventas")
 	@RequestMapping(value = "/delete-sale/{id}")
-	public String deleteSale(@PathVariable("id")Long id){
+	public String deleteSale(@PathVariable("id")Long id, Model model){
 		
 		if(id!= null && id> 0) {
 			Integer result= salesService.deleteSale(id);
@@ -208,8 +234,11 @@ public class SalesControllerMVC {
 				return REDIRECT+ROOT_PATH+"/sale-list";
 			
 			//PAGINA DE ERROR
-			 if(result== -1) 
-				 return "/error_404"; 
+			 if(result== -1) {
+				 model.addAttribute("mensaje", "SALE ID NOT FOUND");
+				 model.addAttribute("redirectPage", ROOT_PATH+"/sale-list");
+				 return "/error_404";
+			 }	 
 		}
 		return REDIRECT+ROOT_PATH+"/sale-list";
 	}
