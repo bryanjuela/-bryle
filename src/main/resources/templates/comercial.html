@@ -3,91 +3,107 @@
 
 
 <head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<title>Nuevo Comercial</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/comercial-style.css}">  
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>Profesionales</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/comercial-style.css}">
 </head>
 <body>
 
-<div class="container-fluid">
-		
-	<div class="box">
-		<img th:src="@{/images/logo.png}" class="avatar" alt="Logo BryLe">
-		<div >
-			<h1 th:text="${titulo}"></h1>
-		</div>	
-			
-		<!--Campos-->
-		<form  th:action="@{/controller/professional-operations/professional}" method="post" th:object="${professionalVO}">
-		<!--<form  action="" class="formulario">-->
-		<input type="hidden" th:field="*{id}">
-			<div class="form-group row">
-				<label for="inputNombre" class="col-sm-2 col-form-label">Nombre:</label>
-				<div class="col-sm-9">
-					<input type="text" placeholder="Nombre" required autofocus th:field="*{firstName}">
-				</div>
+
+	<div class="container-fluid">
+
+		<div class="box">
+			<img th:src="@{/images/logo.png}" class="avatar" alt="Logo BryLe">
+			<div>
+				<h1 th:text="${titulo}"></h1>
 			</div>
 
-			<div class="form-group row">
-				<label for="inputApellido" class="col-sm-2 col-form-label">Apellido:</label>
-				<div class="col-sm-9">
-					<input type="text" placeholder="Apellido" required autofocus th:field="*{lastName}">
-				</div>
-			</div>
-			<!-- 
-			<div class="form-group row">
-				<label for="inputDireccion" class="col-sm-2 col-form-label">Dirección:</label>
-				<div class="col-sm-9">
-					<input type="text" placeholder="Dirección" autofocus th:field="*{address}">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="inputTelefono" class="col-sm-2 col-form-label">Teléfono:</label>
-				<div class="col-sm-9">
-					<input type="number" placeholder="Teléfono" required autofocus th:field="*{tlf}">
-				</div>
-			</div>
-			-->		
-			<div class="form-group row">
-				<label for="inputDNI" class="col-sm-2 col-form-label">DNI:</label>
-				<div class="col-sm-9">
-					<input type="text" placeholder="DNI" required autofocus th:field="*{dni}">
-				</div>
-			</div>
+			<!--Campos-->
+			<form th:action="@{/controller/professional-operations/professional}"
+				method="post" th:object="${professionalVO}">
 
-			<div class="form-group row">
-				<label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
-				<div class="col-sm-9">
-            		<input type="email" placeholder="Email" required th:field="*{user}">
+				<input type="hidden" th:field="*{id}">
+
+				<div class="form-group row">
+					<label for="inputNombre" class="col-sm-2 col-form-label">Nombre:</label>
+					<div class="col-sm-9">
+						<input type="text" placeholder="Nombre"
+							pattern="[a-zA-ZáÁéÉíÍóÓúÚñÑ '-]{2,25}"
+							title="El nombre puede contener un máximo de 25 letras" required
+							autofocus th:field="*{firstName}">
+					</div>
 				</div>
-			</div>
-			
-			<!--botonera-->
-			<div class="botonera" >
-				<div class="aceptar">
-					<input class="btn btn-primary" type="submit" value="Aceptar">
+
+				<div class="form-group row">
+					<label for="inputApellido" class="col-sm-2 col-form-label">Apellido:</label>
+					<div class="col-sm-9">
+						<input type="text" placeholder="Apellido"
+							pattern="[a-zA-ZáÁéÉíÍóÓúÚñÑ '-]{2,50}"
+							title="El apellido puede contener un máximo de 50 letras"
+							required th:field="*{lastName}">
+					</div>
 				</div>
-				<div class="limpiar">
-	        		<input type="reset" value="Limpiar">	
+
+				<div class="form-group row">
+					<label for="inputDireccion" class="col-sm-2 col-form-label">Dirección:</label>
+					<div class="col-sm-9">
+						<input type="text" placeholder="Dirección" th:field="*{address}">
+					</div>
 				</div>
-				<div class="cancelar">
-  					<a class="btn btn-primary" href="@{/controller/professional-operations/professional-list}" role="button">Cancelar</a> 
+
+				<div class="form-group row">
+					<label for="inputTelefono" class="col-sm-2 col-form-label">Teléfono:</label>
+					<div class="col-sm-9">
+						<input type="number" placeholder="Teléfono"
+							pattern="^[9|8|7|6]\d{8}$"
+							title="Teléfono (9 dígitos comenzando por 9, 8, 7 o 6)"
+							th:field="*{phone}">
+					</div>
 				</div>
-				
-			</div>
-		            
-		</form>
+
+				<div class="form-group row">
+					<label for="inputDNI" class="col-sm-2 col-form-label">DNI:</label>
+					<div class="col-sm-9">
+						<input type="text" placeholder="DNI/NIE" required
+							pattern="((\d{8}[A-ZÑ])||([XYZ]\d{7,8}[A-Z]))" th:field="*{dni}">
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
+					<div class="col-sm-9">
+						<input type="email" placeholder="Email" required
+							pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+							th:field="*{user}">
+					</div>
+				</div>
+
+				<!--botonera-->
+				<div class="botonera">
+					<div class="aceptar">
+						<input class="btn btn-primary" type="submit" value="Aceptar">
+					</div>
+					<div class="limpiar">
+						<input type="reset" value="Limpiar">
+					</div>
+					<div class="cancelar">
+						<a class="btn btn-primary"
+							th:href="@{/controller/professional-operations/professional-list}"
+							role="button">Cancelar</a>
+					</div>
+
+				</div>
+
+			</form>
+		</div>
+
+
 	</div>
-	
 
-</div>
-
-	<!--script-->
-	<script src="../static/js/jquery.js"></script>
-	<script src="../static/js/popper.min.js"></script>
-	<script src="../static/js/bootstrap.min.js"></script>
-	
 </body>
 </html>

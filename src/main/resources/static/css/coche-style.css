@@ -77,6 +77,8 @@ table {
   position: absolute;
   top: -50px;
   left: calc(50% - 50px);
+  background: #fff;
+  
 }
 
 .box h1 {

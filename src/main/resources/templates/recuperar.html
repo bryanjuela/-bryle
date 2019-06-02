@@ -68,7 +68,7 @@
 
 	<div class="box">
 
-		<img th:src="@{/images/logo.jpg}" alt="Logo BryLe" class="avatar">
+		<img th:src="@{/images/logo.png}" alt="Logo BryLe" class="avatar">
 
 		<div>
 			<h1>Recuperar Contraseña</h1>
@@ -80,11 +80,11 @@
 				placeholder="Nueva contraseña" required> <input
 				type="password" placeholder="Repetir contraseña" required>
 			<div class="botones">
-				<input type="submit" value="Acceder"> <input type="reset"
-					value="Limpiar">
+				<input type="submit" value="Acceder">
+				<input type="reset"	value="Limpiar">
 			</div>
 			<div class="salir">
-				<a th:href="@{/login.html}">Salir</a>
+				<a th:href="@{/logout}">Salir</a>
 			</div>
 		</form>
 	</div>
