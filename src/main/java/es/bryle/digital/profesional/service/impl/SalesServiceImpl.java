@@ -115,6 +115,25 @@ public class SalesServiceImpl implements SalesService {
 		
 		return totalSales;
 	}
+	
+	@Override
+	public List<SaleVO> getAllSales(){
+		List<Sale> sales= saleRepository.findAll();
+		List<SaleVO> totalSales= new ArrayList<>();
+		
+		if(!sales.isEmpty()) {
+			sales.forEach(element-> {
+				SaleVO sale= saleVOMapper.mapper(element);
+				sale.setProfessional(element.getProfessional().getFirstName()+ " "+
+						element.getProfessional().getLastName());
+				sale.setCar(element.getCar().getNumBastidor()+ " "+
+						element.getCar().getMarca()+" "+element.getCar().getModelo());
+				totalSales.add(sale);
+			});
+		}
+		
+		return totalSales;
+	}
 
 	@Override
 	public SaleVO getOneSale(Long id) {

@@ -36,7 +36,7 @@ public class SaleMapper {
 		}	
 		
 		if(source.getCar()!= null) {
-			Optional<Car> car= carRepository.findById(source.getCar()); 
+			Optional<Car> car= carRepository.findById(Long.parseLong(source.getCar())); 
 			if(car.isPresent()) {
 				target.setCar(car.get());
 			}else 
@@ -53,7 +53,7 @@ public class SaleMapper {
 			}
 			
 		}else {
-			target.setProfessional(professionalRepository.findById(source.getProfessional()).get());
+			target.setProfessional(professionalRepository.findById(Long.parseLong(source.getProfessional())).get());
 		}
 		
 		if(source.getPrice()!= null)

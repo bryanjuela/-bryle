@@ -7,8 +7,8 @@ public class SaleVO {
 	private Long id;
 	//private Date saleDate;
 	private String saleDate;
-	private Long car;
-	private Long professional;
+	private String car;
+	private String professional;
 	private String price;
 	
 	public Long getId() {
@@ -34,19 +34,19 @@ public class SaleVO {
 	public void setSaleDate(String saleDate) {
 		this.saleDate = saleDate;
 	}
-	public Long getCar() {
+	public String getCar() {
 		return car;
 	}
 
-	public void setCar(Long car) {
+	public void setCar(String car) {
 		this.car = car;
 	}
 
-	public Long getProfessional() {
+	public String getProfessional() {
 		return professional;
 	}
 
-	public void setProfessional(Long professional) {
+	public void setProfessional(String professional) {
 		this.professional = professional;
 	}
 
