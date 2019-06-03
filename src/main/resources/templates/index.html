@@ -22,28 +22,22 @@
 		<a th:href="@{/logout}">Cambiar usuario</a>
 	</div>
 <!--
+			
 	<div class="tab">
-		<button class="tablinks" onclick="openTab(event, 'Bienvenido')"	id="defaultOpen">Quienes somos</button>	
-		<button class="tablinks" onclick="openTab(event, 'Coches')"	>Coches</button>
-		<button class="tablinks" onclick="openTab(event, 'Profesionales')">Profesionales</button>
-		<button class="tablinks" onclick="openTab(event, 'Ventas')">Ventas</button>
+		<button class="tablinks" onclick="openTab(event, 'Bienvenido')">Nosotros</button>
+		<a th:href="@{/controller/sales-operations/car-list}"><button th:id="${coches}" class="tablinks" onclick="openTab(event, 'Coches')">Coches</button></a>
+		<a th:href="@{/controller/professional-operations/professional-list}"><button th:id="${profesionales}" class="tablinks" onclick="openTab(event, 'Profesionales')">Profesionales</button></a>
+		<a th:href="@{/controller/sales-operations/sale-list}"><button th:id="${ventas}" class="tablinks" onclick="openTab(event, 'Ventas')">Ventas</button></a>
 	</div>
 		
-	 <div class="tab">
-		<button class="tablinks" onclick="openTab(event, 'Bienvenido')" id="defaultOpen">Nosotros</button>
-		<a th:href="@{/controller/sales-operations/car-list}"><button class="tablinks" onclick="openTab(event, 'Coches')">Coches</button></a>
-		<a th:href="@{/controller/professional-operations/professional-list}"><button class="tablinks" onclick="openTab(event, 'Profesionales')">Profesionales</button></a>
-		<a th:href="@{/controller/sales-operations/sale-list}"><button class="tablinks" onclick="openTab(event, 'Ventas')">Ventas</button></a>
-	</div> 
-		
-	
-	
+ 	
 -->
+
 	<div class="tab">
 	 	<button class="tablinks" onclick="openTab(event, 'Bienvenido')" >Nosotros</button>
-	 	<button id="tab2" class="tablinks" onclick="openTab(event, 'Coches')" th:id="${coches}"><a th:href="@{/controller/sales-operations/car-list}">Coches</a></button>
-		<button id="tab3" class="tablinks" onclick="openTab(event, 'Profesionales')" th:id="${profesionales}"><a th:href="@{/controller/professional-operations/professional-list}">Profesionales</a></button>
-		<button id="tab4" class="tablinks" onclick="openTab(event, 'Ventas')" th:id="${ventas}"><a th:href="@{/controller/sales-operations/sale-list}">Ventas</a></button>
+	 	<button class="tablinks" onclick="openTab(event, 'Coches')" th:id="${coches}"><a th:href="@{/controller/sales-operations/car-list}">Coches</a></button>
+		<button class="tablinks" onclick="openTab(event, 'Profesionales')" th:id="${profesionales}"><a th:href="@{/controller/professional-operations/professional-list}">Profesionales</a></button>
+		<button class="tablinks" onclick="openTab(event, 'Ventas')" th:id="${ventas}"><a th:href="@{/controller/sales-operations/sale-list}">Ventas</a></button>
 	</div>
 	
 
@@ -80,8 +74,7 @@
 						<th>Precio</th>
 						<th>Km</th>
 						<th>Estado</th>
-						<th></th>
-						<th></th>
+						
 					</tr>
 				</thead>
 
@@ -125,8 +118,7 @@
 						<th>Email</th>
 						<th>DNI</th>
 						<th>Nº Ventas</th>
-						<th></th>
-						<th></th>
+						
 					</tr>
 				</thead>
 
@@ -141,6 +133,9 @@
 						<td th:text="*{professional.dni}"></td>
 						<!-- si las ventas es igual a null, mostrar 0 -->
 						<td th:if="*{professional.sales == null}" th:text="0"></td>
+						<td th:unless="*{professional.sales == null}" th:text="*{professional.sales}"></td>
+						
+						
 						<td class="bt-editar"><a
 							class="btn btn-outline-primary btn-sm editar"
 							th:href="@{/controller/professional-operations/edit-professional/} + ${professional.id}">Editar</a></td>
