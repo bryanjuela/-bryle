@@ -1,0 +1,57 @@
+<div th:fragment="car">
+	<div class="tab">
+		<div class="btn"><a th:id="${coches}" class="tablinks" th:href="@{/controller/sales-operations/car-list}">Coches</a></div>
+		<div class="btn"><a th:id="${profesionales}" class="tablinks" th:href="@{/controller/professional-operations/professional-list}">Profesionales</a></div>
+		<div class="btn"><a th:id="${ventas}" class="tablinks" th:href="@{/controller/sales-operations/sale-list}">Ventas</a></div>
+		<div class="btn"><a th:id="${bonus}" class="tablinks" th:href="@{/building}">Bonus</a></div> 
+		
+	</div>
+	
+	
+	
+
+	<div id="Coches" class="tabcontent table-responsive ">
+		<div class="container">
+		<h1>Coches</h1>
+			<table  id="mi-tabla1" class="table table-striped tablesorter">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Marca</th>
+						<th>Modelo</th>
+						<th>Nº Bastidor</th>
+						<th>Año</th>
+						<th>Precio</th>
+						<th>Km</th>
+						<th>Estado</th>
+						
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="car: ${cars}">
+						<td th:text="*{car.id}"></td>
+						<td th:text="*{car.marca}"></td>
+						<td th:text="*{car.modelo}"></td>
+						<td th:text="*{car.numBastidor}"></td>
+						<td th:text="*{car.anyo}"></td>
+						<td th:text="*{car.precio}"></td>
+						<td th:text="*{car.km}"></td>
+						<td th:text="*{car.estado}"></td>
+						<td class="bt-editar"><a
+							class="btn btn-outline-primary btn-sm editar"
+							th:href="@{/controller/sales-operations/edit-car/} + ${car.id}">Editar</a></td>
+						<td class="	bt-eliminar"><a
+							class="btn btn-outline-danger btn-sm eliminar"
+							th:href="@{/controller/sales-operations/delete-car/} + ${car.id}">Eliminar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+	<div class="crear">
+		<a class="btn btn-primary" th:href="${createButton}">Crear</a>
+	</div>
+</div>	
