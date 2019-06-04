@@ -21,17 +21,15 @@
 	<div class="salir">
 		<a th:href="@{/logout}">Cambiar usuario</a>
 	</div>
-<!--
-			
-	<div class="tab">
-		<button class="tablinks" onclick="openTab(event, 'Bienvenido')">Nosotros</button>
-		<a th:href="@{/controller/sales-operations/car-list}"><button th:id="${coches}" class="tablinks" onclick="openTab(event, 'Coches')">Coches</button></a>
-		<a th:href="@{/controller/professional-operations/professional-list}"><button th:id="${profesionales}" class="tablinks" onclick="openTab(event, 'Profesionales')">Profesionales</button></a>
-		<a th:href="@{/controller/sales-operations/sale-list}"><button th:id="${ventas}" class="tablinks" onclick="openTab(event, 'Ventas')">Ventas</button></a>
+
+	<!--  		
+
+<div class="tab">
+		<a th:ref="#">Nosotros</a>
+		<a th:id="${coches}" class="tablinks" th:href="@{/controller/sales-operations/car-list}">Coches</a>
+		<a th:id="${profesionales}" class="tablinks" th:href="@{/controller/professional-operations/professional-list}">Profesionales</a>
+		<a th:id="${ventas}" class="tablinks" th:href="@{/controller/sales-operations/sale-list}">Ventas</a>
 	</div>
-		
- 	
--->
 
 	<div class="tab">
 	 	<button class="tablinks" onclick="openTab(event, 'Bienvenido')" >Nosotros</button>
@@ -40,29 +38,23 @@
 		<button class="tablinks" onclick="openTab(event, 'Ventas')" th:id="${ventas}"><a th:href="@{/controller/sales-operations/sale-list}">Ventas</a></button>
 	</div>
 	
-
-	<div id="Bienvenido" class="tabcontent">
 	
-		<h1>Bienvenido</h1>
-		<div class="container">
-		<div>
-			<img th:src="@{/images/logo.png}" alt="Logo BryLe">
-		</div>
-
-		<div>
-			<p>
-				Aplicación realizada por: <br>
-				<span> Bryan Juela y Elena Méndez.</span>
-			</p>
-		</div>
-		</div>
 	
-	</div>
-
+	  		
+	<div class="tab">
+		<div class="btn"><a th:id="${coches}" class="tablinks" th:href="@{/controller/sales-operations/car-list}">Coches</a></div>
+		<div class="btn"><a th:id="${profesionales}" class="tablinks" th:href="@{/controller/professional-operations/professional-list}">Profesionales</a></div>
+		<div class="btn"><a th:id="${ventas}" class="tablinks" th:href="@{/controller/sales-operations/sale-list}">Ventas</a></div>
+		<div class="btn"><a th:id="${bonus}" class="tablinks" th:href="@{/building}">Bonus</a></div> 
+		
+	</div> 
+	 -->
+	
+	<!--  
+	
 	<div id="Coches" class="tabcontent table-responsive ">
-		<h1>Coches</h1>
 		<div class="container">
-
+		<h1>Coches</h1>
 			<table  id="mi-tabla1" class="table table-striped tablesorter">
 				<thead>
 					<tr>
@@ -97,16 +89,13 @@
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
-
 	</div>
 	
 
 	<div id="Profesionales" class="tabcontent table-responsive">
-		<h1>Profesionales</h1>
 		<div class="container">
-
+			<h1>Profesionales</h1>
 			<table  id="mi-tabla2" class="table table-striped ">
 				<thead>
 					<tr>
@@ -131,9 +120,8 @@
 						<td th:text="*{professional.phone}"></td>
 						<td th:text="*{professional.user}"></td>
 						<td th:text="*{professional.dni}"></td>
-						<!-- si las ventas es igual a null, mostrar 0 -->
 						<td th:if="*{professional.sales == null}" th:text="0"></td>
-						<td th:unless="*{professional.sales == null}" th:text="*{professional.sales}"></td>
+						<td th:unless="*{professional.sales == null}" th:text="*{professional.sales.size()}"></td>
 						
 						
 						<td class="bt-editar"><a
@@ -145,7 +133,6 @@
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
 	</div>
 
@@ -185,18 +172,45 @@
 
 	</div>
 
+  	-->
+
+
+<!-- 
+	<div class="tabcontent us">
+			<h1>BIENVENIDO</h1>
+			<div>
+				<img th:src="@{/images/logo.png}" alt="Logo BryLe">
+			</div>
+
+			<div>
+				<p>
+				Aplicación realizada por: <br>
+				<span> Bryan Juela y Elena Méndez.</span>
+				</p>
+			</div>
+				
+	</div>
+ -->
+	
+	<div th:replace="fragments/index-us :: us"></div>
+	
+<!-- 
+	<div th:replace="fragments/index-car :: car"></div>
+	
+	<div th:replace="fragments/index-prof :: prof"></div>
+	
+	<div th:replace="fragments/index-sale :: sale"></div>
+ -->
+			
+	
+	
+	
+	
+	
 	
 
-	<div class="crear">
-		<a class="btn btn-primary" th:href="${createButton}">Crear</a>
-	</div>
-<div>
-
-</div>
-
-
-
-	<script>
+ <!-- 
+  <script>
 		function openTab(evt, tabName) {
 			var i, tabcontent, tablinks;
 			tabcontent = document.getElementsByClassName("tabcontent");
@@ -214,7 +228,9 @@
 
 		// Get the element with id="defaultOpen" and click on it
 		document.getElementById("defaultOpen").click();
-	</script> 
+	</script>
+  -->
+  
 
 
 </body>
