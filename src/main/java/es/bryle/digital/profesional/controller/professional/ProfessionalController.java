@@ -46,7 +46,7 @@ public class ProfessionalController {
 		//ROOT_PATH+"/create-comercial" -> valor de la variable
 		model.put("professionals", professionals);
 		model.put("createButton", ROOT_PATH+"/create-comercial");
-		model.put("profesionales", "defaultOpen");
+		model.put("tabFragment", "profesionales");
 		return "/index";
 	}
 	

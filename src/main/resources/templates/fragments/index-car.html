@@ -1,16 +1,13 @@
-<div th:fragment="car">
-	<div class="tab">
-		<div class="btn"><a th:id="${coches}" class="tablinks" th:href="@{/controller/sales-operations/car-list}">Coches</a></div>
-		<div class="btn"><a th:id="${profesionales}" class="tablinks" th:href="@{/controller/professional-operations/professional-list}">Profesionales</a></div>
-		<div class="btn"><a th:id="${ventas}" class="tablinks" th:href="@{/controller/sales-operations/sale-list}">Ventas</a></div>
-		<div class="btn"><a th:id="${bonus}" class="tablinks" th:href="@{/building}">Bonus</a></div> 
-		
-	</div>
-	
-	
-	
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
 
-	<div id="Coches" class="tabcontent table-responsive ">
+	<div  th:fragment="car">
+		<div id="Coches" class="tabcontent table-responsive ">
 		<div class="container">
 		<h1>Coches</h1>
 			<table  id="mi-tabla1" class="table table-striped tablesorter">
@@ -19,8 +16,8 @@
 						<th>Id</th>
 						<th>Marca</th>
 						<th>Modelo</th>
-						<th>Nº Bastidor</th>
-						<th>Año</th>
+						<th>NÂº Bastidor</th>
+						<th>AÃ±o</th>
 						<th>Precio</th>
 						<th>Km</th>
 						<th>Estado</th>
@@ -54,4 +51,7 @@
 	<div class="crear">
 		<a class="btn btn-primary" th:href="${createButton}">Crear</a>
 	</div>
-</div>	
+	</div>
+
+</body>
+</html>

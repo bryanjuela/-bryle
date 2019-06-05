@@ -1,15 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
 
-<div th:fragment="sale">
-
-	<div class="tab">
-		<div class="btn"><a th:id="${coches}" class="tablinks" th:href="@{/controller/sales-operations/car-list}">Coches</a></div>
-		<div class="btn"><a th:id="${profesionales}" class="tablinks" th:href="@{/controller/professional-operations/professional-list}">Profesionales</a></div>
-		<div class="btn"><a th:id="${ventas}" class="tablinks" th:href="@{/controller/sales-operations/sale-list}">Ventas</a></div>
-		<div class="btn"><a th:id="${bonus}" class="tablinks" th:href="@{/building}">Bonus</a></div> 
-		
-	</div>
-	
-	<div id="Ventas" class="tabcontent table-responsive">
+	<div  th:fragment="sale">
+		<div id="Ventas" class="tabcontent table-responsive">
 		<h1>Ventas</h1>
 		<div class="container">
 
@@ -49,6 +47,7 @@
 	<div class="crear">
 		<a class="btn btn-primary" th:href="${createButton}">Crear</a>
 	</div>
-	
-	
-</div>	
+	</div>
+
+</body>
+</html>
