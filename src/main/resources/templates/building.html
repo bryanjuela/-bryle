@@ -13,9 +13,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:700,900" rel="stylesheet">
 
 	<!-- Custom stlylesheet -->
-	<!-- <link rel="stylesheet" type="text/css" href="../static/css/building-style.css">  -->
 	<link rel="stylesheet" type="text/css" th:href="@{/css/building-style.css}"> 
-
 	
 </head>
 
@@ -28,11 +26,9 @@
 				<h2>UNDER CONSTRUCTION</h2>
 			</div>
 			<div class="img">
-				<!--<img src="../static/images/progreso.gif" alt="">-->
 				<img src="@{/static/images/progreso.gif}" alt="">
 			</div>
 
-			<!--<a href="login.html">Homepage</a>-->
 			<a th:href="${redirectPage}">Homepage</a>
 		</div>
 	</div>

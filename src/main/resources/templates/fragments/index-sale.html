@@ -8,45 +8,43 @@
 
 	<div  th:fragment="sale">
 		<div id="Ventas" class="tabcontent table-responsive">
-		<h1>Ventas</h1>
-		<div class="container">
-
-			<table id="mi-tabla3" class="table table-striped">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Fecha</th>
-						<th>Coche</th>
-						<th>Profesional</th>
-						<th>Precio</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr th:each="sale: ${sales}">
-						<td th:text="*{sale.id}"></td>
-						<td th:text="*{sale.saleDate}"></td>
-						<td th:text="*{sale.car}"></td>
-						<td th:text="*{sale.professional}"></td>
-						<td th:text="*{sale.price}"></td>
-						<td class="bt-editar"><a
-							class="btn btn-outline-primary btn-sm editar"
-							th:href="@{/controller/sales-operations/edit-sale/} + ${sale.id}">Editar</a></td>
-						<td class="	bt-eliminar"><a
-							class="btn btn-outline-danger btn-sm eliminar"
-							th:href="@{/controller/sales-operations/delete-sale/} + ${sale.id}">Eliminar</a></td>
-					</tr>
-				</tbody>
-			</table>
-
+			<div class="container">
+				<h1>Ventas</h1>
+				<table id="mi-tabla3" class="table table-striped">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Fecha</th>
+							<th>Coche</th>
+							<th>Profesional</th>
+							<th>Precio</th>
+						</tr>
+					</thead>
+	
+					<tbody>
+						<tr th:each="sale: ${sales}">
+							<td th:text="*{sale.id}"></td>
+							<td th:text="*{sale.saleDate}"></td>
+							<td th:text="*{sale.car}"></td>
+							<td th:text="*{sale.professional}"></td>
+							<td th:text="*{sale.price}"></td>
+							
+							<td class="bt-editar"><a
+								class="btn btn-outline-primary btn-sm editar"
+								th:href="@{/controller/sales-operations/edit-sale/} + ${sale.id}">Editar</a></td>
+							<td class="	bt-eliminar"><a
+								class="btn btn-outline-danger btn-sm eliminar"
+								th:href="@{/controller/sales-operations/delete-sale/} + ${sale.id}">Eliminar</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
-
-	</div>
+		
+		<div class="crear">
+			<a class="btn btn-primary" th:href="${createButton}">Crear</a>
+		</div>
 	
-	
-	<div class="crear">
-		<a class="btn btn-primary" th:href="${createButton}">Crear</a>
-	</div>
 	</div>
 
 </body>

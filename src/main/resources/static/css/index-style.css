@@ -191,6 +191,7 @@ table tr th:hover{
 	color: #fff;
 	font-size: 18px;
 	border-radius: 12px;
+	margin-bottom:40px;
 }
 
 .crear a :hover {

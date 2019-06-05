@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css"
 	th:href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/coche-style.css}">
-<title>Coche</title>
+<title>Coches</title>
 </head>
 <body>
 
@@ -48,7 +48,7 @@
 					<label for="inputBastidor" class="col-sm-2 col-form-label">Nº
 						de Bastidor:</label>
 					<div class="col-sm-9">
-						<input type="text" placeholder="Bastidor" pattern="[A-HJ-NPR-Z0_9]{17}" required th:field="*{numBastidor}">
+						<input type="text" placeholder="Bastidor" pattern="[A-HJ-NPR-Z0-9]{17}" required th:field="*{numBastidor}">
 					</div>
 				</div>
 
