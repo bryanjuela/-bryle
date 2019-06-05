@@ -1,15 +1,13 @@
-<div th:fragment="prof">
-	<div class="tab">
-		<div class="btn"><a th:id="${coches}" class="tablinks" th:href="@{/controller/sales-operations/car-list}">Coches</a></div>
-		<div class="btn"><a th:id="${profesionales}" class="tablinks" th:href="@{/controller/professional-operations/professional-list}">Profesionales</a></div>
-		<div class="btn"><a th:id="${ventas}" class="tablinks" th:href="@{/controller/sales-operations/sale-list}">Ventas</a></div>
-		<div class="btn"><a th:id="${bonus}" class="tablinks" th:href="@{/building}">Bonus</a></div> 
-		
-	</div>
-	
-	
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
 
-	<div id="Profesionales" class="tabcontent table-responsive">
+	<!--  <div  th:fragment="prof">-->
+		<div th:fragment="prof" id="Profesionales" class="tabcontent table-responsive">
 		<div class="container">
 			<h1>Profesionales</h1>
 			<table  id="mi-tabla2" class="table table-striped ">
@@ -18,11 +16,11 @@
 						<th>Id</th>
 						<th>Nombre</th>
 						<th>Apellido</th>
-						<th>Dirección</th>
+						<th>DirecciÃ³n</th>
 						<th>Telefono</th>
 						<th>Email</th>
 						<th>DNI</th>
-						<th>Nº Ventas</th>
+						<th>NÂº Ventas</th>
 						
 					</tr>
 				</thead>
@@ -52,11 +50,11 @@
 		</div>
 		
 	</div>
-	
-	<div class="crear">
+	<!-- <div class="crear">
 		<a class="btn btn-primary" th:href="${createButton}">Crear</a>
 	</div>
-
-</div>
-
+	</div> -->
 	
+
+</body>
+</html>

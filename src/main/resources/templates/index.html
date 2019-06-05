@@ -39,7 +39,7 @@
 	</div>
 	
 	
-	
+	-->
 	  		
 	<div class="tab">
 		<div class="btn"><a th:id="${coches}" class="tablinks" th:href="@{/controller/sales-operations/car-list}">Coches</a></div>
@@ -48,7 +48,7 @@
 		<div class="btn"><a th:id="${bonus}" class="tablinks" th:href="@{/building}">Bonus</a></div> 
 		
 	</div> 
-	 -->
+	 
 	
 	<!--  
 	
@@ -192,8 +192,25 @@
 	</div>
  -->
 	
-	<div th:replace="fragments/index-us :: us"></div>
+	<!-- <div th:replace="fragments/index-us :: us"></div> -->
 	
+	
+	<div th:if="${tabFragment == 'coches'}" >
+	<div th:replace="fragments/index-car :: car"></div>
+	</div>
+	
+	<div th:if="${tabFragment == 'profesionales'}" >
+	<div th:replace="fragments/index-prof :: prof"></div>
+	</div>
+	
+	<div th:if="${tabFragment == 'ventas'}" >
+	<div th:replace="fragments/index-sale :: sale"></div>
+	</div>
+	
+	<!-- <div th:case="'profesionales'" th:replace="fragments/index-prof :: prof"></div>
+	
+	<div th:case="'ventas'" th:replace="fragments/index-sale :: sale"></div>
+	</div> -->
 <!-- 
 	<div th:replace="fragments/index-car :: car"></div>
 	

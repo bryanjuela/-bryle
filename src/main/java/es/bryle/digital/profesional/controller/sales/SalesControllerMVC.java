@@ -48,7 +48,7 @@ public class SalesControllerMVC {
 		//ROOT_PATH+"/create-car" -> valor de la variable 
 		model.put("cars", cars);
 		model.put("createButton", ROOT_PATH+"/create-car");
-		model.put("coches", "defaultOpen");
+		model.put("tabFragment", "coches");
 		return "/index";
 	}
 	
@@ -144,7 +144,7 @@ public class SalesControllerMVC {
 		//ROOT_PATH+"/create-sale" -> valor de la variable 
 		model.put("sales", sales);
 		model.put("createButton", ROOT_PATH+"/create-sale");
-		model.put("ventas", "defaultOpen");
+		model.put("tabFragment", "ventas");
 		return "/index";
 	}
 	
@@ -158,11 +158,15 @@ public class SalesControllerMVC {
 		
 		//pasar el listado de coches no vendidos
 		List<CarVO> cars= salesService.getCars();
-		for(CarVO element: cars) {
-			if(element.getEstado().equalsIgnoreCase("vendido"))
-				cars.remove(element);
+		List<CarVO> totalCars= new ArrayList<CarVO>();
+		
+		for(int i= 0; i< cars.size(); i++) {
+			CarVO element= cars.get(i);
+			if(!element.getEstado().equals("Vendido"));
+				totalCars.add(element);
 		}
-		model.addAttribute("cars", cars);
+		
+		model.addAttribute("cars", totalCars);
 		return "/venta";
 	}
 	
