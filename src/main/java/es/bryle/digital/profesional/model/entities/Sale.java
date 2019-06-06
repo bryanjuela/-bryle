@@ -28,7 +28,7 @@ public class Sale {
 	@Column(name = "id")
 	private Long id;
 	
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "sale_date")
 	private Date saleDate;
 

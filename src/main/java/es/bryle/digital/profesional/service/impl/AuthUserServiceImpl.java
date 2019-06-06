@@ -1,5 +1,7 @@
 package es.bryle.digital.profesional.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -10,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.bryle.digital.profesional.model.entities.auth.Role;
 import es.bryle.digital.profesional.model.entities.auth.User;
 import es.bryle.digital.profesional.model.entities.auth.User;
 import es.bryle.digital.profesional.repository.UserRepository;
@@ -63,15 +66,14 @@ public class AuthUserServiceImpl implements AuthUserService{
 
 	@Override
 	public Boolean isEqualRolCurrentUser(String role) {
-		return null;
-	}
-
-	@Override
-	public Object getCurrentUser1() {
-		Authentication auth= SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
-		System.out.println(auth.getName()+"\n"+auth.getAuthorities());
-		return auth.getPrincipal();
+		List<Role> roles= getCurrentUser().getRoles();
+		
+		for(Role element: roles) {
+			if(element.getType().equalsIgnoreCase(role))
+				return true;
+		}
+		
+		return false;
 	}
 
 }
