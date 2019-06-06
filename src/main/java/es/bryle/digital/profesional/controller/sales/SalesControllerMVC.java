@@ -37,6 +37,8 @@ public class SalesControllerMVC {
 	
 	private static final String ROOT_PATH= "/controller/sales-operations";
 	private static final String REDIRECT= "redirect:";
+	private static final String ROLE_PROFESSIONAL= "professional";
+	private static final String ROLE_ADMIN= "admin";
 	
 	
 	@ApiOperation(value = "Recuperación de todos los coches",
@@ -47,9 +49,9 @@ public class SalesControllerMVC {
 		if(cars== null ) 
 			cars= new ArrayList<>();
 		
-		//Ruta para el boton crear de index.html para los coches
-		//createButton -> nombre de la variable
-		//ROOT_PATH+"/create-car" -> valor de la variable 
+		User user= authUserService.getCurrentUser();
+		model.put("role", user.getRoles().get(0));
+		model.put("nombre", user.getProfessional().getFirstName());
 		model.put("cars", cars);
 		model.put("createButton", ROOT_PATH+"/create-car");
 		model.put("tabFragment", "coches");
@@ -139,11 +141,18 @@ public class SalesControllerMVC {
 			notes = "Recupera un listado con todas las ventas de la BD")
 	@RequestMapping(value = "/sale-list", method= RequestMethod.GET)
 	public String getSales(Map<String, Object> model){
-		List<SaleVO> sales= salesService.getAllSales();
-		if(sales== null) 
-			sales= new ArrayList<SaleVO>();
 		User user= authUserService.getCurrentUser();
+		List<SaleVO> sales= null;
+		//Si tiene rol professional, mostrar solo las ventas propias 
+		if(authUserService.isEqualRolCurrentUser(ROLE_PROFESSIONAL))
+			sales= salesService.getCurrentUserSales();
+		if(authUserService.isEqualRolCurrentUser(ROLE_ADMIN))
+			sales= salesService.getAllSales();
+		
+		if(sales== null) sales= new ArrayList<SaleVO>();
+		
 		model.put("role", user.getRoles().get(0));
+		model.put("nombre", user.getProfessional().getFirstName());
 		model.put("sales", sales);
 		model.put("createButton", ROOT_PATH+"/create-sale");
 		model.put("tabFragment", "ventas");
@@ -216,11 +225,15 @@ public class SalesControllerMVC {
 				model.addAttribute("titulo", "Editar Venta");
 				//pasar el listado de coches no vendidos
 				List<CarVO> cars= salesService.getCars();
-				for(CarVO element: cars) {
-					if(element.getEstado().equalsIgnoreCase("vendido"))
-						cars.remove(element);
+				List<CarVO> totalCars= new ArrayList<CarVO>();
+				
+				for(int i= 0; i< cars.size(); i++) {
+					CarVO element= cars.get(i);
+					String estado= element.getEstado();
+					if(!estado.equalsIgnoreCase("Vendido"))
+						totalCars.add(element);
 				}
-				model.addAttribute("cars", cars);
+				model.addAttribute("cars", totalCars);
 				return "/venta";
 			}
 		}

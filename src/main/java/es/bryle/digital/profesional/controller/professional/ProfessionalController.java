@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.bryle.digital.profesional.model.entities.auth.User;
 import es.bryle.digital.profesional.model.vo.ProfessionalVO;
 import es.bryle.digital.profesional.repository.ProfessionaRepository;
+import es.bryle.digital.profesional.service.interfaces.AuthUserService;
 import es.bryle.digital.profesional.service.interfaces.ProfessionalService;
 import es.bryle.digital.profesional.service.interfaces.SalesService;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +29,7 @@ public class ProfessionalController {
 	@Autowired
 	private ProfessionalService professionalService;
 	@Autowired
-	private ProfessionaRepository professionalRepository;
+	private AuthUserService authUserService;
 	
 	
 	private static final String REDIRECT= "redirect:";
@@ -41,9 +43,9 @@ public class ProfessionalController {
 		if(professionals== null) 
 			professionals= new ArrayList<ProfessionalVO>();
 		
-		//Ruta para el boton crear de index.html para los coches
-		//createButton -> nombre de la variable
-		//ROOT_PATH+"/create-comercial" -> valor de la variable
+		User user= authUserService.getCurrentUser();
+		model.put("role", user.getRoles().get(0));
+		model.put("nombre", user.getProfessional().getFirstName());
 		model.put("professionals", professionals);
 		model.put("createButton", ROOT_PATH+"/create-comercial");
 		model.put("tabFragment", "profesionales");

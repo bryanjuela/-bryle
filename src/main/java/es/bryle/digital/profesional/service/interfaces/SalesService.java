@@ -20,6 +20,8 @@ public interface SalesService {
 	
 	List<SaleVO> getAllSales();
 	
+	List<SaleVO> getCurrentUserSales();
+	
 	SaleVO getOneSale(Long id);
 	
 	Integer createCar(CarVO carVO);

@@ -2,6 +2,7 @@ package es.bryle.digital.profesional.model.mapper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,14 @@ public class SaleMapper {
 
 	public  Sale mapper(SaleVO source, Sale target) {
 		if(source.getSaleDate()!= null) {
+			try {
+				String[] time= source.getSaleDate().split("-");
+				String date= time[2]+"-"+time[1]+"-"+time[0];
+				Date newDate= new SimpleDateFormat("dd-MM-yyyy").parse(date);
+				target.setSaleDate(newDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			
 		}	
 		

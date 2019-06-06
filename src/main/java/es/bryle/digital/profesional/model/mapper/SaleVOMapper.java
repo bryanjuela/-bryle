@@ -1,5 +1,7 @@
 package es.bryle.digital.profesional.model.mapper;
 
+import java.text.SimpleDateFormat;
+
 import org.springframework.stereotype.Service;
 
 import es.bryle.digital.profesional.model.entities.Sale;
@@ -26,7 +28,8 @@ public class SaleVOMapper {
 		}
 		
 		if(source.getSaleDate()!= null) {
-			//target.setSaleDate(source.getSaleDate().toString());
+			String date= new SimpleDateFormat("dd-MM-yyyy").format(source.getSaleDate());
+			target.setSaleDate(date);
 		}
 		
 		if(source.getPrice()!= null)

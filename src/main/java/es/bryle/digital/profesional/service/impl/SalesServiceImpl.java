@@ -1,8 +1,10 @@
 package es.bryle.digital.profesional.service.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -131,6 +133,26 @@ public class SalesServiceImpl implements SalesService {
 				totalSales.add(sale);
 			});
 		}
+		
+		return totalSales;
+	}
+	
+	@Override
+	public List<SaleVO> getCurrentUserSales() {
+		Professional professional= authUserService.getCurrentUser().getProfessional();
+		Set<Sale> sales= professional.getSales();
+		List<SaleVO> totalSales= new ArrayList<>();
+		
+		for(Iterator<Sale> it= sales.iterator(); it.hasNext();) {
+			Sale element= it.next();
+			SaleVO saleVO= saleVOMapper.mapper(element);
+			saleVO.setProfessional(element.getProfessional().getFirstName()+ " "+
+					element.getProfessional().getLastName());
+			saleVO.setCar(element.getCar().getNumBastidor()+ " "+
+					element.getCar().getMarca()+" "+element.getCar().getModelo());
+			totalSales.add(saleVO);
+		}
+		
 		
 		return totalSales;
 	}
