@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.bryle.digital.profesional.model.entities.auth.User;
 import es.bryle.digital.profesional.model.vo.CarVO;
 import es.bryle.digital.profesional.model.vo.ProfessionalVO;
 import es.bryle.digital.profesional.model.vo.SaleVO;
+import es.bryle.digital.profesional.service.interfaces.AuthUserService;
 import es.bryle.digital.profesional.service.interfaces.ProfessionalService;
 import es.bryle.digital.profesional.service.interfaces.SalesService;
 import io.swagger.annotations.ApiOperation;
@@ -30,6 +32,8 @@ public class SalesControllerMVC {
 
 	@Autowired
 	private SalesService salesService;
+	@Autowired
+	private AuthUserService authUserService;
 	
 	private static final String ROOT_PATH= "/controller/sales-operations";
 	private static final String REDIRECT= "redirect:";
@@ -138,10 +142,8 @@ public class SalesControllerMVC {
 		List<SaleVO> sales= salesService.getAllSales();
 		if(sales== null) 
 			sales= new ArrayList<SaleVO>();
-		
-		//Ruta para el boton crear de index.html para los coches
-		//createButton -> nombre de la variable
-		//ROOT_PATH+"/create-sale" -> valor de la variable 
+		User user= authUserService.getCurrentUser();
+		model.put("role", user.getRoles().get(0));
 		model.put("sales", sales);
 		model.put("createButton", ROOT_PATH+"/create-sale");
 		model.put("tabFragment", "ventas");
@@ -162,7 +164,8 @@ public class SalesControllerMVC {
 		
 		for(int i= 0; i< cars.size(); i++) {
 			CarVO element= cars.get(i);
-			if(!element.getEstado().equals("Vendido"));
+			String estado= element.getEstado();
+			if(!estado.equalsIgnoreCase("Vendido"))
 				totalCars.add(element);
 		}
 		

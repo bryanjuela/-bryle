@@ -29,7 +29,8 @@
 							<td th:text="*{sale.professional}"></td>
 							<td th:text="*{sale.price}"></td>
 							
-							<td class="bt-editar"><a
+							<!--th:if="${role == 'admin'}"  -->
+							<td  class="bt-editar"><a
 								class="btn btn-outline-primary btn-sm editar"
 								th:href="@{/controller/sales-operations/edit-sale/} + ${sale.id}">Editar</a></td>
 							<td class="	bt-eliminar"><a
