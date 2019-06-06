@@ -6,55 +6,52 @@
 </head>
 <body>
 
-	<!--  <div  th:fragment="prof">-->
-		<div th:fragment="prof" id="Profesionales" class="tabcontent table-responsive">
-		<div class="container">
-			<h1>Profesionales</h1>
-			<table  id="mi-tabla2" class="table table-striped ">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Nombre</th>
-						<th>Apellido</th>
-						<th>Dirección</th>
-						<th>Telefono</th>
-						<th>Email</th>
-						<th>DNI</th>
-						<th>Nº Ventas</th>
-						
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr th:each="professional: ${professionals}">
-						<td th:text="*{professional.id}"></td>
-						<td th:text="*{professional.firstName}"></td>
-						<td th:text="*{professional.lastName}"></td>
-						<td th:text="*{professional.address}"></td>
-						<td th:text="*{professional.phone}"></td>
-						<td th:text="*{professional.user}"></td>
-						<td th:text="*{professional.dni}"></td>
-						<td th:if="*{professional.sales == null}" th:text="0"></td>
-						<td th:unless="*{professional.sales == null}" th:text="*{professional.sales.size()}"></td>
-						
-						
-						<td class="bt-editar"><a
-							class="btn btn-outline-primary btn-sm editar"
-							th:href="@{/controller/professional-operations/edit-professional/} + ${professional.id}">Editar</a></td>
-						<td class="bt-eliminar"><a
-							class="btn btn-outline-danger btn-sm eliminar"
-							th:href="@{/controller/professional-operations/delete-professional/} + ${professional.id} ">Eliminar</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		
-	</div>
-	<!-- <div class="crear">
-		<a class="btn btn-primary" th:href="${createButton}">Crear</a>
-	</div>
-	</div> -->
+	<div  th:fragment="prof">
+		<div id="Profesionales" class="tabcontent table-responsive">
+			<div class="container">
+				<h1>Profesionales</h1>
+				<table  id="mi-tabla2" class="table table-striped">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Dirección</th>
+							<th>Telefono</th>
+							<th>Email</th>
+							<th>DNI</th>
+							<th>Nº Ventas</th>
+						</tr>
+					</thead>
 	
+					<tbody>
+						<tr th:each="professional: ${professionals}">
+							<td th:text="*{professional.id}"></td>
+							<td th:text="*{professional.firstName}"></td>
+							<td th:text="*{professional.lastName}"></td>
+							<td th:text="*{professional.address}"></td>
+							<td th:text="*{professional.phone}"></td>
+							<td th:text="*{professional.user}"></td>
+							<td th:text="*{professional.dni}"></td>
+							<td th:if="*{professional.sales == null}" th:text="0"></td>
+							<td th:unless="*{professional.sales == null}" th:text="*{professional.sales.size()}"></td>
+													
+							<td class="bt-editar"><a
+								class="btn btn-outline-primary btn-sm editar"
+								th:href="@{/controller/professional-operations/edit-professional/} + ${professional.id}">Editar</a></td>
+							<td class="bt-eliminar"><a
+								class="btn btn-outline-danger btn-sm eliminar"
+								th:href="@{/controller/professional-operations/delete-professional/} + ${professional.id} ">Eliminar</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	
+		<div class="crear">
+			<a class="btn btn-primary" th:href="${createButton}">Crear</a>
+		</div>
+	</div>
 
 </body>
 </html>

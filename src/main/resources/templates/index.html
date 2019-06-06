@@ -21,161 +21,16 @@
 	<div class="salir">
 		<a th:href="@{/logout}">Cambiar usuario</a>
 	</div>
-
-	<!--  		
-
-<div class="tab">
-		<a th:ref="#">Nosotros</a>
-		<a th:id="${coches}" class="tablinks" th:href="@{/controller/sales-operations/car-list}">Coches</a>
-		<a th:id="${profesionales}" class="tablinks" th:href="@{/controller/professional-operations/professional-list}">Profesionales</a>
-		<a th:id="${ventas}" class="tablinks" th:href="@{/controller/sales-operations/sale-list}">Ventas</a>
-	</div>
-
-	<div class="tab">
-	 	<button class="tablinks" onclick="openTab(event, 'Bienvenido')" >Nosotros</button>
-	 	<button class="tablinks" onclick="openTab(event, 'Coches')" th:id="${coches}"><a th:href="@{/controller/sales-operations/car-list}">Coches</a></button>
-		<button class="tablinks" onclick="openTab(event, 'Profesionales')" th:id="${profesionales}"><a th:href="@{/controller/professional-operations/professional-list}">Profesionales</a></button>
-		<button class="tablinks" onclick="openTab(event, 'Ventas')" th:id="${ventas}"><a th:href="@{/controller/sales-operations/sale-list}">Ventas</a></button>
-	</div>
-	
-	
-	-->
 	  		
 	<div class="tab">
 		<div class="btn"><a th:id="${coches}" class="tablinks" th:href="@{/controller/sales-operations/car-list}">Coches</a></div>
 		<div class="btn"><a th:id="${profesionales}" class="tablinks" th:href="@{/controller/professional-operations/professional-list}">Profesionales</a></div>
 		<div class="btn"><a th:id="${ventas}" class="tablinks" th:href="@{/controller/sales-operations/sale-list}">Ventas</a></div>
-		<div class="btn"><a th:id="${bonus}" class="tablinks" th:href="@{/building}">Bonus</a></div> 
-		
+		<!-- <div class="btn"><a th:id="${bonus}" class="tablinks" th:href="@{/building}">Bonus</a></div> --> 
 	</div> 
-	 
 	
-	<!--  
 	
-	<div id="Coches" class="tabcontent table-responsive ">
-		<div class="container">
-		<h1>Coches</h1>
-			<table  id="mi-tabla1" class="table table-striped tablesorter">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Marca</th>
-						<th>Modelo</th>
-						<th>Nº Bastidor</th>
-						<th>Año</th>
-						<th>Precio</th>
-						<th>Km</th>
-						<th>Estado</th>
-						
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr th:each="car: ${cars}">
-						<td th:text="*{car.id}"></td>
-						<td th:text="*{car.marca}"></td>
-						<td th:text="*{car.modelo}"></td>
-						<td th:text="*{car.numBastidor}"></td>
-						<td th:text="*{car.anyo}"></td>
-						<td th:text="*{car.precio}"></td>
-						<td th:text="*{car.km}"></td>
-						<td th:text="*{car.estado}"></td>
-						<td class="bt-editar"><a
-							class="btn btn-outline-primary btn-sm editar"
-							th:href="@{/controller/sales-operations/edit-car/} + ${car.id}">Editar</a></td>
-						<td class="	bt-eliminar"><a
-							class="btn btn-outline-danger btn-sm eliminar"
-							th:href="@{/controller/sales-operations/delete-car/} + ${car.id}">Eliminar</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	
-
-	<div id="Profesionales" class="tabcontent table-responsive">
-		<div class="container">
-			<h1>Profesionales</h1>
-			<table  id="mi-tabla2" class="table table-striped ">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Nombre</th>
-						<th>Apellido</th>
-						<th>Dirección</th>
-						<th>Telefono</th>
-						<th>Email</th>
-						<th>DNI</th>
-						<th>Nº Ventas</th>
-						
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr th:each="professional: ${professionals}">
-						<td th:text="*{professional.id}"></td>
-						<td th:text="*{professional.firstName}"></td>
-						<td th:text="*{professional.lastName}"></td>
-						<td th:text="*{professional.address}"></td>
-						<td th:text="*{professional.phone}"></td>
-						<td th:text="*{professional.user}"></td>
-						<td th:text="*{professional.dni}"></td>
-						<td th:if="*{professional.sales == null}" th:text="0"></td>
-						<td th:unless="*{professional.sales == null}" th:text="*{professional.sales.size()}"></td>
-						
-						
-						<td class="bt-editar"><a
-							class="btn btn-outline-primary btn-sm editar"
-							th:href="@{/controller/professional-operations/edit-professional/} + ${professional.id}">Editar</a></td>
-						<td class="bt-eliminar"><a
-							class="btn btn-outline-danger btn-sm eliminar"
-							th:href="@{/controller/professional-operations/delete-professional/} + ${professional.id} ">Eliminar</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-
-	<div id="Ventas" class="tabcontent table-responsive">
-		<h1>Ventas</h1>
-		<div class="container">
-
-			<table id="mi-tabla3" class="table table-striped">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Fecha</th>
-						<th>Coche</th>
-						<th>Profesional</th>
-						<th>Precio</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr th:each="sale: ${sales}">
-						<td th:text="*{sale.id}"></td>
-						<td th:text="*{sale.saleDate}"></td>
-						<td th:text="*{sale.car}"></td>
-						<td th:text="*{sale.professional}"></td>
-						<td th:text="*{sale.price}"></td>
-						<td class="bt-editar"><a
-							class="btn btn-outline-primary btn-sm editar"
-							th:href="@{/controller/sales-operations/edit-sale/} + ${sale.id}">Editar</a></td>
-						<td class="	bt-eliminar"><a
-							class="btn btn-outline-danger btn-sm eliminar"
-							th:href="@{/controller/sales-operations/delete-sale/} + ${sale.id}">Eliminar</a></td>
-					</tr>
-				</tbody>
-			</table>
-
-		</div>
-
-	</div>
-
-  	-->
-
-
-<!-- 
+	<!-- 
 	<div class="tabcontent us">
 			<h1>BIENVENIDO</h1>
 			<div>
@@ -183,17 +38,14 @@
 			</div>
 
 			<div>
-				<p>
-				Aplicación realizada por: <br>
-				<span> Bryan Juela y Elena Méndez.</span>
+				<p>Aplicación realizada por:<br>
+				<span>Bryan Juela y Elena Méndez.</span>
 				</p>
 			</div>
-				
-	</div>
- -->
-	
-	<!-- <div th:replace="fragments/index-us :: us"></div> -->
-	
+		</div>
+	 -->
+
+<!--<div th:replace="fragments/index-us :: us"></div> -->	
 	
 	<div th:if="${tabFragment == 'coches'}" >
 	<div th:replace="fragments/index-car :: car"></div>
@@ -207,48 +59,7 @@
 	<div th:replace="fragments/index-sale :: sale"></div>
 	</div>
 	
-	<!-- <div th:case="'profesionales'" th:replace="fragments/index-prof :: prof"></div>
 	
-	<div th:case="'ventas'" th:replace="fragments/index-sale :: sale"></div>
-	</div> -->
-<!-- 
-	<div th:replace="fragments/index-car :: car"></div>
-	
-	<div th:replace="fragments/index-prof :: prof"></div>
-	
-	<div th:replace="fragments/index-sale :: sale"></div>
- -->
-			
-	
-	
-	
-	
-	
-	
-
- <!-- 
-  <script>
-		function openTab(evt, tabName) {
-			var i, tabcontent, tablinks;
-			tabcontent = document.getElementsByClassName("tabcontent");
-			for (i = 0; i < tabcontent.length; i++) {
-				tabcontent[i].style.display = "none";
-			}
-			tablinks = document.getElementsByClassName("tablinks");
-			for (i = 0; i < tablinks.length; i++) {
-				tablinks[i].className = tablinks[i].className.replace(
-						" active", "");
-			}
-			document.getElementById(tabName).style.display = "block";
-			evt.currentTarget.className += " active";
-		}
-
-		// Get the element with id="defaultOpen" and click on it
-		document.getElementById("defaultOpen").click();
-	</script>
-  -->
-  
-
 
 </body>
 </html>
