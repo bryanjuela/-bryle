@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}"> 
+	
+<title></title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/noAutorizado.css}">
+
+</head>
+<body>
+
+<div class="container">
+		<div class="signal">
+			<img src="senal-prohibido-pasar.jpg" alt="prohibido">
+		</div>
+		<div class="mensaje">
+			<p>USTED NO ESTÁ AUTORIZADO<br>PARA REALIZAR ESTA OPERACIÓN</p>
+			<a th:href="@{/logout}">Volver atrás</a>
+		</div>
+	</div>
+
+
+
+
+
+</body>
+</html>

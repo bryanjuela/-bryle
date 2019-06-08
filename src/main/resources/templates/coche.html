@@ -5,6 +5,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}"> 
+	
 <link rel="stylesheet" type="text/css"
 	th:href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/coche-style.css}">
@@ -30,25 +32,31 @@
 
 				<input type="hidden" th:field="*{id}" />
 
+
 				<div class="form-group row">
 					<label for="inputMarca" class="col-sm-2 col-form-label">Marca:</label>
-					<div class="col-sm-9">
-						<input type="text" placeholder="Marca" required autofocus th:field="*{marca}">
+					<div class="col-sm-8">
+						<input type="text" placeholder="Marca" required autofocus
+							th:field="*{marca}">
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="inputModelo" class="col-sm-2 col-form-label">Modelo:</label>
-					<div class="col-sm-9">
-						<input type="text" placeholder="Modelo" required th:field="*{modelo}">
+					<div class="col-sm-8">
+						<input type="text" placeholder="Modelo" required
+							th:field="*{modelo}">
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="inputBastidor" class="col-sm-2 col-form-label">Nº
 						de Bastidor:</label>
-					<div class="col-sm-9">
-						<input type="text" placeholder="Bastidor" pattern="[A-HJ-NPR-Z0-9]{17}" required th:field="*{numBastidor}">
+					<div class="col-sm-8">
+						<input type="text" th:if="${titulo == 'Nuevo Coche'}" placeholder="Bastidor"
+							pattern="[A-HJ-NPR-Z0-9]{17}" required th:field="*{numBastidor}" title="El nº de bastidor consta de 17 caracteres (números y letras, a excepción de las letras I, Ñ, O y P)">
+						<input type="text" th:if="${titulo == 'Editar coche'}" disabled placeholder="Bastidor"
+							pattern="[A-HJ-NPR-Z0-9]{17}" required th:field="*{numBastidor}" title="El nº de bastidor consta de 17 caracteres (números y letras, a excepción de las letras I, Ñ, O y P)">
 					</div>
 				</div>
 
@@ -56,29 +64,39 @@
 					<label for="inputAnyo" class="col-sm-2 col-form-label">Año
 						de fabricación:</label>
 					<div class="col-sm-3">
-						<input type="number" required min="2010-01-01" max="2020-01-01" th:field="*{anyo}" placeholder="Año">
+						<input type="number" th:if="${titulo == 'Nuevo Coche'}" required min="2000" max="2019"
+							th:field="*{anyo}" placeholder="Año">
+						<input type="number" th:if="${titulo == 'Editar coche'}" disabled required min="2000" max="2019"
+							th:field="*{anyo}" placeholder="Año">
 					</div>
-					<label for="inputKm" class="col-sm-2 col-form-label offset-md-1">Km:</label>
+					<label for="inputKm" class="col-sm-2 col-form-label">Km:</label>
 					<div class="col-sm-3">
-						<input type="number" placeholder="Km" min="0" max="999999" th:field="*{km}">
-					</div> 
+						<input type="number" placeholder="Km" min="0" max="999999"
+							th:field="*{km}">
+					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="inputPrecio" class="col-sm-2 col-form-label">Precio:</label>
 					<div class="col-sm-3">
-						<input type="number" placeholder="Precio" min="0" max="999999" th:field="*{precio}">
+						<input type="number" placeholder="Precio" min="0" max="999999"
+							th:field="*{precio}">
 					</div>
 					<label for="inputEstado"
-						class="col-sm-2 col-form-label offset-md-1">Estado:</label>
+						class="col-sm-2 col-form-label">Estado:</label>
 					<div class="col-sm-3">
-						<select id="inputState" class="form-control" th:field="*{estado}" >
+						<select id="inputState" class="form-control" th:field="*{estado}">
 							<option value="" disabled selected>Seleccionar</option>
-							<option value="nuevo">Nuevo</option>
-							<option value="usado">2ª Mano</option>
+							<option value="Nuevo">Nuevo</option>
+							<option value="2ª Mano">2ª Mano</option>
 						</select>
 					</div>
 
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label"></label>
+					<label th:if="${titulo == 'Editar Coche'}" class="col-sm-8 col-form-label nota">No puede modificar el Nº de Bastidor ni el Año de fabricación</label>
+					
 				</div>
 
 				<!--botonera-->

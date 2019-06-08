@@ -1,163 +1,136 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
+
 body {
-  line-height: 1;
+	background: #000;
 }
-ol, ul {
-  list-style: none;
-}
-blockquote, q {
-  quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-
-
-/****************************************************************************************************/
-
-
-
 
 .box {
-  position: relative;
-  display: block;
-  float: left;
-  width: 95%; 
-  height: 470px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background: #000;
-  color: #fff;
-  top: 50%;
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  padding: 70px 30px;
-  font-family: sans-serif;
-
+	position: relative;
+	display: block;
+	float: left;
+	width: 95%;
+	height: 470px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background: #000;
+	color: #fff;
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	padding: 70px 30px;
+	font-family: sans-serif;
 }
 
 .box .avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  position: absolute;
-  top: -50px;
-  left: calc(50% - 50px);
-  background: #fff;
-  
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	position: absolute;
+	top: -50px;
+	left: calc(50% - 50px);
+	background: #fff;
 }
 
 .box h1 {
-  margin: 0;
-  padding: 0 0 20px;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
+	margin: 0;
+	padding: 0 0 20px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
 }
-
 
 .box input {
-  width: 100%;
-  margin-bottom: 20px;
-
+	width: 100%;
+	margin-bottom: 20px;
 }
 
-.box input[type="text"]{
-  border: none;
-  border-bottom: 1px solid #fff;
-  background: transparent;
-  outline: none;
-  height: 40px;
-  color: #fff;
-  font-size: 16px;
+.box input[type="text"] {
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	color: #fff;
+	font-size: 16px;
 }
 
-.box a, input[type="reset"], input[type="submit"]{
-  border: none;
-  outline: none;
-  width: 20%;
-  height: 40px;
-  background: #b80f22;
-  color: #fff;
-  font-size: 18px;
-  border-radius: 12px;
+.box a, input[type="reset"], input[type="submit"] {
+	border: none;
+	outline: none;
+	width: 20%;
+	height: 40px;
+	background: #b80f22;
+	color: #fff;
+	font-size: 18px;
+	border-radius: 12px;
 }
 
-.box a:hover , input[type="reset"]:hover , input[type="submit"] {
-  cursor: pointer;
-  background: #0c06c9;
-  color: #000;
+.box a:hover, input[type="reset"]:hover, input[type="submit"] {
+	cursor: pointer;
+	background: #0c06c9;
+	color: #000;
+}
+
+.formulario{
+	padding-left:200px;
 }
 
 /*botones*/
-.box .aceptar input{
-  position: relative;
-  float: left;
-  width: 100px;
-  margin-right: 20px;
-  margin-bottom:10px;
-
+.botonera {
+	position: relative;
+	float: right;
+	width: 200px;
+	margin-right: 50px;
+	margin-top: -225px;
 }
 
-
-.box .limpiar input{
-  position: relative;
-  float: left;
-  width: 100px;
+.aceptar input {
+	position: relative;
+	float: left;
+	width: 100%;
+	color: #fff;
+	border: none;
+	font-weight: bold;
 }
 
-.box .cancelar a{
-  position: relative;
-  float: right;
-  width: 100px;
-  margin-bottom: 10px;
+.aceptar input:hover {
+	background: #b80f22;
+	color: #000;
 }
 
-.box .botonera {
-  position: relative;
-  float: right;
-  width: 220px;
-  margin-top: 50px;
-  margin-right: 10px;
+.limpiar input {
+	position: relative;
+	float: left;
+	width: 100%;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	color: #fff;
+	background: #0c06c9;
+	border: none;
+	font-weight: bold;
 }
 
+.limpiar input:hover {
+	background: #b80f22;
+	color: #000;
+}
+
+.cancelar a {
+	position: relative;
+	float: left;
+	width: 100%;
+	border-radius: 12px;
+	color: #fff;
+	background: #b80f22;
+	border: none;
+	font-weight: bold;
+}
+
+.cancelar a:hover {
+	background: #0c06c9;
+	color: #000;
+}
 
 
 /******************************  MOVIL  ******************************/

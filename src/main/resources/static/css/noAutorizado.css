@@ -1,0 +1,33 @@
+.container{
+	position: absolute;
+	transform: translate(-50%, -50%);
+	padding: 70px 30px;
+	font-family: sans-serif;
+	width: 50%;
+	height: 400px;
+	
+	background: #000;
+	color: #fff;
+	top: 50%;
+	left: 50%;
+} 
+	
+.signal{
+	width: 100%;
+}
+
+.signal img{
+	display:block;
+	margin:auto;
+}
+.mensaje p{
+	 text-align: center;
+	  font-size: 1em; 
+	  line-height: 1.5em; 
+	  font-weight:bold;
+}
+
+.mensaje a{
+	text-decoration: none; 
+	color:#0066CC"
+}
