@@ -21,6 +21,9 @@
 	<div class="salir">
 		<a th:href="@{/logout}">Cambiar usuario</a>
 	</div>
+	 
+	 <div class="alert alert-danger" th:if="${error != null}"
+			th:text="${error}"></div>
 	  		
 	<div class="tab">
 		<div class="btn"><a th:id="${coches}" class="tablinks" th:href="@{/controller/sales-operations/car-list}">Coches</a></div>
