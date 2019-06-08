@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.bryle.digital.profesional.model.entities.auth.User;
 import es.bryle.digital.profesional.model.vo.CarVO;
@@ -61,11 +62,17 @@ public class SalesControllerMVC {
 	@ApiOperation(value = "Formulario de coche",
 			notes = "Redirecciona a la vista para crear un nuevo coche")
 	@RequestMapping(value = "/create-car", method= RequestMethod.GET)
-	public String createCar(Map<String, Object> model) {
-		CarVO carVO= new CarVO();
-		model.put("carVO", carVO);
-		model.put("titulo", "Nuevo Coche");
-		return "/coche";
+	public String createCar(Map<String, Object> model, RedirectAttributes flash) {
+		if(authUserService.isEqualRolCurrentUser(ROLE_PROFESSIONAL)) {
+			CarVO carVO= new CarVO();
+			model.put("carVO", carVO);
+			model.put("titulo", "Nuevo Coche");
+			return "/coche";
+		}else {
+			flash.addFlashAttribute("error", "Lo sentimos admin, no tienes permisos para crear un coche");
+			return  REDIRECT+ROOT_PATH+"/car-list";
+		}
+		
 	}
 	
 	
@@ -101,40 +108,50 @@ public class SalesControllerMVC {
 	@ApiOperation(value = "Eliminacion de un coche",
 			notes = "Elimina el coche de la BD ")
 	@RequestMapping(value = "/delete-car/{id}")
-	public String deleteCar(@PathVariable("id")Long id, Model model){
-		
-		if(id!= null && id> 0) {
-			Integer result= salesService.deleteCar(id);
-			if(result== 1)
-				return REDIRECT+ROOT_PATH+"/car-list";
-			
-			//PAGINA DE ERROR
-			if(result== -1) {
-				model.addAttribute("mensaje", "CAR ID NOT FOUND");
-				 model.addAttribute("redirectPage", ROOT_PATH+"/car-list");
-				return "/error_404";
-			}	
+	public String deleteCar(@PathVariable("id")Long id, Model model, RedirectAttributes flash){
+		if(authUserService.isEqualRolCurrentUser(ROLE_PROFESSIONAL)) {
+			if(id!= null && id> 0) {
+				Integer result= salesService.deleteCar(id);
+				if(result== 1)
+					return REDIRECT+ROOT_PATH+"/car-list";
+				
+				//PAGINA DE ERROR
+				if(result== -1) {
+					model.addAttribute("mensaje", "CAR ID NOT FOUND");
+					 model.addAttribute("redirectPage", ROOT_PATH+"/car-list");
+					return "/error_404";
+				}	
+			}
+			return REDIRECT+ROOT_PATH+"/car-list";
+		}else {
+			flash.addFlashAttribute("error", "Lo sentimos admin, no tienes permisos para eliminar un coche");
+			return  REDIRECT+ROOT_PATH+"/car-list";
 		}
-		return REDIRECT+ROOT_PATH+"/car-list";
+		
 	}
 	
 	
 	@ApiOperation(value = "Edición de un coche",
 			notes = "Redirecciona a la vista de coches con los datos del coche seleccionado")
 	@RequestMapping(value = "/edit-car/{id}")
-	public String editCar(@PathVariable("id")Long id, Model model){
-		
-		if(id!= null && id> 0) {
-			CarVO carVO= salesService.getOneCar(id);
-			if(carVO!= null) {
-				model.addAttribute("carVO", carVO);
-				model.addAttribute("titulo", "Editar coche");
-				return "/coche";
+	public String editCar(@PathVariable("id")Long id, Model model, RedirectAttributes flash){
+		if(authUserService.isEqualRolCurrentUser(ROLE_PROFESSIONAL)) {
+			if(id!= null && id> 0) {
+				CarVO carVO= salesService.getOneCar(id);
+				if(carVO!= null) {
+					model.addAttribute("carVO", carVO);
+					model.addAttribute("titulo", "Editar coche");
+					return "/coche";
+				}
 			}
+			 model.addAttribute("mensaje", "CAR ID NOT FOUND");
+			 model.addAttribute("redirectPage", ROOT_PATH+"/car-list");
+			return "/error_404";
+		}else {
+			flash.addFlashAttribute("error", "Lo sentimos admin, no tienes permisos para editar un coche");
+			return  REDIRECT+ROOT_PATH+"/car-list";
 		}
-		 model.addAttribute("mensaje", "CAR ID NOT FOUND");
-		 model.addAttribute("redirectPage", ROOT_PATH+"/car-list");
-		return "/error_404";
+		
 	}
 
 	@ApiOperation(value = "Recuperación de todas las ventas",
@@ -162,29 +179,34 @@ public class SalesControllerMVC {
 	@ApiOperation(value = "Formulario de venta",
 			notes = "Redirecciona a la vista para crear una nueva venta")
 	@RequestMapping(value = "/create-sale", method= RequestMethod.GET)
-	public String createSale(Model model) {
-		SaleVO saleVO= new SaleVO();
-		model.addAttribute("saleVO", saleVO);
-		model.addAttribute("titulo", "Nueva venta");
-		
-		//pasar el listado de coches no vendidos
-		List<CarVO> cars= salesService.getCars();
-		List<CarVO> totalCars= new ArrayList<CarVO>();
-		
-		for(int i= 0; i< cars.size(); i++) {
-			CarVO element= cars.get(i);
-			String estado= element.getEstado();
-			if(!estado.equalsIgnoreCase("Vendido"))
-				totalCars.add(element);
+	public String createSale(Model model, RedirectAttributes flash) {
+		if(authUserService.isEqualRolCurrentUser(ROLE_PROFESSIONAL)) {
+			SaleVO saleVO= new SaleVO();
+			model.addAttribute("saleVO", saleVO);
+			model.addAttribute("titulo", "Nueva venta");
+			
+			//pasar el listado de coches no vendidos
+			List<CarVO> cars= salesService.getCars();
+			List<CarVO> totalCars= new ArrayList<CarVO>();
+			
+			for(int i= 0; i< cars.size(); i++) {
+				CarVO element= cars.get(i);
+				String estado= element.getEstado();
+				if(!estado.equalsIgnoreCase("Vendido"))
+					totalCars.add(element);
+			}
+			
+			model.addAttribute("cars", totalCars);
+			return "/venta";
+		}else {
+			flash.addFlashAttribute("error", "Lo sentimos admin, no tienes permisos para crear una venta");
+			return  REDIRECT+ROOT_PATH+"/sale-list";
 		}
-		
-		model.addAttribute("cars", totalCars);
-		return "/venta";
 	}
 	
 	@ApiOperation(value = "Creación o edición de una venta",
 			notes = "Crea o edita una venta en la BD")
-	@RequestMapping(value = "/sale", method= RequestMethod.POST)
+	@RequestMapping(value = "/sale")
 	public String saveSale(@Valid SaleVO saleVO, Model model){
 		
 		if(saleVO!= null) {
@@ -216,51 +238,61 @@ public class SalesControllerMVC {
 	@ApiOperation(value = "Edición de una venta",
 			notes = "Redirecciona a la vista de ventas con los datos de la Venta seleccionado")
 	@RequestMapping(value = "/edit-sale/{id}")
-	public String editSale(@PathVariable("id")Long id, Model model){
-		
-		if(id!= null && id> 0) {
-			SaleVO saleVO= salesService.getOneSale(id);
-			if(saleVO!= null) {
-				model.addAttribute("saleVO", saleVO);
-				model.addAttribute("titulo", "Editar Venta");
-				//pasar el listado de coches no vendidos
-				List<CarVO> cars= salesService.getCars();
-				List<CarVO> totalCars= new ArrayList<CarVO>();
-				
-				for(int i= 0; i< cars.size(); i++) {
-					CarVO element= cars.get(i);
-					String estado= element.getEstado();
-					if(!estado.equalsIgnoreCase("Vendido"))
-						totalCars.add(element);
+	public String editSale(@PathVariable("id")Long id, Model model, RedirectAttributes flash){
+		if(authUserService.isEqualRolCurrentUser(ROLE_PROFESSIONAL)) {
+			if(id!= null && id> 0) {
+				SaleVO saleVO= salesService.getOneSale(id);
+				if(saleVO!= null) {
+					model.addAttribute("saleVO", saleVO);
+					model.addAttribute("titulo", "Editar Venta");
+					//pasar el listado de coches no vendidos
+					List<CarVO> cars= salesService.getCars();
+					List<CarVO> totalCars= new ArrayList<CarVO>();
+					
+					for(int i= 0; i< cars.size(); i++) {
+						CarVO element= cars.get(i);
+						String estado= element.getEstado();
+						if(!estado.equalsIgnoreCase("Vendido"))
+							totalCars.add(element);
+					}
+					model.addAttribute("cars", totalCars);
+					return "/venta";
 				}
-				model.addAttribute("cars", totalCars);
-				return "/venta";
 			}
+			 model.addAttribute("mensaje", "SALE ID NOT FOUND");
+			 model.addAttribute("redirectPage", ROOT_PATH+"/sale-list");
+			return "/error_404";
+		}else {
+			flash.addFlashAttribute("error", "Lo sentimos admin, no tienes permisos para editar una venta");
+			return  REDIRECT+ROOT_PATH+"/sale-list";
 		}
-		 model.addAttribute("mensaje", "SALE ID NOT FOUND");
-		 model.addAttribute("redirectPage", ROOT_PATH+"/sale-list");
-		return "/error_404";
+		
 	}
 	
 	
 	@ApiOperation(value = "Eliminacion de una venta",
 			notes = "Elimina ls venta de la BD y vuelve a cargar la página de ventas")
 	@RequestMapping(value = "/delete-sale/{id}")
-	public String deleteSale(@PathVariable("id")Long id, Model model){
-		
-		if(id!= null && id> 0) {
-			Integer result= salesService.deleteSale(id);
-			if(result== 1)
-				return REDIRECT+ROOT_PATH+"/sale-list";
-			
-			//PAGINA DE ERROR
-			 if(result== -1) {
-				 model.addAttribute("mensaje", "SALE ID NOT FOUND");
-				 model.addAttribute("redirectPage", ROOT_PATH+"/sale-list");
-				 return "/error_404";
-			 }	 
+	public String deleteSale(@PathVariable("id")Long id, Model model, RedirectAttributes flash){
+		if(authUserService.isEqualRolCurrentUser(ROLE_PROFESSIONAL)) {
+			if(id!= null && id> 0) {
+				Integer result= salesService.deleteSale(id);
+				if(result== 1)
+					return REDIRECT+ROOT_PATH+"/sale-list";
+				
+				//PAGINA DE ERROR
+				 if(result== -1) {
+					 model.addAttribute("mensaje", "SALE ID NOT FOUND");
+					 model.addAttribute("redirectPage", ROOT_PATH+"/sale-list");
+					 return "/error_404";
+				 }	 
+			}
+			return REDIRECT+ROOT_PATH+"/sale-list";
+		}else {
+			flash.addFlashAttribute("error", "Lo sentimos admin, no tienes permisos para eliminar una venta");
+			return  REDIRECT+ROOT_PATH+"/sale-list";
 		}
-		return REDIRECT+ROOT_PATH+"/sale-list";
+		
 	}
 	
 }

@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.bryle.digital.profesional.model.entities.auth.User;
 import es.bryle.digital.profesional.model.vo.ProfessionalVO;
@@ -34,11 +37,13 @@ public class ProfessionalController {
 	
 	private static final String REDIRECT= "redirect:";
 	private static final String ROOT_PATH= "/controller/professional-operations";
+	private static final String ROLE_PROFESSIONAL= "professional";
+	private static final String ROLE_ADMIN= "admin";
 	
 	@ApiOperation(value = "Recuperación de todos los profesionales",
 			notes = "Recupera un listado con todos los profesionales de la BD")
 	@RequestMapping(value = "/professional-list", method= RequestMethod.GET)
-	public String getProfessionals(Map<String, Object> model){
+	public String getProfessionals(Map<String, Object> model, HttpServletRequest request){
 		List<ProfessionalVO> professionals= professionalService.getProfessionals();
 		if(professionals== null) 
 			professionals= new ArrayList<ProfessionalVO>();
@@ -55,11 +60,16 @@ public class ProfessionalController {
 	@ApiOperation(value = "Formulario de profesional",
 			notes = "Redirecciona a la vista para crear un nuevo profesional")
 	@RequestMapping(value = "/create-comercial", method= RequestMethod.GET)
-	public String newProfessional(Map<String, Object> model) {
-		ProfessionalVO professionalVO= new ProfessionalVO();
-		model.put("professionalVO", professionalVO);
-		model.put("titulo", "Nuevo Comercial");
-		return "/comercial";
+	public String newProfessional(Map<String, Object> model, RedirectAttributes flash) {
+		if(authUserService.isEqualRolCurrentUser(ROLE_ADMIN)) {
+			ProfessionalVO professionalVO= new ProfessionalVO();
+			model.put("professionalVO", professionalVO);
+			model.put("titulo", "Nuevo Comercial");
+			return "/comercial";
+		}else {
+			flash.addFlashAttribute("error", "Lo sentimos, no tienes permisos para crear un profesional.");
+			return REDIRECT+ROOT_PATH+"/professional-list";
+		}
 	}
 	
 	@ApiOperation(value = "Creación o edición de un profesional",
@@ -100,37 +110,44 @@ public class ProfessionalController {
 	@ApiOperation(value = "Eliminacion de un profesional",
 			notes = "Elimina al profesional y todas sus ventas de la BD ")
 	@RequestMapping(value = "/delete-professional/{id}")
-	public String deleteProfessional(@PathVariable("id")Long id, Model model){
-		
-		if(id!= null && id> 0) {
-			Integer result= professionalService.deleteProfessional(id);
-			if(result== 1)
-				return  REDIRECT+ROOT_PATH+"/professional-list";
-			//PAGINA DE ERROR
-			if(result== -1 || result== -2) {//volver a cargar la página
-				 model.addAttribute("mensaje", "PROFESSIONAL ID NOT FOUND");
-				 model.addAttribute("redirectPage", ROOT_PATH+"/professional-list");
-				return "/error_404";
-			}	
+	public String deleteProfessional(@PathVariable("id")Long id, Model model, RedirectAttributes flash){
+		if(authUserService.isEqualRolCurrentUser(ROLE_ADMIN)) {
+			if(id!= null && id> 0) {
+				Integer result= professionalService.deleteProfessional(id);
+				if(result== 1)
+					return  REDIRECT+ROOT_PATH+"/professional-list";
+				//PAGINA DE ERROR
+				if(result== -1 || result== -2) {//volver a cargar la página
+					 model.addAttribute("mensaje", "PROFESSIONAL ID NOT FOUND");
+					 model.addAttribute("redirectPage", ROOT_PATH+"/professional-list");
+					return "/error_404";
+				}	
+			}
+			return  REDIRECT+ROOT_PATH+"/professional-list";
 		}
+		flash.addFlashAttribute("error", "Lo sentimos, no tienes permisos para eliminar un profesional");
 		return  REDIRECT+ROOT_PATH+"/professional-list";
 	}
 	
 	@ApiOperation(value = "Edición de un profesional",
 			notes = "Redirecciona a la vista del comercial con los datos del comercial seleccionado")
 	@RequestMapping(value = "/edit-professional/{id}")
-	public String editProfessional(@PathVariable("id")Long id, Model model){
+	public String editProfessional(@PathVariable("id")Long id, Model model, RedirectAttributes flash){
 		
-		if(id!= null && id> 0) {
-			ProfessionalVO professionalVO= professionalService.getProfessional(id);
-			if(professionalVO!= null) {
-				model.addAttribute("professionalVO", professionalVO);
-				model.addAttribute("titulo", "Editar Comercial");
-				return "/comercial";
+		if(authUserService.isEqualRolCurrentUser(ROLE_ADMIN)) {
+			if(id!= null && id> 0) {
+				ProfessionalVO professionalVO= professionalService.getProfessional(id);
+				if(professionalVO!= null) {
+					model.addAttribute("professionalVO", professionalVO);
+					model.addAttribute("titulo", "Editar Comercial");
+					return "/comercial";
+				}
 			}
+			 model.addAttribute("mensaje", "PROFESSIONAL ID NOT FOUND");
+			 model.addAttribute("redirectPage", ROOT_PATH+"/professional-list");
+			return "/error_404";
 		}
-		 model.addAttribute("mensaje", "PROFESSIONAL ID NOT FOUND");
-		 model.addAttribute("redirectPage", ROOT_PATH+"/professional-list");
-		return "/error_404";
+		flash.addFlashAttribute("error", "Lo sentimos, no tienes permisos para editar un profesional");
+		return  REDIRECT+ROOT_PATH+"/professional-list";
 	}
 }
