@@ -7,11 +7,12 @@
 <body>
 
 	<div  th:fragment="car">
+		<h1>Coches</h1>
 		<div id="Coches" class="tabcontent table-responsive ">
 			<div class="container">
-				<h1>Coches</h1>
-				<table  id="mi-tabla1" class="table table-striped">
-					<thead>
+				
+				<table id="mi-tabla1" class="table table-striped table-hover tableFixHead">
+					<thead class="thead-dark">
 						<tr>
 							<th>Id</th>
 							<th>Marca</th>
@@ -21,6 +22,8 @@
 							<th>Precio</th>
 							<th>Km</th>
 							<th>Estado</th>
+							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 	

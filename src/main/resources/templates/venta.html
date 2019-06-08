@@ -22,12 +22,13 @@
 		</div>	
 
 		<!--Campos-->
+		<div class="formulario">
 		<form  th:action="@{/controller/sales-operations/sale}" method="post" th:object="${saleVO}">
 				
-			<div class="form-group row">
+			<div class="form-group row align-self-center">
 				<input type="hidden" th:field="*{id}"/>
-				<label for="inputBastidor" class="col-sm-2 col-form-label">Nº de Bastidor:</label>
-				<div class="col-sm-9">
+				<label for="inputBastidor" class="col-md-2 col-form-label">Nº de Bastidor:</label>
+				<div class="col-md-6">
 				<!-- <input type="text" th:field="*{car}"/> -->
 				<select id="inputState" class="form-control" th:field="*{car}">
        					<option value="" disabled selected>Seleccionar</option>
@@ -37,16 +38,19 @@
 			</div>
 
 			<div class="form-group row">
-				<label for="inputAnyo" class="col-sm-2 col-form-label">Fecha de venta:</label>
-				<div class="col-sm-3">
+				<label for="inputAnyo" class="col-md-2 col-form-label">Fecha de venta:</label>
+				<div class="col-md-6">
            			<input type="date"  required th:field="*{saleDate}">
 				</div>
-				<label for="inputAnyo" class="col-sm-2 col-form-label offset-md-1">Precio de venta:</label>
-				<div class="col-sm-3">
-           			<input type="number" placeholder="Precio" th:field="*{price}">
+				
+			</div>
+			
+			<div class="form-group row">
+				<label for="inputAnyo" class="col-md-2 col-form-label">Precio de venta:</label>
+				<div class="col-md-6">
+           			<input type="number" placeholder="Precio" th:field="*{price}" min="0" max="999999">
 				</div>
 			</div>
-					
 			<!--botonera-->
 			<div class="botonera" >
 				<div class="aceptar">
@@ -62,6 +66,7 @@
 			
             
 		</form>
+		</div>
 	</div>
 	
 

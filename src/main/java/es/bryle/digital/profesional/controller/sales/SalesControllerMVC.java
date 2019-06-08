@@ -122,7 +122,7 @@ public class SalesControllerMVC {
 			CarVO carVO= salesService.getOneCar(id);
 			if(carVO!= null) {
 				model.addAttribute("carVO", carVO);
-				model.addAttribute("titulo", "Editar coche");
+				model.addAttribute("titulo", "Editar Coche");
 				return "/coche";
 			}
 		}

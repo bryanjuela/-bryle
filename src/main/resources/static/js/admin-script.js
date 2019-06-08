@@ -8,4 +8,3 @@ $(function(){
 	  $('#mi-tabla3').tablesorter(); 
 	});
 
-

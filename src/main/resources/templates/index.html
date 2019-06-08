@@ -9,26 +9,30 @@
 
 <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/admin-script.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.fixedtableheader.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery.tablesorter.min.js}"></script>
 
 </head>
 <body>
 
-	<div class="banner">
-		<img th:src="@{/images/banner2.jpg}" alt="banner">
-	</div>
 
 	<div class="salir">
 		<a th:href="@{/logout}">Cambiar usuario</a>
 	</div>
-	  		
-	<div class="tab">
-		<div class="btn"><a th:id="${coches}" class="tablinks" th:href="@{/controller/sales-operations/car-list}">Coches</a></div>
-		<div class="btn"><a th:id="${profesionales}" class="tablinks" th:href="@{/controller/professional-operations/professional-list}">Profesionales</a></div>
-		<div class="btn"><a th:id="${ventas}" class="tablinks" th:href="@{/controller/sales-operations/sale-list}">Ventas</a></div>
-		<!-- <div class="btn"><a th:id="${bonus}" class="tablinks" th:href="@{/building}">Bonus</a></div> --> 
-	</div> 
 	
+	<div class="banner">
+		<img th:src="@{/images/banner.jpg}" alt="banner">
+	</div>
+
+	
+		
+	<div class="tab">
+		<div class="tablinks tabsup"><a th:id="${us}">Nosotros</a></div>
+		<div class="tablinks"><a th:id="${coches}" th:href="@{/controller/sales-operations/car-list}">Coches</a></div>
+		<div class="tablinks"><a th:id="${profesionales}" th:href="@{/controller/professional-operations/professional-list}">Profesionales</a></div>
+		<div class="tablinks"><a th:id="${ventas}" th:href="@{/controller/sales-operations/sale-list}">Ventas</a></div>
+		<div class="tablinks"><a th:id="${bonus}">Bonus</a></div>
+	</div> 
 	
 	<!-- 
 	<div class="tabcontent us">
@@ -58,6 +62,7 @@
 	<div th:if="${tabFragment == 'ventas'}" >
 	<div th:replace="fragments/index-sale :: sale"></div>
 	</div>
+	
 	
 	
 
