@@ -29,14 +29,11 @@ public class AuthUserController {
 			notes = "Si no está logeado, manda a la página de login")
 	@RequestMapping(value= "/login", method = RequestMethod.GET)
 	public String login(Authentication principal) {
-		System.out.println("login adfsadfd");
 		
 		if(principal!= null) {
-			System.out.println("Principal: "+principal.getName());
-			return REDIRECT+"/controller/professional-operations/professional-list";
+			return REDIRECT+"/home";
 		}	
 		
-		System.out.println("nada");
 		return "login";
 	}
 	
