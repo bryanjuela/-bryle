@@ -49,7 +49,7 @@ public class ProfessionalController {
 			professionals= new ArrayList<ProfessionalVO>();
 		
 		User user= authUserService.getCurrentUser();
-		model.put("role", user.getRoles().get(0));
+		model.put("role", user.getRoles().get(0).getType());
 		model.put("nombre", user.getProfessional().getFirstName());
 		model.put("professionals", professionals);
 		model.put("createButton", ROOT_PATH+"/create-comercial");
