@@ -21,7 +21,8 @@
 <body>
 
 	<div class="banner">
-		<img th:src="@{/images/banner2.jpg}" alt="banner">
+		<span class="logo"><img th:src="@{/images/logo.png}" alt="banner"></span>
+		<span class="i8"><img th:src="@{/images/banner2.jpg}" alt="banner"></span>
 	</div>
 
 
@@ -45,7 +46,7 @@
 
 	<div class="tab">
 		<div class="tablinks tabsup">
-			<a th:id="${home}">Nosotros</a>
+			<a th:id="${home}" th:href="@{/home}">Nosotros</a>
 		</div>
 		<div class="tablinks">
 			<a th:id="${coches}"
@@ -60,7 +61,7 @@
 				th:href="@{/controller/sales-operations/sale-list}">Ventas</a>
 		</div>
 		<div class="tablinks">
-			<a th:id="${bonus}">Bonus</a>
+			<a th:id="${bonus}" th:href="@{/bonus}">Bonus</a>
 		</div>
 	</div>
 
