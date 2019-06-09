@@ -7,6 +7,9 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}"> 
 	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">  
 	<link rel="stylesheet" type="text/css" th:href="@{/css/venta-style.css}">  
+	<link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">  
+	
+	
 	<title>Ventas</title>
 </head>
 <body>
@@ -64,12 +67,10 @@
   					<a class="btn btn-primary" th:href="@{/controller/sales-operations/sale-list}" role="button">Cancelar</a> 
 				</div>
 			</div>
-			
-            
 		</form>
+		<div th:replace="fragments/index-footer :: footer"></div>
 	</div>
 	
-
 </div>
 
 	

@@ -10,6 +10,8 @@
 <link rel="stylesheet" type="text/css"
 	th:href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/coche-style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">  
+
 <title>Coches</title>
 </head>
 <body>
@@ -115,6 +117,8 @@
 
 
 			</form>
+			<div th:replace="fragments/index-footer :: footer"></div>
+			
 		</div>
 
 
