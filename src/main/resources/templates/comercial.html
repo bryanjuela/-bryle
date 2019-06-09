@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}"> 
+	
 <title>Profesionales</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/css/bootstrap.min.css}">
@@ -29,7 +31,7 @@
 
 				<div class="form-group row">
 					<label for="inputNombre" class="col-sm-2 col-form-label">Nombre:</label>
-					<div class="col-sm-9">
+					<div class="col-sm-8">
 						<input type="text" placeholder="Nombre"
 							pattern="[a-zA-ZáÁéÉíÍóÓúÚñÑ '-]{2,25}"
 							title="El nombre puede contener un máximo de 25 letras" required
@@ -39,7 +41,7 @@
 
 				<div class="form-group row">
 					<label for="inputApellido" class="col-sm-2 col-form-label">Apellido:</label>
-					<div class="col-sm-9">
+					<div class="col-sm-8">
 						<input type="text" placeholder="Apellido"
 							pattern="[a-zA-ZáÁéÉíÍóÓúÚñÑ '-]{2,50}"
 							title="El apellido puede contener un máximo de 50 letras"
@@ -49,15 +51,15 @@
 
 				<div class="form-group row">
 					<label for="inputDireccion" class="col-sm-2 col-form-label">Dirección:</label>
-					<div class="col-sm-9">
+					<div class="col-sm-8">
 						<input type="text" placeholder="Dirección" th:field="*{address}">
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="inputTelefono" class="col-sm-2 col-form-label">Teléfono:</label>
-					<div class="col-sm-9">
-						<input type="number" placeholder="Teléfono"
+					<div class="col-sm-8">
+						<input type="number" placeholder="Teléfono" min="600000000" max="999999999"
 							pattern="^[9|8|7|6]\d{8}$"
 							title="Teléfono (9 dígitos comenzando por 9, 8, 7 o 6)"
 							th:field="*{phone}">
@@ -66,19 +68,29 @@
 
 				<div class="form-group row">
 					<label for="inputDNI" class="col-sm-2 col-form-label">DNI:</label>
-					<div class="col-sm-9">
-						<input type="text" placeholder="DNI/NIE" required
-							pattern="((\d{8}[A-ZÑ])||([XYZ]\d{7,8}[A-Z]))" th:field="*{dni}">
+					<div class="col-sm-8">
+						<input type="text" th:if="${titulo == 'Nuevo Comercial'}" placeholder="DNI/NIE" required
+							pattern="((\d{8}[A-ZÑ])||([XYZ]\d{7}[A-Z]))" th:field="*{dni}" title="DNI: 8 números y 1 letra mayuscula / NIE: X, Y o Z, 7 números y 1 letra mayuscula">
+						<input type="text" th:if="${titulo == 'Editar Comercial'}" disabled placeholder="DNI/NIE" required
+							pattern="((\d{8}[A-ZÑ])||([XYZ]\d{7,8}[A-Z]))" th:field="*{dni}" title="DNI: 8 números y 1 letra mayuscula / NIE: X, Y o Z, 7 números y 1 letra mayuscula">
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
-					<div class="col-sm-9">
-						<input type="email" placeholder="Email" required
+					<div class="col-sm-8">
+						<input type="email" th:if="${titulo == 'Nuevo Comercial'}" placeholder="Email" required
 							pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
-							th:field="*{user}">
+							th:field="*{user}" title="nombre@domino.extensión">
+						<input type="email" th:if="${titulo == 'Editar Comercial'}" disabled placeholder="Email" required
+							pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+							th:field="*{user}" title="nombre@domino.extensión">
 					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label"></label>
+					<label th:if="${titulo == 'Editar Comercial'}" class="col-sm-8 col-form-label nota">No puede modificar el Email ni el DNI</label>
+					
 				</div>
 
 				<!--botonera-->
