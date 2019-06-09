@@ -55,7 +55,7 @@
 					<div class="col-sm-8">
 						<input type="text" th:if="${titulo == 'Nuevo Coche'}" placeholder="Bastidor"
 							pattern="[A-HJ-NPR-Z0-9]{17}" required th:field="*{numBastidor}" title="El nº de bastidor consta de 17 caracteres (números y letras, a excepción de las letras I, Ñ, O y P)">
-						<input type="text" th:if="${titulo == 'Editar coche'}" disabled placeholder="Bastidor"
+						<input type="text" th:if="${titulo == 'Editar Coche'}" readonly placeholder="Bastidor"
 							pattern="[A-HJ-NPR-Z0-9]{17}" required th:field="*{numBastidor}" title="El nº de bastidor consta de 17 caracteres (números y letras, a excepción de las letras I, Ñ, O y P)">
 					</div>
 				</div>
@@ -66,7 +66,7 @@
 					<div class="col-sm-3">
 						<input type="number" th:if="${titulo == 'Nuevo Coche'}" required min="2000" max="2019"
 							th:field="*{anyo}" placeholder="Año">
-						<input type="number" th:if="${titulo == 'Editar coche'}" disabled required min="2000" max="2019"
+						<input type="number" th:if="${titulo == 'Editar coche'}" readonly required min="2000" max="2019"
 							th:field="*{anyo}" placeholder="Año">
 					</div>
 					<label for="inputKm" class="col-sm-2 col-form-label">Km:</label>
