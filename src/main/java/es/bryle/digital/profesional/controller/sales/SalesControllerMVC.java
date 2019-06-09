@@ -51,7 +51,7 @@ public class SalesControllerMVC {
 			cars= new ArrayList<>();
 		
 		User user= authUserService.getCurrentUser();
-		model.put("role", user.getRoles().get(0));
+		model.put("role", user.getRoles().get(0).getType());
 		model.put("nombre", user.getProfessional().getFirstName());
 		model.put("cars", cars);
 		model.put("createButton", ROOT_PATH+"/create-car");
@@ -168,7 +168,7 @@ public class SalesControllerMVC {
 		
 		if(sales== null) sales= new ArrayList<SaleVO>();
 		
-		model.put("role", user.getRoles().get(0));
+		model.put("role", user.getRoles().get(0).getType());
 		model.put("nombre", user.getProfessional().getFirstName());
 		model.put("sales", sales);
 		model.put("createButton", ROOT_PATH+"/create-sale");
