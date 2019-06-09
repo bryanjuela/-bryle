@@ -39,10 +39,10 @@
 							<td th:if="*{professional.sales == null}" th:text="0"></td>
 							<td th:unless="*{professional.sales == null}" th:text="*{professional.sales.size()}"></td>
 													
-							<td class="bt-editar"><a
+							<td class="bt-editar" th:if="${role == 'admin'}" ><a
 								class="btn btn-outline-primary btn-sm editar"
 								th:href="@{/controller/professional-operations/edit-professional/} + ${professional.id}">Editar</a></td>
-							<td class="bt-eliminar"><a
+							<td class="bt-eliminar" th:if="${role == 'admin'}" ><a
 								class="btn btn-outline-danger btn-sm eliminar"
 								th:href="@{/controller/professional-operations/delete-professional/} + ${professional.id} ">Eliminar</a></td>
 						</tr>
@@ -51,7 +51,7 @@
 			</div>
 		</div>
 	
-		<div class="crear">
+		<div class="crear" th:if="${role == 'admin'}" >
 			<a class="btn btn-primary" th:href="${createButton}">Crear</a>
 		</div>
 	</div>

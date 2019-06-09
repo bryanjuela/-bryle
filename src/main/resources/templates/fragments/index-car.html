@@ -38,10 +38,10 @@
 							<td th:text="*{car.km}"></td>
 							<td th:text="*{car.estado}"></td>
 							
-							<td class="bt-editar"><a
+							<td class="bt-editar" th:if="${role == 'professional'}"><a
 								class="btn btn-outline-primary btn-sm editar"
 								th:href="@{/controller/sales-operations/edit-car/} + ${car.id}">Editar</a></td>
-							<td class="	bt-eliminar"><a
+							<td class="	bt-eliminar" th:if="${role == 'professional'}"><a
 								class="btn btn-outline-danger btn-sm eliminar"
 								th:href="@{/controller/sales-operations/delete-car/} + ${car.id}">Eliminar</a></td>
 						</tr>
@@ -50,7 +50,7 @@
 			</div>
 		</div>
 
-		<div class="crear">
+		<div class="crear" th:if="${role == 'professional'}">
 			<a class="btn btn-primary" th:href="${createButton}">Crear</a>
 		</div>
 	</div>
