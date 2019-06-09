@@ -29,6 +29,18 @@ body {
 	background:#b80f22;
 }
 
+.mensaje{
+	display:block;
+	width:100%;
+	text-align:center
+}
+
+
+ .mensaje img{
+ width:5%;
+ }
+
+
 .alert-danger {
     color: #920318;
     background-color: #e1dfff;
@@ -173,6 +185,7 @@ table tr th:hover{
 .crear {
 	position: relative;
 	float: right;
+	width: 100%;
 	padding-top: 30px;
 	padding-bottom: 30px;
 	padding-right: 45px;
