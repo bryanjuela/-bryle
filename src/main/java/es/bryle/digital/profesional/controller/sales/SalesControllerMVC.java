@@ -79,7 +79,7 @@ public class SalesControllerMVC {
 	@ApiOperation(value = "Creación o edición de un nuevo coche",
 			notes = "Crea o edita un coche en la BD")
 	@RequestMapping(value = "/car", method= RequestMethod.POST)
-	public String saveCar(@Valid CarVO carVO, Model model){
+	public String saveCar(@Valid CarVO carVO, Model model, RedirectAttributes flash){
 		
 		if(carVO!= null) {
 			Integer result; 
@@ -95,8 +95,10 @@ public class SalesControllerMVC {
 			
 			if(result== 1)
 				return REDIRECT+ROOT_PATH+"/car-list";
-			if(result== -1 || result== -2)
+			if(result== -1 || result== -2) {
+				flash.addFlashAttribute("warning", "El número de bastidor ya existe");
 				return REDIRECT+ROOT_PATH+ redirectPage;
+			}	
 		}
 		model.addAttribute("mensaje", "CAR ERROR");
 		model.addAttribute("redirectPage", ROOT_PATH+"/car-list");
