@@ -16,6 +16,14 @@
 </head>
 <body>
 
+	<div class="mensaje">
+		<span><img th:if="${warning != null}"
+			th:src="@{/images/warning.png}" alt="prohibido"></span>
+		<span class="alert alert-danger" th:if="${warning != null}"
+			th:text="${warning}"></span> <span><img th:if="${warning != null}"
+			th:src="@{/images/warning.png}" alt="prohibido"></span>
+	</div>
+	
 	<div class="container-fluid">
 
 
@@ -68,7 +76,7 @@
 					<div class="col-sm-3">
 						<input type="number" th:if="${titulo == 'Nuevo Coche'}" required min="2000" max="2019"
 							th:field="*{anyo}" placeholder="Año">
-						<input type="number" th:if="${titulo == 'Editar coche'}" readonly required min="2000" max="2019"
+						<input type="number" th:if="${titulo == 'Editar Coche'}" readonly required min="2000" max="2019"
 							th:field="*{anyo}" placeholder="Año">
 					</div>
 					<label for="inputKm" class="col-sm-2 col-form-label">Km:</label>
@@ -97,7 +105,7 @@
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
-					<label th:if="${titulo == 'Editar Coche'}" class="col-sm-8 col-form-label nota">No puede modificar el Nº de Bastidor ni el Año de fabricación</label>
+					<label th:if="${titulo == 'Editar Coche'}" class="col-sm-8 col-form-label nota" Style="text-align:center;">No puede modificar el Nº de Bastidor ni el Año de fabricación</label>
 					
 				</div>
 

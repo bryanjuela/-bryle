@@ -48,7 +48,8 @@ body {
 .mensaje{
 	display:block;
 	width:100%;
-	text-align:center
+	text-align:center;
+	padding-left:15%;
 }
 
 

@@ -18,10 +18,10 @@
 
 	<div class="mensaje">
 		<span><img th:if="${warning != null}"
-			th:src="@{/images/senal-prohibido-pasar.jpg}" alt="prohibido"></span>
+			th:src="@{/images/warning.png}" alt="prohibido"></span>
 		<span class="alert alert-danger" th:if="${warning != null}"
 			th:text="${warning}"></span> <span><img th:if="${warning != null}"
-			th:src="@{/images/senal-prohibido-pasar.jpg}" alt="prohibido"></span>
+			th:src="@{/images/warning.png}" alt="prohibido"></span>
 	</div>
 	
 	<div class="container-fluid">
@@ -98,7 +98,7 @@
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
-					<label th:if="${titulo == 'Editar Comercial'}" class="col-sm-8 col-form-label nota">No puede modificar el Email ni el DNI</label>
+					<label th:if="${titulo == 'Editar Comercial'}" class="col-sm-8 col-form-label nota" Style="text-align:center;">No puede modificar el Email ni el DNI</label>
 					
 				</div>
 
