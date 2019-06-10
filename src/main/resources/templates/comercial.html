@@ -16,7 +16,14 @@
 </head>
 <body>
 
-
+	<div class="mensaje">
+		<span><img th:if="${warning != null}"
+			th:src="@{/images/senal-prohibido-pasar.jpg}" alt="prohibido"></span>
+		<span class="alert alert-danger" th:if="${warning != null}"
+			th:text="${warning}"></span> <span><img th:if="${warning != null}"
+			th:src="@{/images/senal-prohibido-pasar.jpg}" alt="prohibido"></span>
+	</div>
+	
 	<div class="container-fluid">
 
 		<div class="box">

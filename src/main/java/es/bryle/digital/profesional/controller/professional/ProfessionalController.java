@@ -45,10 +45,24 @@ public class ProfessionalController {
 	@RequestMapping(value = "/professional-list", method= RequestMethod.GET)
 	public String getProfessionals(Map<String, Object> model, HttpServletRequest request){
 		List<ProfessionalVO> professionals= professionalService.getProfessionals();
+		List<ProfessionalVO> totalProfessional= new ArrayList<ProfessionalVO>();
+		User user= authUserService.getCurrentUser();
+		
+		if(authUserService.isEqualRolCurrentUser(ROLE_ADMIN)) {
+			for(int i= 0; i< professionals.size(); i++) {
+				ProfessionalVO element= professionals.get(i);
+				if(element.getUser()!= user.getEmail())
+					totalProfessional.add(element);
+			}
+			professionals.clear();
+			professionals.addAll(totalProfessional);
+		}
+		
+		
 		if(professionals== null) 
 			professionals= new ArrayList<ProfessionalVO>();
 		
-		User user= authUserService.getCurrentUser();
+		
 		model.put("role", user.getRoles().get(0).getType());
 		model.put("nombre", user.getProfessional().getFirstName());
 		model.put("professionals", professionals);
@@ -76,7 +90,7 @@ public class ProfessionalController {
 			notes = "Crear o edita un usuario con el rol de 'USER'")
 	@RequestMapping(value = "/professional")
 	public String createProfessional(@Valid ProfessionalVO professionalVO, 
-			final BindingResult bindingResult, Model model){
+			final BindingResult bindingResult, Model model, RedirectAttributes flash){
 		
 		if(!bindingResult.hasErrors()) {
 			if(professionalVO== null){
@@ -98,8 +112,10 @@ public class ProfessionalController {
 				
 			if(result== 1) //todo correcto
 				return REDIRECT+ROOT_PATH+ "/professional-list";
-			if(result== -1 || result== -2)//volver a cargar la página
+			if(result== -1 || result== -2) {//volver a cargar la página
+				flash.addFlashAttribute("warning", "El email o dni ya existe");
 				return REDIRECT+ROOT_PATH+ redirectPage;
+			}	
 		}
 		
 		model.addAttribute("mensaje", "PROFESSIONAL ERROR");
