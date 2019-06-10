@@ -95,11 +95,14 @@ img{
 
 
 @media (max-width: 700px){
+	
+
   body{
     background: #000000;
   }
   
   .box{
+  margin-top:150px;
     width: 100%;
   }
 

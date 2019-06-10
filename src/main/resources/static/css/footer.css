@@ -1,0 +1,21 @@
+.footer{
+	background-color: #000;
+	text-align: center;
+	padding-bottom: 30px;
+	padding-top: 30px;
+}
+
+
+.footer img{
+	margin-top:40px;
+	padding-left: 55px;
+	padding-right: 55px;
+	width: 10%;
+}
+
+.footer p{
+	padding-top: 20px;
+	color: #fff;
+	text-align: center;
+}
+

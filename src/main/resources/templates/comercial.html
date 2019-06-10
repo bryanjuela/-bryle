@@ -11,6 +11,8 @@
 	th:href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" type="text/css"
 	th:href="@{/css/comercial-style.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">  
+	
 </head>
 <body>
 
@@ -110,6 +112,8 @@
 				</div>
 
 			</form>
+			<div th:replace="fragments/index-footer :: footer"></div>
+			
 		</div>
 
 
