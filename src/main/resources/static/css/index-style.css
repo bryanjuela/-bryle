@@ -277,41 +277,131 @@ table tr th:hover{
 /*****************************************  MOVIL  ********************/
 @media ( max-width : 700px) {
 	
-	
-	/*
-	
-	.banner img {
-		width: 100%;
-		height: 80px;
+	.i8 {
+		display:none
 	}
-	.tab {
+	.logo{
 		position: relative;
 		display: block;
 		float: left;
-		width: 100%;
-		height: 70px;
-		background: #000;
+		width:100%;
+		text-align:center;
+		padding:auto;
+		margin:auto;
 	}
-	.tab button {
-		width: 32.5%;
-		text-align: center;
+	.logo img{
+		width: 25%;
+		margin-bottom:20px;
 	}
-	.tab button.active {
-		background-color: #ddd;
-		color: black;
-		font: 500 18px Helvetica, sans-serif;
-		font-weight: bold;
-		padding-bottom: 40px;
-		padding-left: 2px;
+	
+		
+	.dropdown{
+	width:100%;
+	padding:0;
+	margin:0;
+	text-align:center
+	
 	}
-	.tabcontent {
-		width: 100%;
+	
+	.dropdown button{
+	width:60%;
 	}
-	.tabcontent h1 {
+	
+	
+	
+	.tab{
+		position: relative;
 		display: block;
-		display: none;
+		float: left;
+		width:100%;
+		height: 60px;
+		margin-top:20px;
+		text-align:center;
+		padding:auto;
+		
 	}
-	*/
+	
+	.tab .tablinks{
+	position:relative;
+	display: inline;
+	width:20%;
+	margin:0 ;
+	padding:0;
+	}
+	
+
+.tab .tablinks a {
+	position:relative;
+	display: block;
+	float: left;
+	background: #000;
+	color: #3366BB;
+	width: 100%;
+	border: none;
+	outline: none;
+	text-align: center;
+	cursor: pointer;
+	transition: 0.3s;
+	font: 18px Helvetica, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	margin:0 ;
+	padding:0;
+}
+
+.tab a:hover {
+	color:  #fff;
+	font-weight: bold;
+}
+
+.tab a:active {
+	color: #fff;
+	font-weight: bold;
+}
+		
+	
+	.tabcontent {
+	position:relative;
+	display: block;
+	float: left;
+	width: 100%;
+	}
+	h1 {
+	position:relative;
+	display: block;
+	float: left;
+	width: 100%;
+	margin:0 ;
+	padding:0;
+	padding-bottom:20px;
+	text-align:center;
+	}
+
+.crear{
+	position:relative;
+	display: block;
+	float: left;
+	width: 100%;
+	margin:0 ;
+	padding:0;
+	text-align:center;
+}
+ .crear a{
+margin-top:20px;
+width:60%;
+
+ }
+ 
+ 
+ .us{
+ 
+ padding-top:60px;
+ }
+ 
+ .us img{
+ 	width:40%;
+ }
+
 }
 
 

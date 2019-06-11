@@ -30,19 +30,26 @@
 				
 			<div class="form-group row align-self-center">
 				<input type="hidden" th:field="*{id}"/>
-				<label for="inputBastidor" class="col-md-2 col-form-label">Nº de Bastidor:</label>
-				<div class="col-md-6">
-				<!-- <input type="text" th:field="*{car}"/> -->
-				<select id="inputState" class="form-control" th:field="*{car}">
+				<label for="inputBastidor" class="col-md-2 col-form-label">Coche:</label>
+				
+				 <div class="col-md-7" th:if="${titulo == 'Nueva Venta'}">
+					<select id="inputState" class="form-control" th:field="*{car}">
        					<option value="" disabled selected>Seleccionar</option>
-        				<option th:each="bastidor: ${cars}" th:value="${bastidor.id}" th:text="${bastidor.numBastidor + ' - ' + bastidor.marca + ' ' + bastidor.modelo + ' - Precio inicial: ' + bastidor.precio}"></option>
+        				<option th:each="bastidor: ${cars}" th:value="${bastidor.id}" th:text="${bastidor.marca + ' ' + bastidor.modelo + ' - Precio inicial: ' + bastidor.precio}"></option>
+     				</select>
+				</div>
+				
+				<div class="col-md-7" th:if="${titulo == 'Editar Venta'}">
+					
+					<select id="inputState" class="form-control" th:field="*{car}">
+       					
      				</select>
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="inputAnyo" class="col-md-2 col-form-label">Fecha de venta:</label>
-				<div class="col-md-6">
+				<div class="col-md-7">
            			<input type="date"  required th:field="*{saleDate}">
 				</div>
 				
@@ -50,7 +57,7 @@
 			
 			<div class="form-group row">
 				<label for="inputAnyo" class="col-md-2 col-form-label">Precio de venta:</label>
-				<div class="col-md-6">
+				<div class="col-md-7">
            			<input type="number" placeholder="Precio" th:field="*{price}" min="0" max="999999">
 				</div>
 			</div>
