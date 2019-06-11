@@ -185,7 +185,7 @@ public class SalesControllerMVC {
 		if(authUserService.isEqualRolCurrentUser(ROLE_PROFESSIONAL)) {
 			SaleVO saleVO= new SaleVO();
 			model.addAttribute("saleVO", saleVO);
-			model.addAttribute("titulo", "Nueva venta");
+			model.addAttribute("titulo", "Nueva Venta");
 			
 			//pasar el listado de coches no vendidos
 			List<CarVO> cars= salesService.getCars();

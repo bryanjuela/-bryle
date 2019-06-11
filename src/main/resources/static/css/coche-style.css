@@ -3,6 +3,27 @@ body {
 	background: #000;
 }
 
+
+.mensaje{
+	display:block;
+	width:100%;
+	text-align:center;
+}
+
+
+ .mensaje img{
+ width:5%;
+ }
+
+
+.alert-danger {
+    color: #920318;
+    background-color: #e1dfff;
+    border-color: #f5c6cb;
+    text-align:center;
+    font-weight: bold;
+}
+
 .box {
 	display: block;
 	float: left;
