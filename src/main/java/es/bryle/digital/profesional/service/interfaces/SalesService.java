@@ -22,6 +22,8 @@ public interface SalesService {
 	
 	List<SaleVO> getCurrentUserSales();
 	
+	boolean belongSale(Long id);
+	
 	SaleVO getOneSale(Long id);
 	
 	Integer createCar(CarVO carVO);

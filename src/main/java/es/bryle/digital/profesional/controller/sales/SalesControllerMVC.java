@@ -7,23 +7,17 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.bryle.digital.profesional.model.entities.auth.User;
 import es.bryle.digital.profesional.model.vo.CarVO;
-import es.bryle.digital.profesional.model.vo.ProfessionalVO;
 import es.bryle.digital.profesional.model.vo.SaleVO;
 import es.bryle.digital.profesional.service.interfaces.AuthUserService;
-import es.bryle.digital.profesional.service.interfaces.ProfessionalService;
 import es.bryle.digital.profesional.service.interfaces.SalesService;
 import io.swagger.annotations.ApiOperation;
 
@@ -102,7 +96,7 @@ public class SalesControllerMVC {
 		}
 		model.addAttribute("mensaje", "CAR ERROR");
 		model.addAttribute("redirectPage", ROOT_PATH+"/car-list");
-		return "/error_404";
+		return "/error";
 	}
 	
 	
@@ -121,7 +115,7 @@ public class SalesControllerMVC {
 				if(result== -1) {
 					model.addAttribute("mensaje", "CAR ID NOT FOUND");
 					 model.addAttribute("redirectPage", ROOT_PATH+"/car-list");
-					return "/error_404";
+					return "/error";
 				}	
 			}
 			return REDIRECT+ROOT_PATH+"/car-list";
@@ -148,7 +142,7 @@ public class SalesControllerMVC {
 			}
 			 model.addAttribute("mensaje", "CAR ID NOT FOUND");
 			 model.addAttribute("redirectPage", ROOT_PATH+"/car-list");
-			return "/error_404";
+			return "/error";
 		}else {
 			flash.addFlashAttribute("error", "Lo sentimos admin, no tienes permisos para editar un coche");
 			return  REDIRECT+ROOT_PATH+"/car-list";
@@ -233,7 +227,7 @@ public class SalesControllerMVC {
 		//error
 		model.addAttribute("mensaje", "SALE ERROR");
 		model.addAttribute("redirectPage", ROOT_PATH+"/sale-list");
-		return "/error_404";
+		return "/error";
 	}
 	
 	
@@ -243,27 +237,35 @@ public class SalesControllerMVC {
 	public String editSale(@PathVariable("id")Long id, Model model, RedirectAttributes flash){
 		if(authUserService.isEqualRolCurrentUser(ROLE_PROFESSIONAL)) {
 			if(id!= null && id> 0) {
-				SaleVO saleVO= salesService.getOneSale(id);
-				if(saleVO!= null) {
-					model.addAttribute("saleVO", saleVO);
-					model.addAttribute("titulo", "Editar Venta");
-					//pasar el listado de coches no vendidos
-					List<CarVO> cars= salesService.getCars();
-					List<CarVO> totalCars= new ArrayList<CarVO>();
-					
-					for(int i= 0; i< cars.size(); i++) {
-						CarVO element= cars.get(i);
-						String estado= element.getEstado();
-						if(!estado.equalsIgnoreCase("Vendido"))
-							totalCars.add(element);
+				
+					SaleVO saleVO= salesService.getOneSale(id);
+					if(saleVO!= null) {
+						
+						if(salesService.belongSale(id)) {
+							model.addAttribute("saleVO", saleVO);
+							model.addAttribute("titulo", "Editar Venta");
+							//pasar el listado de coches no vendidos
+							List<CarVO> cars= salesService.getCars();
+							List<CarVO> totalCars= new ArrayList<CarVO>();
+							
+							for(int i= 0; i< cars.size(); i++) {
+								CarVO element= cars.get(i);
+								String estado= element.getEstado();
+								if(!estado.equalsIgnoreCase("Vendido"))
+									totalCars.add(element);
+							}
+							model.addAttribute("cars", totalCars);
+							return "/venta";
+						}else {
+							flash.addFlashAttribute("error", "Lo sentimos, no puedes editar esta venta porque no te pertenece");
+							return  REDIRECT+ROOT_PATH+"/sale-list";
+						}
 					}
-					model.addAttribute("cars", totalCars);
-					return "/venta";
-				}
+				
 			}
 			 model.addAttribute("mensaje", "SALE ID NOT FOUND");
 			 model.addAttribute("redirectPage", ROOT_PATH+"/sale-list");
-			return "/error_404";
+			return "/error";
 		}else {
 			flash.addFlashAttribute("error", "Lo sentimos admin, no tienes permisos para editar una venta");
 			return  REDIRECT+ROOT_PATH+"/sale-list";
@@ -278,16 +280,23 @@ public class SalesControllerMVC {
 	public String deleteSale(@PathVariable("id")Long id, Model model, RedirectAttributes flash){
 		if(authUserService.isEqualRolCurrentUser(ROLE_PROFESSIONAL)) {
 			if(id!= null && id> 0) {
-				Integer result= salesService.deleteSale(id);
-				if(result== 1)
-					return REDIRECT+ROOT_PATH+"/sale-list";
 				
-				//PAGINA DE ERROR
-				 if(result== -1) {
-					 model.addAttribute("mensaje", "SALE ID NOT FOUND");
-					 model.addAttribute("redirectPage", ROOT_PATH+"/sale-list");
-					 return "/error_404";
-				 }	 
+					Integer result= salesService.deleteSale(id);
+					if(result== 1)
+						return REDIRECT+ROOT_PATH+"/sale-list";
+					
+					//PAGINA DE ERROR
+					 if(result== -1) {
+						 model.addAttribute("mensaje", "SALE ID NOT FOUND");
+						 model.addAttribute("redirectPage", ROOT_PATH+"/sale-list");
+						 return "/error";
+					 }
+					 
+					 if(result== -2) {
+						 flash.addFlashAttribute("error", "Lo sentimos, no puedes eliminar esta venta porque no te pertenece");
+							return  REDIRECT+ROOT_PATH+"/sale-list";
+					 }
+					 
 			}
 			return REDIRECT+ROOT_PATH+"/sale-list";
 		}else {

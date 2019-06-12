@@ -120,7 +120,7 @@ public class ProfessionalController {
 		
 		model.addAttribute("mensaje", "PROFESSIONAL ERROR");
 		model.addAttribute("redirectPage", ROOT_PATH+"/professional-list");
-		return "/error_404";
+		return "/error";
 	}
 	
 	@ApiOperation(value = "Eliminacion de un profesional",
@@ -136,7 +136,7 @@ public class ProfessionalController {
 				if(result== -1 || result== -2) {//volver a cargar la página
 					 model.addAttribute("mensaje", "PROFESSIONAL ID NOT FOUND");
 					 model.addAttribute("redirectPage", ROOT_PATH+"/professional-list");
-					return "/error_404";
+					return "/error";
 				}	
 			}
 			return  REDIRECT+ROOT_PATH+"/professional-list";
@@ -161,7 +161,7 @@ public class ProfessionalController {
 			}
 			 model.addAttribute("mensaje", "PROFESSIONAL ID NOT FOUND");
 			 model.addAttribute("redirectPage", ROOT_PATH+"/professional-list");
-			return "/error_404";
+			return "/error";
 		}
 		flash.addFlashAttribute("error", "Lo sentimos, no tienes permisos para editar un profesional");
 		return  REDIRECT+ROOT_PATH+"/professional-list";

@@ -24,10 +24,12 @@
 		<div class="notfound">
 			<div class="notfound-404">
 				<h1>404</h1>
-				<h2 th:text="${mensaje}"></h2>
+				<h2 th:if="${mensaje!= null}" th:text="${mensaje}"></h2>
+				<h2 th:if="${mensaje== null}">SORRY PAGE NOT FOUND</h2>
 			</div>
 			
-			<a th:href="${redirectPage}">Homepage</a>
+			<a th:if="${redirectPage != null}" th:href="${redirectPage}">Homepage</a>
+			<a th:if="${redirectPage == null}" th:href="@{/login}">Homepage</a>
 		</div>
 	</div>
 
