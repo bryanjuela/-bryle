@@ -14,18 +14,13 @@ import es.bryle.digital.profesional.model.entities.Professional;
 import es.bryle.digital.profesional.model.entities.Sale;
 import es.bryle.digital.profesional.model.mapper.CarMapper;
 import es.bryle.digital.profesional.model.mapper.CarVOMapper;
-import es.bryle.digital.profesional.model.mapper.ProfessionalMapper;
-import es.bryle.digital.profesional.model.mapper.ProfessionalVOMapper;
 import es.bryle.digital.profesional.model.mapper.SaleMapper;
 import es.bryle.digital.profesional.model.mapper.SaleVOMapper;
 import es.bryle.digital.profesional.model.vo.CarVO;
 import es.bryle.digital.profesional.model.vo.SaleVO;
-import es.bryle.digital.profesional.repository.AuthorityRepository;
 import es.bryle.digital.profesional.repository.CarRepository;
 import es.bryle.digital.profesional.repository.ProfessionaRepository;
-import es.bryle.digital.profesional.repository.RoleRepository;
 import es.bryle.digital.profesional.repository.SaleRepository;
-import es.bryle.digital.profesional.repository.UserRepository;
 import es.bryle.digital.profesional.service.interfaces.AuthUserService;
 import es.bryle.digital.profesional.service.interfaces.SalesService;
 
@@ -33,17 +28,11 @@ import es.bryle.digital.profesional.service.interfaces.SalesService;
 public class SalesServiceImpl implements SalesService {
 
 	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private RoleRepository roleRepository;
-	@Autowired
 	private ProfessionaRepository professionalRepository;
 	@Autowired 
 	private CarRepository carRepository;
 	@Autowired
 	private SaleRepository saleRepository;
-	@Autowired
-	private AuthorityRepository authorityRepository;
 	@Autowired
 	private CarMapper carMapper;
 	@Autowired
@@ -77,13 +66,25 @@ public class SalesServiceImpl implements SalesService {
 
 	@Override
 	public Integer deleteSale(Long id) {
+		//comprobar que la venta a eliminar pertenezca al profesional
+		
+		
 		Optional<Sale> sale= saleRepository.findById(id);
 
 		if(sale.isPresent()) {
-			Professional professional= sale.get().getProfessional();
-			professional.getSales().remove(sale.get());			
-			professionalRepository.save(professional);
-			return 1;
+			if(belongSale(id)) {
+				Sale saleDelete= sale.get();
+				Professional professional= saleDelete.getProfessional();
+				saleDelete.setProfessional(null);
+				
+				professional.getSales().remove(saleDelete);
+				
+				saleRepository.save(saleDelete);
+				professionalRepository.save(professional);
+				
+				return 1;
+			}
+			return -2;
 		}
 		return -1;
 	}
@@ -197,7 +198,6 @@ public class SalesServiceImpl implements SalesService {
 			else {
 				Sale sale= existCar.get().getSale();
 				Professional professional= sale.getProfessional();
-				System.out.println("Borrar coche: "+professional.getSales().size());
 				sale.setProfessional(null);
 								
 				professional.getSales().remove(sale);
@@ -250,6 +250,18 @@ public class SalesServiceImpl implements SalesService {
 			return carVOMapper.mapper(car.get());
 		}
 		return null;
+	}
+	
+	@Override
+	public boolean belongSale(Long idSale) {
+		List<SaleVO> sales= getCurrentUserSales();
+		
+		for(SaleVO element: sales) {
+			if(element.getId()== idSale)
+				return true;
+		}
+		
+		return false;
 	}
 
 }
