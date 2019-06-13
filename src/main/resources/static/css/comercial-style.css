@@ -9,7 +9,7 @@ body {
 	float: left;
 	width: 95%;
 	height: 550px;
-	margin-top: 10px;
+	margin-top: 20px;
 	margin-bottom: 10px;
 	color: #fff;
 	top: 50%;
@@ -93,7 +93,7 @@ body {
 	position: relative;
 	float: right;
 	width: 200px;
-	margin-right: -40px;
+	margin-right: -55px;
 	margin-top: -370px;
 }
 
@@ -152,7 +152,7 @@ body {
 
 /******************************  MOVIL  ******************************/
 
-@media(max-width: 700px){
+@media(max-width: 800px){
   
   body{
     background: #000000;
