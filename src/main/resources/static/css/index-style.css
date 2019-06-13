@@ -1,5 +1,3 @@
-
-
 * {
 	box-sizing: border-box
 }
@@ -9,66 +7,60 @@ body {
 	background-color: #000;
 }
 
-.banner{
+.banner {
 	width: 100%;
 	height: 110px;
 }
 
-.logo img{
+.logo img {
 	width: 10%;
-	padding-left:30px;
-	padding-top:20px;
+	padding-left: 30px;
+	padding-top: 20px;
 }
 
-.i8 img{
+.i8 img {
 	width: 89%;
 	height: 100px;
-	padding-left:45px;
-	padding-top:20px;
-	
+	padding-left: 45px;
+	padding-top: 20px;
 }
-
 
 .dropdown {
-    position: relative;
-    text-align: right;
-    padding-right: 60px;
-       
+	position: relative;
+	text-align: right;
+	padding-right: 60px;
 }
 
-.change-usu button{
+.change-usu button {
 	border-radius: 12px;
-    font-weight: bold;
+	font-weight: bold;
 }
 
-.change-usu button:hover{
-	background:#b80f22;
+.change-usu button:hover {
+	background: #b80f22;
 }
 
-.mensaje{
-	display:block;
-	width:100%;
-	text-align:center;
-	padding-left:15%;
+.mensaje {
+	display: block;
+	width: 100%;
+	text-align: center;
+	padding-left: 15%;
 }
 
-
- .mensaje img{
- width:5%;
- }
-
+.mensaje img {
+	width: 5%;
+}
 
 .alert-danger {
-    color: #920318;
-    background-color: #e1dfff;
-    border-color: #f5c6cb;
-    text-align:center;
-    font-weight: bold;
+	color: #920318;
+	background-color: #e1dfff;
+	border-color: #f5c6cb;
+	text-align: center;
+	font-weight: bold;
 }
 
-
 .tab {
-	position:relative;
+	position: relative;
 	display: block;
 	float: left;
 	border: 1px solid #000;
@@ -77,19 +69,19 @@ body {
 	height: 400px;
 }
 
-.tab .tablinks{
+.tab .tablinks {
 	position: relative;
 	display: block;
 	float: left;
 	width: 100%;
 }
-.tab .tabsup{
-	padding-top:50px;
+
+.tab .tabsup {
+	padding-top: 50px;
 }
 
-
 .tab .tablinks a {
-	position:relative;
+	position: relative;
 	display: block;
 	float: left;
 	background: #000;
@@ -108,7 +100,7 @@ body {
 
 .tab a:hover {
 	font-size: 30px;
-	color:  #fff;
+	color: #fff;
 	font-weight: bold;
 }
 
@@ -118,8 +110,6 @@ body {
 	font-weight: bold;
 }
 
-
-
 .tabcontent {
 	float: left;
 	width: 78%;
@@ -128,16 +118,14 @@ body {
 	border: 5px solid #3366BB;
 }
 
-.tabcontent .container{
-	width: 100%;
 
-}
-.us h1 {
-	
-	padding-top:40px;;
-	
+.us {
+	padding-top: 20px;
 }
 
+.us p {
+	padding-top: 20px;
+}
 
 h1 {
 	font-weight: bold;
@@ -145,7 +133,7 @@ h1 {
 	font-size: 36px;
 	text-align: center;
 	padding-bottom: 10px;
-	color:#ddd;
+	color: #fff;
 	padding-right: 35px;
 }
 
@@ -160,41 +148,42 @@ h1 {
 	font-weight: bold;
 	font-size: 20px;
 }
-.bryle{
-	width:100%;
+
+.bryle {
+	width: 100%;
 	text-align: center;
 }
+
 .tabcontent img {
 	width: 20%;
 	text-align: center;
 }
 
 .container {
-    width: 100%;
-   
-    margin-right: auto;
-    margin-left: auto;
-} 
-table tr th {
-  cursor: pointer;
-  font-weight: bold;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
 }
 
-table tr th:hover{
-  cursor: pointer;
- } 
- 
+
+table tr th {
+	cursor: pointer;
+	font-weight: bold;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+table tr th:hover {
+	cursor: pointer;
+}
+
 .tableFixHead thead th {
 	position: sticky;
-	 top: 0;
+	top: 0;
 }
 
- 
 .container .bt-editar {
 	text-align: right;
 }
@@ -230,7 +219,6 @@ table tr th:hover{
 	color: #000;
 }
 
-
 .editar {
 	width: 90px;
 	border-radius: 12px;
@@ -248,160 +236,116 @@ table tr th:hover{
 	cursor: pointer;
 }
 
-.footer{
-	display:block;
-	loat: left;
-	background-color: #000;
-	text-align: center;
-	padding-bottom: 30px;
-	padding-top: 30px;
-}
-
-
-.footer img{
-	margin-top:40px;
-	padding-left: 55px;
-	padding-right: 55px;
-	width: 10%;
-}
-
-.footer p{
-	padding-top: 20px;
-	color: #fff;
-	text-align: center;
-}
-
-
 
 
 /*****************************************  MOVIL  ********************/
-@media ( max-width : 700px) {
-	
+@media ( max-width : 800px) {
 	.i8 {
-		display:none
+		display: none
 	}
-	.logo{
+	.logo {
 		position: relative;
 		display: block;
 		float: left;
-		width:100%;
-		text-align:center;
-		padding:auto;
-		margin:auto;
+		width: 100%;
+		text-align: center;
+		padding: auto;
+		margin: auto;
 	}
-	.logo img{
+	.logo img {
 		width: 25%;
-		margin-bottom:20px;
+		margin: 0;
+		padding: 0;
+		margin-bottom: 20px;
+		margin-top: 20px;
 	}
-	
-		
-	.dropdown{
-	width:100%;
-	padding:0;
-	margin:0;
-	text-align:center
-	
+	.dropdown {
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		text-align: center
 	}
-	
-	.dropdown button{
-	width:60%;
+	.dropdown button {
+		width: 60%;
 	}
-	
-	
-	
-	.tab{
+	.tab {
 		position: relative;
 		display: block;
 		float: left;
-		width:100%;
+		width: 100%;
 		height: 60px;
-		margin-top:20px;
-		text-align:center;
-		padding:auto;
-		
+		margin-top: 30px;
+		text-align: center;
+		padding: auto;
 	}
-	
-	.tab .tablinks{
-	position:relative;
-	display: inline;
-	width:20%;
-	margin:0 ;
-	padding:0;
+	.tab .tablinks {
+		position: relative;
+		display: inline;
+		width: 20%;
+		margin: 0;
+		padding: 0;
 	}
-	
-
-.tab .tablinks a {
-	position:relative;
-	display: block;
-	float: left;
-	background: #000;
-	color: #3366BB;
-	width: 100%;
-	border: none;
-	outline: none;
-	text-align: center;
-	cursor: pointer;
-	transition: 0.3s;
-	font: 18px Helvetica, sans-serif;
-	text-decoration: none;
-	font-weight: bold;
-	margin:0 ;
-	padding:0;
-}
-
-.tab a:hover {
-	color:  #fff;
-	font-weight: bold;
-}
-
-.tab a:active {
-	color: #fff;
-	font-weight: bold;
-}
-		
-	
+	.tab .tablinks a {
+		position: relative;
+		display: block;
+		float: left;
+		background: #000;
+		color: #3366BB;
+		width: 100%;
+		border: none;
+		outline: none;
+		text-align: center;
+		cursor: pointer;
+		transition: 0.3s;
+		font: 18px Helvetica, sans-serif;
+		text-decoration: none;
+		font-weight: bold;
+		margin: 0;
+		padding: 0;
+	}
+	.tab a:hover {
+		color: #fff;
+	}
+	.tab a:active {
+		color: #fff;
+	}
 	.tabcontent {
-	position:relative;
-	display: block;
-	float: left;
-	width: 100%;
+		position: relative;
+		display: block;
+		float: left;
+		width: 100%;
 	}
 	h1 {
-	position:relative;
-	display: block;
-	float: left;
-	width: 100%;
-	margin:0 ;
-	padding:0;
-	padding-bottom:20px;
-	text-align:center;
+		position: relative;
+		display: block;
+		float: left;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		padding-bottom: 20px;
+		text-align: center;
+		margin-top:-10px;
 	}
-
-.crear{
-	position:relative;
-	display: block;
-	float: left;
-	width: 100%;
-	margin:0 ;
-	padding:0;
-	text-align:center;
-}
- .crear a{
-margin-top:20px;
-width:60%;
-
- }
- 
- 
- .us{
- 
- padding-top:60px;
- }
- 
- .us img{
- 	width:40%;
- }
+	.crear {
+		position: relative;
+		display: block;
+		float: left;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		text-align: center;
+		padding-top:20px;
+	}
+	.crear a {
+		margin-top: 20px;
+		width: 60%;
+	}
+	.us {
+		padding-top: 40px;
+	}
+	.us img {
+		width: 40%;
+	}
+	
 
 }
-
-

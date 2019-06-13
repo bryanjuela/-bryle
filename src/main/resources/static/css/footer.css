@@ -1,21 +1,33 @@
-.footer{
+.footer {
+	display: block;
+	loat: left;
 	background-color: #000;
 	text-align: center;
-	padding-bottom: 30px;
-	padding-top: 30px;
+	
 }
 
-
-.footer img{
-	margin-top:40px;
+.footer img {
+	margin-top: 40px;
 	padding-left: 55px;
 	padding-right: 55px;
-	width: 10%;
+	width: 13%;
 }
 
-.footer p{
-	padding-top: 20px;
+.footer p {
+	padding-top: 30px;
 	color: #fff;
 	text-align: center;
 }
 
+
+
+
+@media ( max-width : 800px) {
+	.footer img {
+	margin-top: 20%;
+	padding:0;
+	padding-right:2%;
+	padding-left:2%;
+	width: 10%;
+}
+}

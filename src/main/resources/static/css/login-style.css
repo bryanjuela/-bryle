@@ -11,7 +11,7 @@ img{
 
 .box {
   width: 320px;
-  height: 450px;
+  height: 400px;
   background: #000;
   color: #fff;
   top: 50%;
@@ -66,6 +66,7 @@ img{
   font-size: 18px;
   border-radius: 12px;
   font-weight: bold;
+  margin-top: 10px;
 
 }
 
@@ -74,6 +75,7 @@ img{
   background: #0c06c9;
   color: #000;
 }
+
 
 .box a {
   text-decoration: none;
@@ -86,28 +88,28 @@ img{
   color: #fff;
 }
 
-.box .botones{
-  margin-top: 30px;
-}
 
 
 /******************   MOVIL  ******************/
 
 
-@media (max-width: 700px){
-	
+@media (max-width: 800px){
+/*
+#myCarousel{
+	display:none;
+}
+*/
+#myCarousel{
+	max-height: 100vh;
+}
 
   body{
     background: #000000;
   }
   
   .box{
-  margin-top:150px;
+  	margin-top:150px;
     width: 100%;
-  }
-
-  .box .preguntas{
-    margin-top: 60px;
   }
 
 }

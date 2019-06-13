@@ -80,7 +80,6 @@ body {
 	position: relative;
 	float: right;
 	width: 200px;
-	margin-right: 50px;
 	margin-top: -225px;
 }
 
@@ -130,11 +129,13 @@ body {
 	background: #0c06c9;
 	color: #000;
 }
-
+.footer{
+	padding-top:50px;
+}
 
 /******************************  MOVIL  ******************************/
 
-@media(max-width: 700px){
+@media(max-width: 800px){
   
   body{
     background: #000000;
